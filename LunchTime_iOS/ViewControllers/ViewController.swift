@@ -11,11 +11,15 @@ import FBSDKLoginKit
 
 class ViewController: UIViewController, FBSDKLoginButtonDelegate {
 
+    @IBOutlet weak var emailField: UITextField!
+    @IBOutlet weak var passwordField: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         let loginButton = FBSDKLoginButton()
         view.addSubview(loginButton)
+        emailField.placeholder = "email"
+        passwordField.placeholder = "password"
         loginButton.frame = CGRect(x:16, y:50, width: view.frame.width - 32, height:50)
         loginButton.delegate = self
     }
