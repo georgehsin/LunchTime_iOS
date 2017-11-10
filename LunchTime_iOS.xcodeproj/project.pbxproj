@@ -15,6 +15,7 @@
 		A698E5C31FB2284C00D42A29 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A698E5C21FB2284C00D42A29 /* Assets.xcassets */; };
 		A698E5C61FB2284C00D42A29 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A698E5C41FB2284C00D42A29 /* LaunchScreen.storyboard */; };
 		A698E5D11FB2284D00D42A29 /* LunchTime_iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A698E5D01FB2284D00D42A29 /* LunchTime_iOSTests.swift */; };
+		A6D307471FB589D6006ACB4B /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6D307461FB589D6006ACB4B /* RegistrationViewController.swift */; };
 		F8A0E76F1C9B524602BE8832 /* Pods_LunchTime_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD06A4EDF8B3B8461D25BBE4 /* Pods_LunchTime_iOS.framework */; };
 /* End PBXBuildFile section */
 
@@ -44,6 +45,7 @@
 		A698E5CC1FB2284D00D42A29 /* LunchTime_iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LunchTime_iOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A698E5D01FB2284D00D42A29 /* LunchTime_iOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LunchTime_iOSTests.swift; sourceTree = "<group>"; };
 		A698E5D21FB2284D00D42A29 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A6D307461FB589D6006ACB4B /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		CA8480FF1860DBEC6C7CC895 /* Pods-LunchTime_iOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LunchTime_iOSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-LunchTime_iOSTests/Pods-LunchTime_iOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		CD06A4EDF8B3B8461D25BBE4 /* Pods_LunchTime_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LunchTime_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -83,6 +85,7 @@
 			isa = PBXGroup;
 			children = (
 				A698E5BD1FB2284C00D42A29 /* ViewController.swift */,
+				A6D307461FB589D6006ACB4B /* RegistrationViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -350,6 +353,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A6D307471FB589D6006ACB4B /* RegistrationViewController.swift in Sources */,
 				A698E5BE1FB2284C00D42A29 /* ViewController.swift in Sources */,
 				A698E5BC1FB2284C00D42A29 /* AppDelegate.swift in Sources */,
 			);
