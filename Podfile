@@ -10,6 +10,8 @@ target 'LunchTime_iOS' do
 pod 'FBSDKCoreKit'
 pod 'FBSDKShareKit'
 pod 'FBSDKLoginKit'
+pod 'Firebase/Auth'
+
 
   target 'LunchTime_iOSTests' do
     inherit! :search_paths
