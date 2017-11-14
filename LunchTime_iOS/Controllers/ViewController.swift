@@ -18,25 +18,51 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
     private var viewModel = UserViewModel()
     
     @IBAction func signUpButtonPressed(_ sender: Any) {
-        performSegue(withIdentifier: "showRegistrationVC", sender: self)
+        performSegue(withIdentifier: Constants.SegueIdentifiers.Registration, sender: self)
     }
     
     @IBAction func loginButtonPressed(_ sender: Any) {
         switch viewModel.validate() {
         case .Valid:
-            viewModel.loginToFirebase()
+            handleLogin()
+            viewModel.updatePassword(password: "")
+            passwordField.text = nil
         case .Invalid(let error):
-            print("\(error)")
+            let alertController = UIAlertController(title: "Invalid", message: error, preferredStyle: UIAlertControllerStyle.alert)
+            let okAction = UIAlertAction(title: "OK", style: .default, handler: { (action) in
+                //
+            })
+            alertController.addAction(okAction)
+            self.present(alertController, animated: true, completion: nil)
         }
-
     }
     
-//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        self.view.endEditing(true)
-//    }
+    @IBAction func unwindFromRegistration(unwindSegue: UIStoryboardSegue) {
+        viewModel.updateUsername(username: emailField.text!)
+//        viewModel.updatePassword(password: passwordField.text!)
+//        loginButtonPressed(self)
+    }
+    
+    func handleLogin() {
+        viewModel.loginToFirebase()
+        
+        //Handle, if login success... do the following
+        saveLoginInfo()
+        performSegue(withIdentifier: Constants.SegueIdentifiers.Home, sender: self)
+    }
+    
+    @IBAction func logoutButtonPressed(unwindSegue: UIStoryboardSegue) {
+        print("logging out")
+        UserDefaults.standard.set(false, forKey: "isLoggedIn")
+        UserDefaults.standard.synchronize()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if isLoggedIn() {
+            performSegue(withIdentifier: Constants.SegueIdentifiers.Home, sender: self)
+        }
+    
         let loginButton = FBSDKLoginButton()
         view.addSubview(loginButton)
         loginButton.frame = CGRect(x:16, y:view.frame.height - 115, width: view.frame.width - 32, height:50)
@@ -48,17 +74,12 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
         
         emailField.placeholder = "email"
         passwordField.placeholder = "password"
+        passwordField.isSecureTextEntry = true
         emailField.delegate = self
         passwordField.delegate = self
-
+        
     }
-    
-//    override func viewDidLayoutSubviews() {
-//        let screenWidth = UIScreen.main.bounds.width
-//        scrollView.contentSize = CGSize(width: screenWidth, height: 600)
-//        self.automaticallyAdjustsScrollViewInsets = false
-//    }
-    
+
     func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
         print("Did log out of facebook")
     }
@@ -69,7 +90,16 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
             return
         }
         
-        viewModel.loginToFirebase()
+        handleLogin()
+    }
+    
+    func saveLoginInfo() {
+        UserDefaults.standard.set(true, forKey: "isLoggedIn")
+        UserDefaults.standard.synchronize()
+    }
+    
+    fileprivate func isLoggedIn() -> Bool {
+        return UserDefaults.standard.bool(forKey: "isLoggedIn")
     }
     
 }
@@ -78,9 +108,6 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
 extension ViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         activeField = textField
-        if textField == emailField {
-            textField.text = viewModel.username
-        }
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
@@ -108,7 +135,7 @@ extension ViewController: UITextFieldDelegate {
 
         return true
     }
-    
+
 }
 
 // MARK: Keyboard NSNotification
@@ -163,35 +190,3 @@ extension UIViewController {
         view.endEditing(true)
     }
 }
-
-//    func registerForKeyboardNotifications(){
-//        //Adding notifies on keyboard appearing
-//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWasShown), name: NSNotification.Name.UIKeyboardDidShow, object: nil)
-//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillBeHidden), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-//    }
-//
-//    @objc func keyboardWasShown(notification: NSNotification) {
-//        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue,
-//            let window = self.view.window?.frame {
-//            // We're not just minusing the kb height from the view height because
-//            // the view could already have been resized for the keyboard before
-//            self.view.frame = CGRect(x: self.view.frame.origin.x,
-//                                     y: self.view.frame.origin.y,
-//                                     width: self.view.frame.width,
-//                                     height: window.origin.y + window.height - keyboardSize.height)
-//        } else {
-//            debugPrint("We're showing the keyboard and either the keyboard size or window is nil: panic widely.")
-//        }
-//    }
-//
-//    @objc func keyboardWillBeHidden(notification: NSNotification) {
-//        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-//            let viewHeight = self.view.frame.height
-//            self.view.frame = CGRect(x: self.view.frame.origin.x,
-//                                     y: self.view.frame.origin.y,
-//                                     width: self.view.frame.width,
-//                                     height: viewHeight + keyboardSize.height)
-//        } else {
-//            debugPrint("We're about to hide the keyboard and the keyboard size is nil. Now is the rapture.")
-//        }
-//    }

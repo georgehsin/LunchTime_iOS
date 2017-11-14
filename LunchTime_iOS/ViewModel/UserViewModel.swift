@@ -43,7 +43,7 @@ extension UserViewModel {
     func validate(register: Bool = false, confirmationPassword: String? = nil) -> UserValidationState {
         print("username = \(user.username) password = \(user.password)")
         if user.username.isEmpty || user.password.isEmpty {
-            return .Invalid("UserName and password are required.")
+            return .Invalid("Username and password are required.")
         }
         
         if user.password.characters.count < minPasswordLength {
@@ -67,22 +67,10 @@ extension UserViewModel {
 extension UserViewModel {
     
     func loginToFirebase() {
-//        print("username = \(user.username) password = \(user.password)")
+        print("username = \(user.username) password = \(user.password)")
 //        print("email = \(email) password = \(password)")
-        if user.username != "" {
-            Auth.auth().signIn(withEmail: user.username, password: user.password, completion: { (user, error) in
-                if let error = error {
-                    print("Error with Firebase login \(error)")
-                    return
-                }
-                print("user signed in succesfully")
-            })
-        }
-//        if let email = email, let password = password {
-//
-//        }
-        else {
-            let credentials = FacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
+        if let facebookToken = FBSDKAccessToken.current() {
+            let credentials = FacebookAuthProvider.credential(withAccessToken: facebookToken.tokenString)
             Auth.auth().signIn(with: credentials) { (user, error) in
                 if let error = error {
                     print("Error with Firebase login \(error)")
@@ -90,6 +78,15 @@ extension UserViewModel {
                 }
                 print("user signed in succesfully")
             }
+        }
+        else {
+            Auth.auth().signIn(withEmail: user.username, password: user.password, completion: { (user, error) in
+                if let error = error {
+                    print("Error with Firebase login \(error)")
+                    return 
+                }
+                print("user signed in succesfully")
+            })
         }
     }
     

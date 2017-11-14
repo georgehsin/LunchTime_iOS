@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="HH1-Pq-TQV">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Home Screen View Controller-->
+        <scene sceneID="4a8-vY-pYa">
+            <objects>
+                <viewController id="HH1-Pq-TQV" customClass="HomeScreenViewController" customModule="LunchTime_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Lc2-os-0Hx">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to LunchTime" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0uC-CT-CHt">
+                                <rect key="frame" x="98" y="170" width="179" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Feeling Hungry?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vP4-oq-0ER">
+                                <rect key="frame" x="125" y="323" width="125" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LunchTimeLogo" translatesAutoresizingMaskIntoConstraints="NO" id="s9C-It-XxG">
+                                <rect key="frame" x="87.5" y="193" width="200" height="120"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="Vhk-0L-30z"/>
+                                    <constraint firstAttribute="height" constant="120" id="aLh-MB-hiJ"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lIx-oc-q5W">
+                                <rect key="frame" x="163" y="617" width="48" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="MA3-Ks-PbW"/>
+                                    <constraint firstAttribute="width" constant="48" id="cPE-x2-fYf"/>
+                                </constraints>
+                                <state key="normal" title="Logout"/>
+                                <connections>
+                                    <action selector="logoutButtonPressed:" destination="Jls-va-tKD" eventType="touchUpInside" id="KYB-sf-sUs"/>
+                                    <segue destination="Jls-va-tKD" kind="unwind" unwindAction="logoutButtonPressedWithUnwindSegue:" id="2du-Ez-HvM"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="vP4-oq-0ER" firstAttribute="centerX" secondItem="Lc2-os-0Hx" secondAttribute="centerX" id="2tz-DT-aFQ"/>
+                            <constraint firstItem="bpm-qo-mwf" firstAttribute="bottom" secondItem="lIx-oc-q5W" secondAttribute="bottom" constant="20" id="5lL-hJ-3Oz"/>
+                            <constraint firstItem="0uC-CT-CHt" firstAttribute="top" secondItem="bpm-qo-mwf" secondAttribute="top" constant="150" id="9vv-QG-bpU"/>
+                            <constraint firstItem="s9C-It-XxG" firstAttribute="centerX" secondItem="Lc2-os-0Hx" secondAttribute="centerX" id="MIX-wu-x2G"/>
+                            <constraint firstItem="0uC-CT-CHt" firstAttribute="centerX" secondItem="Lc2-os-0Hx" secondAttribute="centerX" id="Qor-8i-XKD"/>
+                            <constraint firstItem="vP4-oq-0ER" firstAttribute="centerY" secondItem="Lc2-os-0Hx" secondAttribute="centerY" id="Rtm-UX-YJK"/>
+                            <constraint firstItem="lIx-oc-q5W" firstAttribute="centerX" secondItem="Lc2-os-0Hx" secondAttribute="centerX" id="vL1-kT-eye"/>
+                            <constraint firstItem="s9C-It-XxG" firstAttribute="top" secondItem="0uC-CT-CHt" secondAttribute="bottom" constant="2" id="zo9-9x-gPi"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="bpm-qo-mwf"/>
+                    </view>
+                    <nil key="simulatedTopBarMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BUC-6h-OJM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="Jls-va-tKD" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="-834.39999999999998" y="545.57721139430294"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="LunchTimeLogo" width="300" height="145"/>
+    </resources>
+</document>

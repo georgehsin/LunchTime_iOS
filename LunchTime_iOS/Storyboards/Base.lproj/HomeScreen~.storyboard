@@ -164,7 +164,7 @@
                         <outlet property="passwordField" destination="Wh8-tX-jh1" id="ztS-gy-vQ6"/>
                         <outlet property="scrollView" destination="655-LY-nuQ" id="Qia-I4-LWr"/>
                         <segue destination="L9Q-Vn-Fb9" kind="show" identifier="showRegistrationVC" id="OK9-D8-qdu"/>
-                        <segue destination="mNH-kN-tZ6" kind="show" identifier="showHomeVC" id="Do3-jK-sud"/>
+                        <segue destination="x3T-EP-jiD" kind="show" id="5qb-08-ruX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d59-Pf-AGF" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -287,13 +287,26 @@
                         <outlet property="passwordConfirmField" destination="FIh-6Y-AV7" id="shl-fD-GKb"/>
                         <outlet property="passwordField" destination="yGs-dX-PhQ" id="8rE-wN-k9y"/>
                         <outlet property="scrollView" destination="rZh-9a-qIs" id="fje-0k-aua"/>
-                        <segue destination="9Eq-ES-dzZ" kind="unwind" identifier="unwindToHomeVC" unwindAction="unwindFromRegistrationWithUnwindSegue:" id="6wi-hw-VLt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mQR-AJ-nSH" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="9Eq-ES-dzZ" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="62" y="-254"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="d9U-lg-Xve">
+            <objects>
+                <viewController id="x3T-EP-jiD" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="BgB-PV-MvO">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <viewLayoutGuide key="safeArea" id="fi8-5Y-M2y"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UPH-Uk-v0A" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-716" y="502"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="IJi-DQ-gdP">
@@ -312,14 +325,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MHy-Vv-djJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1591" y="-254"/>
-        </scene>
-        <!--HomeScreen-->
-        <scene sceneID="Oyj-mp-Wju">
-            <objects>
-                <viewControllerPlaceholder storyboardName="HomeScreen" id="mNH-kN-tZ6" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="gbI-h1-Ugq" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-717" y="263"/>
         </scene>
     </scenes>
     <resources>

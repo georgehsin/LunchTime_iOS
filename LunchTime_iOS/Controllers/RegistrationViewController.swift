@@ -1,3 +1,4 @@
+
 //
 //  RegistrationViewController.swift
 //  LunchTime_iOS
@@ -23,9 +24,12 @@ class RegistrationViewController: UIViewController {
         switch viewModel.validate(register: true, confirmationPassword: passwordConfirmField.text) {
         case .Valid:
             viewModel.registerWithFirebase()
+            
+            //Handle, if login success... do the following
+            performSegue(withIdentifier: Constants.SegueIdentifiers.unwindHome, sender: self)
         case .Invalid(let error):
             print("\(error)")
-            let alertController = UIAlertController(title: "Oops", message: error, preferredStyle: UIAlertControllerStyle.alert)
+            let alertController = UIAlertController(title: "Invalid", message: error, preferredStyle: UIAlertControllerStyle.alert)
             let okAction = UIAlertAction(title: "OK", style: .default, handler: { (action) in
                 //
             })
@@ -54,6 +58,13 @@ class RegistrationViewController: UIViewController {
         passwordConfirmField.isSecureTextEntry = true
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == Constants.SegueIdentifiers.unwindHome {
+            let loginController = segue.destination as! ViewController
+            loginController.emailField.text = emailField.text
+//            loginController.passwordField.text = passwordField.text
+        }
+    }
 }
 
 // MARK: UITextFieldDelegate
@@ -98,23 +109,28 @@ extension RegistrationViewController: UITextFieldDelegate {
 
 // MARK: Keyboard NSNotification
 extension RegistrationViewController {
-    
+
     func registerForKeyboardNotifications(){
         //Adding notifies on keyboard appearing
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWasShown), name: NSNotification.Name.UIKeyboardDidShow, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow), name: NSNotification.Name.UIKeyboardDidShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillBeHidden), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
+
+    @objc func UIKeyboardWillShow(notification: NSNotification) {
+        
+    }
     
-    @objc func keyboardWasShown(notification: NSNotification){
+    @objc func keyboardDidShow(notification: NSNotification){
         //Need to calculate keyboard exact size due to Apple suggestions
         scrollView.isScrollEnabled = true
         var info = notification.userInfo!
         let keyboardSize = (info[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.size
         let contentInsets : UIEdgeInsets = UIEdgeInsetsMake(0.0, 0.0, keyboardSize!.height, 0.0)
-        
+
         scrollView.contentInset = contentInsets
         scrollView.scrollIndicatorInsets = contentInsets
-        
+
         var aRect : CGRect = self.view.frame
         aRect.size.height -= keyboardSize!.height
         if let activeField = activeField {
@@ -123,7 +139,7 @@ extension RegistrationViewController {
             }
         }
     }
-    
+
     @objc func keyboardWillBeHidden(notification: NSNotification){
         //Once keyboard disappears, restore original positions
         var info = notification.userInfo!
@@ -134,5 +150,6 @@ extension RegistrationViewController {
         self.view.endEditing(true)
         scrollView.isScrollEnabled = false
     }
-    
+
 }
+
