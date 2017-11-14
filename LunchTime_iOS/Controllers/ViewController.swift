@@ -37,29 +37,30 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
         }
     }
     
-    @IBAction func unwindFromRegistration(unwindSegue: UIStoryboardSegue) {
-        viewModel.updateUsername(username: emailField.text!)
-//        viewModel.updatePassword(password: passwordField.text!)
-//        loginButtonPressed(self)
+    func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
+        print("Did log out of facebook")
+    }
+    
+    func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
+        if let error = error {
+            print(error)
+            return
+        }
+        
+        handleLogin()
     }
     
     func handleLogin() {
         viewModel.loginToFirebase()
         
         //Handle, if login success... do the following
-        saveLoginInfo()
+        UserDefaults.standard.setIsLoggedIn(value: true)
         performSegue(withIdentifier: Constants.SegueIdentifiers.Home, sender: self)
-    }
-    
-    @IBAction func logoutButtonPressed(unwindSegue: UIStoryboardSegue) {
-        print("logging out")
-        UserDefaults.standard.set(false, forKey: "isLoggedIn")
-        UserDefaults.standard.synchronize()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if isLoggedIn() {
+        if UserDefaults.standard.isLoggedIn() {
             performSegue(withIdentifier: Constants.SegueIdentifiers.Home, sender: self)
         }
     
@@ -79,27 +80,19 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
         passwordField.delegate = self
         
     }
-
-    func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
-        print("Did log out of facebook")
+    
+    
+//MARK: Unwind Segues
+    
+    @IBAction func unwindFromRegistration(unwindSegue: UIStoryboardSegue) {
+        viewModel.updateUsername(username: emailField.text!)
+        //        viewModel.updatePassword(password: passwordField.text!)
+        //        loginButtonPressed(self)
     }
     
-    func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
-        if let error = error {
-            print(error)
-            return
-        }
-        
-        handleLogin()
-    }
-    
-    func saveLoginInfo() {
-        UserDefaults.standard.set(true, forKey: "isLoggedIn")
-        UserDefaults.standard.synchronize()
-    }
-    
-    fileprivate func isLoggedIn() -> Bool {
-        return UserDefaults.standard.bool(forKey: "isLoggedIn")
+    @IBAction func logoutButtonPressed(unwindSegue: UIStoryboardSegue) {
+        print("logging out")
+        UserDefaults.standard.setIsLoggedIn(value: false)
     }
     
 }
