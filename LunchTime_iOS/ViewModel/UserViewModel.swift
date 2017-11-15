@@ -66,37 +66,67 @@ extension UserViewModel {
 //MARK: Network login and registration
 extension UserViewModel {
     
-    func loginToFirebase() {
+    func loginToFirebase(onComplete: @escaping (String?) -> ()) {
         print("username = \(user.username) password = \(user.password)")
 //        print("email = \(email) password = \(password)")
+        var errorMsg: String?
         if let facebookToken = FBSDKAccessToken.current() {
             let credentials = FacebookAuthProvider.credential(withAccessToken: facebookToken.tokenString)
             Auth.auth().signIn(with: credentials) { (user, error) in
-                if let error = error {
-                    print("Error with Firebase login \(error)")
-                    return
+                if error != nil  {
+//                    print("Error with Firebase login \(error)")
+                    if let errCode = AuthErrorCode(rawValue: error!._code) {
+                        switch errCode {
+                        case .emailAlreadyInUse:
+                            errorMsg = "in use"
+                        default:
+                            errorMsg = "unsuccessful login, please try a different username/password"
+                        }
+                    }
                 }
-                print("user signed in succesfully")
+                onComplete(errorMsg)
             }
         }
         else {
             Auth.auth().signIn(withEmail: user.username, password: user.password, completion: { (user, error) in
-                if let error = error {
-                    print("Error with Firebase login \(error)")
-                    return 
+                if error != nil {
+                    print("error")
+                    if let errCode = AuthErrorCode(rawValue: error!._code) {
+                        switch errCode {
+                        case .invalidEmail:
+                            errorMsg = "invalid email"
+                        case .emailAlreadyInUse:
+                            errorMsg = "in use"
+                        case .userNotFound:
+                            errorMsg = "User not found, please register user"
+                        case .wrongPassword:
+                            errorMsg = "Incorrect user password"
+                        default:
+                            errorMsg = "unsuccessful login, please try a different username/password"
+                        }
+                    }
                 }
-                print("user signed in succesfully")
+                onComplete(errorMsg)
             })
         }
     }
     
-    func registerWithFirebase() {
+    func registerWithFirebase(onComplete: @escaping (String?) -> ()) {
+        var errorMsg: String?
         Auth.auth().createUser(withEmail: user.username, password: user.password) { (user, error) in
-            if let error = error {
-                print("error creating user in Firebase" , error)
-                return
+            if error != nil {
+                if let errCode = AuthErrorCode(rawValue: error!._code) {
+                    switch errCode {
+                    case .invalidEmail:
+                        errorMsg = "invalid email"
+                    case .emailAlreadyInUse:
+                        errorMsg = "Email already in use"
+                    default:
+                        errorMsg = "unsuccessful registration, please try a different username"
+                    }
+                }
             }
-            print("successfully created user in Firebase")
+            onComplete(errorMsg)
         }
     }
     

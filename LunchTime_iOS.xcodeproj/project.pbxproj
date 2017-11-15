@@ -17,7 +17,6 @@
 		A698E5C31FB2284C00D42A29 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A698E5C21FB2284C00D42A29 /* Assets.xcassets */; };
 		A698E5C61FB2284C00D42A29 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A698E5C41FB2284C00D42A29 /* LaunchScreen.storyboard */; };
 		A698E5D11FB2284D00D42A29 /* LunchTime_iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A698E5D01FB2284D00D42A29 /* LunchTime_iOSTests.swift */; };
-		A6C79F591FBA11F500649FBE /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C79F581FBA11F500649FBE /* MainNavigationController.swift */; };
 		A6C79F5C1FBAC4B500649FBE /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C79F5B1FBAC4B500649FBE /* Constants.swift */; };
 		A6C79F5E1FBB5F4400649FBE /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6C79F5D1FBB5F4400649FBE /* UserDefaults.swift */; };
 		A6D307471FB589D6006ACB4B /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6D307461FB589D6006ACB4B /* RegistrationViewController.swift */; };
@@ -54,7 +53,6 @@
 		A698E5CC1FB2284D00D42A29 /* LunchTime_iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LunchTime_iOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A698E5D01FB2284D00D42A29 /* LunchTime_iOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LunchTime_iOSTests.swift; sourceTree = "<group>"; };
 		A698E5D21FB2284D00D42A29 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A6C79F581FBA11F500649FBE /* MainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
 		A6C79F5B1FBAC4B500649FBE /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		A6C79F5D1FBB5F4400649FBE /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		A6D307461FB589D6006ACB4B /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
@@ -114,7 +112,6 @@
 		A62C24201FB434CB0091A158 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				A6C79F581FBA11F500649FBE /* MainNavigationController.swift */,
 				A698E5BD1FB2284C00D42A29 /* ViewController.swift */,
 				A6D307461FB589D6006ACB4B /* RegistrationViewController.swift */,
 				A6D577691FB97A66004D94BE /* HomeScreenViewController.swift */,
@@ -403,7 +400,6 @@
 				A623217F1FB8FA9400A54814 /* UserViewModel.swift in Sources */,
 				A698E5BE1FB2284C00D42A29 /* ViewController.swift in Sources */,
 				A62321811FB8FAD900A54814 /* User.swift in Sources */,
-				A6C79F591FBA11F500649FBE /* MainNavigationController.swift in Sources */,
 				A6C79F5E1FBB5F4400649FBE /* UserDefaults.swift in Sources */,
 				A698E5BC1FB2284C00D42A29 /* AppDelegate.swift in Sources */,
 				A6D5776A1FB97A66004D94BE /* HomeScreenViewController.swift in Sources */,

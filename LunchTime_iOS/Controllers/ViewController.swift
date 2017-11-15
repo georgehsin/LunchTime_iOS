@@ -25,8 +25,6 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
         switch viewModel.validate() {
         case .Valid:
             handleLogin()
-            viewModel.updatePassword(password: "")
-            passwordField.text = nil
         case .Invalid(let error):
             let alertController = UIAlertController(title: "Invalid", message: error, preferredStyle: UIAlertControllerStyle.alert)
             let okAction = UIAlertAction(title: "OK", style: .default, handler: { (action) in
@@ -34,6 +32,8 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
             })
             alertController.addAction(okAction)
             self.present(alertController, animated: true, completion: nil)
+            self.viewModel.updatePassword(password: "")
+            self.passwordField.text = nil
         }
     }
     
@@ -51,11 +51,24 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
     }
     
     func handleLogin() {
-        viewModel.loginToFirebase()
-        
-        //Handle, if login success... do the following
-        UserDefaults.standard.setIsLoggedIn(value: true)
-        performSegue(withIdentifier: Constants.SegueIdentifiers.Home, sender: self)
+        viewModel.loginToFirebase { (errorMsg) in
+            if let errorMsg = errorMsg {
+                let alertController = UIAlertController(title: "Invalid", message: errorMsg, preferredStyle: UIAlertControllerStyle.alert)
+                let okAction = UIAlertAction(title: "OK", style: .default, handler: { (action) in
+                    //
+                })
+                alertController.addAction(okAction)
+                self.present(alertController, animated: true, completion: nil)
+            }
+            else {
+                //Handle, if login success... do the following
+                UserDefaults.standard.setIsLoggedIn(value: true)
+                self.performSegue(withIdentifier: Constants.SegueIdentifiers.Home, sender: self)
+            }
+            self.viewModel.updatePassword(password: "")
+            self.passwordField.text = nil
+        }
+
     }
     
     override func viewDidLoad() {

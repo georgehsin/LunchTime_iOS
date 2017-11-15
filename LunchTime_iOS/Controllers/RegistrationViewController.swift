@@ -23,10 +23,18 @@ class RegistrationViewController: UIViewController {
     @IBAction func registerButtonPressed(_ sender: Any) {
         switch viewModel.validate(register: true, confirmationPassword: passwordConfirmField.text) {
         case .Valid:
-            viewModel.registerWithFirebase()
-            
-            //Handle, if login success... do the following
-            performSegue(withIdentifier: Constants.SegueIdentifiers.unwindHome, sender: self)
+            viewModel.registerWithFirebase { (errorMsg) in
+                if let errorMsg = errorMsg {
+                    let alertController = UIAlertController(title: "Invalid", message: errorMsg, preferredStyle: UIAlertControllerStyle.alert)
+                    let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                    alertController.addAction(okAction)
+                    self.present(alertController, animated: true, completion: nil)
+                }
+                else {
+                    //Handle, if registration success... do the following
+                    self.performSegue(withIdentifier: Constants.SegueIdentifiers.unwindHome, sender: self)
+                }
+            }
         case .Invalid(let error):
             print("\(error)")
             let alertController = UIAlertController(title: "Invalid", message: error, preferredStyle: UIAlertControllerStyle.alert)
