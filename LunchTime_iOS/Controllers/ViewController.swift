@@ -105,6 +105,7 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
     
     @IBAction func logoutButtonPressed(unwindSegue: UIStoryboardSegue) {
         print("logging out")
+        viewModel.logoutOfFirebase()
         UserDefaults.standard.setIsLoggedIn(value: false)
     }
     

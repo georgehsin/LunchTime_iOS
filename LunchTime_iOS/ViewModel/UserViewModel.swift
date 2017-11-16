@@ -130,6 +130,13 @@ extension UserViewModel {
         }
     }
     
+    func logoutOfFirebase() {
+        if let currentUser = Auth.auth().currentUser {
+            print(currentUser)
+        }
+        try! Auth.auth().signOut()
+        
+    }
     
     func getFBInfo() {
         FBSDKGraphRequest(graphPath: "/me", parameters: ["fields": "id, name, email"]).start {
