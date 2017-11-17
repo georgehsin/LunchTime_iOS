@@ -164,7 +164,7 @@
                         <outlet property="passwordField" destination="Wh8-tX-jh1" id="ztS-gy-vQ6"/>
                         <outlet property="scrollView" destination="655-LY-nuQ" id="Qia-I4-LWr"/>
                         <segue destination="L9Q-Vn-Fb9" kind="show" identifier="showRegistrationVC" id="OK9-D8-qdu"/>
-                        <segue destination="mNH-kN-tZ6" kind="show" identifier="showHomeVC" id="Do3-jK-sud"/>
+                        <segue destination="mNH-kN-tZ6" kind="presentation" identifier="showHomeVC" id="Do3-jK-sud"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d59-Pf-AGF" userLabel="First Responder" sceneMemberID="firstResponder"/>
