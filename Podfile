@@ -11,6 +11,7 @@ pod 'FBSDKCoreKit'
 pod 'FBSDKShareKit'
 pod 'FBSDKLoginKit'
 pod 'Firebase/Auth'
+pod 'YelpAPI'
 
 
   target 'LunchTime_iOSTests' do

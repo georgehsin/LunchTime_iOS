@@ -5,6 +5,8 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -101,36 +103,85 @@
             </objects>
             <point key="canvasLocation" x="-665" y="213"/>
         </scene>
-        <!--View Controller-->
+        <!--Location Selector View Controller-->
         <scene sceneID="kKu-b6-Hax">
             <objects>
-                <viewController id="Xyg-si-BgO" sceneMemberID="viewController">
+                <viewController id="Xyg-si-BgO" customClass="LocationSelectorViewController" customModule="LunchTime_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7IB-ZY-Y7b">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vn1-9K-8sH">
-                                <rect key="frame" x="142" y="323" width="90" height="21"/>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="pVE-0b-ZHA">
+                                <rect key="frame" x="0.0" y="64" width="375" height="56"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="qR0-mO-1fU"/>
-                                    <constraint firstAttribute="width" constant="90" id="zw5-Y8-mAH"/>
+                                    <constraint firstAttribute="height" constant="56" id="Bsy-in-aa6"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="EUf-Zz-wJq">
+                                <rect key="frame" x="0.0" y="120" width="375" height="547"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="100" id="VcZ-FG-JMd">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="100"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="VcZ-FG-JMd" id="0NX-IW-jU3">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="99.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zd2-ah-98d">
+                                                    <rect key="frame" x="16" y="10" width="96" height="79.5"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="Zd2-ah-98d" secondAttribute="height" multiplier="47:39" id="uFv-vU-2fK"/>
+                                                    </constraints>
+                                                </view>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Location Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sWf-Ab-ffT">
+                                                    <rect key="frame" x="148" y="29" width="129" height="40"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Zd2-ah-98d" firstAttribute="top" secondItem="0NX-IW-jU3" secondAttribute="topMargin" constant="2" id="pHS-lJ-X8Z"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="Zd2-ah-98d" secondAttribute="bottom" constant="2" id="um1-C9-2Iv"/>
+                                                <constraint firstItem="Zd2-ah-98d" firstAttribute="leading" secondItem="0NX-IW-jU3" secondAttribute="leadingMargin" constant="8" id="wjY-T1-PXR"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Vn1-9K-8sH" firstAttribute="centerX" secondItem="7IB-ZY-Y7b" secondAttribute="centerX" id="DI4-sL-xXX"/>
-                            <constraint firstItem="Vn1-9K-8sH" firstAttribute="centerY" secondItem="7IB-ZY-Y7b" secondAttribute="centerY" id="pfS-5X-BTf"/>
+                            <constraint firstItem="pVE-0b-ZHA" firstAttribute="trailing" secondItem="87K-wH-T9Y" secondAttribute="trailing" id="9qE-dj-bbD"/>
+                            <constraint firstItem="87K-wH-T9Y" firstAttribute="trailing" secondItem="EUf-Zz-wJq" secondAttribute="trailing" id="Gbl-0r-Ljy"/>
+                            <constraint firstItem="EUf-Zz-wJq" firstAttribute="top" secondItem="pVE-0b-ZHA" secondAttribute="bottom" id="Ova-yB-9TY"/>
+                            <constraint firstItem="EUf-Zz-wJq" firstAttribute="leading" secondItem="87K-wH-T9Y" secondAttribute="leading" id="fAQ-cu-28T"/>
+                            <constraint firstItem="pVE-0b-ZHA" firstAttribute="top" secondItem="87K-wH-T9Y" secondAttribute="top" id="fJ6-kH-QP8"/>
+                            <constraint firstItem="87K-wH-T9Y" firstAttribute="bottom" secondItem="EUf-Zz-wJq" secondAttribute="bottom" id="fis-qZ-DjM"/>
+                            <constraint firstItem="pVE-0b-ZHA" firstAttribute="leading" secondItem="87K-wH-T9Y" secondAttribute="leading" id="r6P-dk-OP5"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="87K-wH-T9Y"/>
                     </view>
+                    <connections>
+                        <outlet property="searchDisplayController" destination="zGb-yj-s5i" id="G0K-pY-h5e"/>
+                        <outlet property="tableView" destination="EUf-Zz-wJq" id="gx5-aD-HvS"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2jV-Zb-lHK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="zGb-yj-s5i">
+                    <connections>
+                        <outlet property="delegate" destination="Xyg-si-BgO" id="2sL-Jq-9eS"/>
+                        <outlet property="searchContentsController" destination="Xyg-si-BgO" id="CZc-jL-BrJ"/>
+                        <outlet property="searchResultsDataSource" destination="Xyg-si-BgO" id="Wmt-ul-9dv"/>
+                        <outlet property="searchResultsDelegate" destination="Xyg-si-BgO" id="XUe-4N-uHR"/>
+                    </connections>
+                </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="-639" y="1053"/>
+            <point key="canvasLocation" x="-639.20000000000005" y="1052.9235382308846"/>
         </scene>
         <!--New-->
         <scene sceneID="Kbp-eC-r6y">

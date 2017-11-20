@@ -10,15 +10,20 @@ import UIKit
 
 class HomeScreenViewController: UIViewController{
     
+    private var yelp = YelpSearchViewModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         print("Arrived at HomeScreen")
+        self.tabBarController?.tabBar.items?[2].image = UIImage(named: "add")?.withRenderingMode(UIImageRenderingMode.alwaysOriginal)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: false)
         self.tabBarController?.tabBar.isHidden = false
+        
+        yelpQueryTest()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -29,6 +34,25 @@ class HomeScreenViewController: UIViewController{
     @IBAction func cancelCreateEvent(unwindSegue: UIStoryboardSegue) {
         //do something
     }
+    
+    func yelpQueryTest() {
+        yelp.queryYelp(location: "San Jose, CA") { (results) in
+            if results != nil {
+                for business in results {
+                    print(business.name)
+                }
+            }
+        }
+        yelp.queryYelp(term: "bar", location: "San Jose, CA") { (results) in
+            if results != nil {
+                print("term/location")
+                for business in results {
+                    print(business.name)
+                }
+            }
+        }
+    }
+    
     
 }
 

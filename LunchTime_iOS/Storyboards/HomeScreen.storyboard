@@ -62,7 +62,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="bpm-qo-mwf"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Home" id="rNg-Ki-mbS"/>
+                    <tabBarItem key="tabBarItem" title="Home" image="home" id="rNg-Ki-mbS">
+                        <color key="badgeColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    </tabBarItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BUC-6h-OJM" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="Jls-va-tKD" userLabel="Exit" sceneMemberID="exit"/>
@@ -95,7 +97,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="8um-fE-TtV"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Profile" id="E2d-fD-grb"/>
+                    <tabBarItem key="tabBarItem" title="Profile" image="profile" id="E2d-fD-grb"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dja-EG-drV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -110,6 +112,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="selectedImageTintColor" red="0.87058823529999996" green="0.47058823529999999" blue="0.14901960780000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>
                     <connections>
                         <segue destination="HH1-Pq-TQV" kind="relationship" relationship="viewControllers" id="p78-Td-Tfg"/>
@@ -149,7 +152,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="uwa-Bj-0iw"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Events" id="Fth-y4-l7V"/>
+                    <tabBarItem key="tabBarItem" title="Events" image="event" id="Fth-y4-l7V"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WWk-01-lGY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -186,7 +189,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Kqa-XB-AIM"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Friends" id="vHc-pO-6Ml"/>
+                    <tabBarItem key="tabBarItem" title="Friends" image="friend" id="vHc-pO-6Ml"/>
                     <connections>
                         <outlet property="searchDisplayController" destination="XFZ-sE-HDq" id="qFf-8h-dMB"/>
                     </connections>
@@ -216,5 +219,9 @@
     </scenes>
     <resources>
         <image name="LunchTimeLogo" width="300" height="145"/>
+        <image name="event" width="25" height="25"/>
+        <image name="friend" width="25" height="25"/>
+        <image name="home" width="25" height="25"/>
+        <image name="profile" width="25" height="25"/>
     </resources>
 </document>
