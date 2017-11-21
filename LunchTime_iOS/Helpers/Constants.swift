@@ -11,8 +11,15 @@ import Foundation
 struct Constants {
     
     struct SegueIdentifiers {
+        //MARK: Registration/Login Flow
         static let Registration = "showRegistrationVC"
         static let Home = "showHomeVC"
         static let unwindHome = "unwindToHomeVC"
+        
+        //MARK: Create New Event Flow
+        static let eventLocation = "showLocationSelectorVC"
+        static let eventDateTime = "showDateTimeSelectorVC"
+        static let eventFriends = "showFreindsSelectorVC"
+        
     }
 }

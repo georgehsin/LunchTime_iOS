@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		9849EFBD648DDAAFC8535406 /* Pods_LunchTime_iOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26FC5D1606165C5F50455F91 /* Pods_LunchTime_iOSTests.framework */; };
 		A608558B1FC26CEE009E4BDD /* LocationSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A608558A1FC26CEE009E4BDD /* LocationSelectorViewController.swift */; };
+		A608558E1FC395AD009E4BDD /* YelpLocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A608558C1FC395AD009E4BDD /* YelpLocationTableViewCell.swift */; };
+		A608558F1FC395AD009E4BDD /* YelpLocationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A608558D1FC395AD009E4BDD /* YelpLocationTableViewCell.xib */; };
 		A623216D1FB78F6E00A54814 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A623216C1FB78C7000A54814 /* GoogleService-Info.plist */; };
 		A623217F1FB8FA9400A54814 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A623217E1FB8FA9400A54814 /* UserViewModel.swift */; };
 		A62321811FB8FAD900A54814 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A62321801FB8FAD900A54814 /* User.swift */; };
@@ -45,6 +47,8 @@
 		8E53322CDB226ED3D2495DE7 /* Pods-LunchTime_iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LunchTime_iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LunchTime_iOS/Pods-LunchTime_iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		A3561D9897744D70CC7FD9E5 /* Pods-LunchTime_iOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LunchTime_iOSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LunchTime_iOSTests/Pods-LunchTime_iOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A608558A1FC26CEE009E4BDD /* LocationSelectorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationSelectorViewController.swift; sourceTree = "<group>"; };
+		A608558C1FC395AD009E4BDD /* YelpLocationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpLocationTableViewCell.swift; sourceTree = "<group>"; };
+		A608558D1FC395AD009E4BDD /* YelpLocationTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YelpLocationTableViewCell.xib; sourceTree = "<group>"; };
 		A623216C1FB78C7000A54814 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A623217E1FB8FA9400A54814 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		A62321801FB8FAD900A54814 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -101,6 +105,14 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		A60855901FC396B4009E4BDD /* Xibs */ = {
+			isa = PBXGroup;
+			children = (
+				A608558D1FC395AD009E4BDD /* YelpLocationTableViewCell.xib */,
+			);
+			path = Xibs;
+			sourceTree = "<group>";
+		};
 		A623217C1FB8F84700A54814 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -126,6 +138,7 @@
 				A6D577691FB97A66004D94BE /* HomeScreenViewController.swift */,
 				A6B04C311FBEB4EE0021944C /* CreateEventViewController.swift */,
 				A608558A1FC26CEE009E4BDD /* LocationSelectorViewController.swift */,
+				A608558C1FC395AD009E4BDD /* YelpLocationTableViewCell.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -133,6 +146,7 @@
 		A62C24211FB434F20091A158 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
+				A60855901FC396B4009E4BDD /* Xibs */,
 				A6D577671FB97600004D94BE /* HomeScreen.storyboard */,
 				A6C22FDB1FBEC63500AB472E /* CreateEvent.storyboard */,
 				A698E5BF1FB2284C00D42A29 /* Main.storyboard */,
@@ -294,6 +308,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A6D577681FB97600004D94BE /* HomeScreen.storyboard in Resources */,
+				A608558F1FC395AD009E4BDD /* YelpLocationTableViewCell.xib in Resources */,
 				A6C22FDC1FBEC63500AB472E /* CreateEvent.storyboard in Resources */,
 				A698E5C61FB2284C00D42A29 /* LaunchScreen.storyboard in Resources */,
 				A698E5C31FB2284C00D42A29 /* Assets.xcassets in Resources */,
@@ -417,6 +432,7 @@
 				A698E5BC1FB2284C00D42A29 /* AppDelegate.swift in Sources */,
 				A644D5631FC2533100E851A8 /* YelpSearchViewModel.swift in Sources */,
 				A6D5776A1FB97A66004D94BE /* HomeScreenViewController.swift in Sources */,
+				A608558E1FC395AD009E4BDD /* YelpLocationTableViewCell.swift in Sources */,
 				A6C79F5C1FBAC4B500649FBE /* Constants.swift in Sources */,
 				A6B04C321FBEB4EE0021944C /* CreateEventViewController.swift in Sources */,
 				A608558B1FC26CEE009E4BDD /* LocationSelectorViewController.swift in Sources */,

@@ -16,4 +16,11 @@ class CreateEventViewController: UIViewController {
     
     
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == Constants.SegueIdentifiers.eventLocation {
+            let eventLocationController = segue.destination as! LocationSelectorViewController
+//            eventLocationController.yelpBusinesses =
+        }
+    }
+    
 }
