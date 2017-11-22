@@ -25,39 +25,41 @@ class LocationSelectorViewController: UIViewController, UITableViewDataSource, U
     var searchController: UISearchController?
     var resultView: UITextView?
 
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var foodSearchBar: UITextField!
     @IBOutlet weak var locationSearchBar: UITextField!
     var yelpBusinesses: [YLPBusiness]?
     
-    @IBAction func searchButtonPressed(_ sender: Any) {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        let nib = UINib(nibName: "YelpLocationTableViewCell", bundle: nil)
+        self.tableView.register(nib, forCellReuseIdentifier: "yelpCell")
+        self.tableView.isHidden = true
+        dispatchYelpQuery(term: "food", location: "San Jose, CA")
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+        self.locationSearchBar.delegate = self
+    }
+    
+    func dispatchYelpQuery(term: String, location: String) {
+        self.startActivityIndicator(indicator: self.activityIndicator)
         DispatchQueue.global(qos: .userInteractive).async {
-            self.yelp.queryYelp(term: self.foodSearchBar.text!, location: self.locationSearchBar.text!) { (results) in
+            self.yelp.queryYelp(term: term, location: location) { (results) in
                 self.yelpBusinesses = results
                 DispatchQueue.main.async {
+                    self.stopActivityIndicator(indicator: self.activityIndicator)
+                    self.tableView.isHidden = false
                     self.tableView.reloadData()
                 }
             }
         }
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
-//        let cell = Bundle.main.loadNibNamed("YelpLocationTableViewCell", owner: self, options: nil)
-        let nib = UINib(nibName: "YelpLocationTableViewCell", bundle: nil)
-        self.tableView.register(nib, forCellReuseIdentifier: "yelpCell")
-        DispatchQueue.global(qos: .userInteractive).async {
-            self.yelp.queryYelp(term: "food", location: "San Jose, CA") { (results) in
-                self.yelpBusinesses = results
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
-            }
-        }
-        self.tableView.delegate = self
-        self.tableView.dataSource = self
-        self.locationSearchBar.delegate = self
+    @IBAction func searchButtonPressed(_ sender: Any) {
+        dispatchYelpQuery(term: self.foodSearchBar.text!, location: self.locationSearchBar.text!)
     }
+    
+//MARK:Delegate and DataSource Methods
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -97,6 +99,8 @@ class LocationSelectorViewController: UIViewController, UITableViewDataSource, U
             present(autocompleteController, animated: true, completion: nil)
         }
     }
+    
+
 }
 
 //MARK: Google Location Search auto-complete
@@ -104,9 +108,6 @@ extension LocationSelectorViewController: GMSAutocompleteViewControllerDelegate 
     
     // Handle the user's selection.
     func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
-        print("Place name: \(place.name)")
-        print("Place address: \(place.formattedAddress)")
-        print("Place attributions: \(place.attributions)")
         locationSearchBar.text = place.formattedAddress
         dismiss(animated: true, completion: nil)
     }
@@ -130,4 +131,21 @@ extension LocationSelectorViewController: GMSAutocompleteViewControllerDelegate 
         UIApplication.shared.isNetworkActivityIndicatorVisible = false
     }
     
+}
+
+//MARK: Methods for showing and stopping acitivty indicator
+extension UIViewController {
+    
+    func startActivityIndicator(indicator: UIActivityIndicatorView) {
+        indicator.startAnimating()
+        indicator.hidesWhenStopped = true
+        // prevents user from interacting while loading
+        UIApplication.shared.beginIgnoringInteractionEvents()
+    }
+ 
+    func stopActivityIndicator(indicator: UIActivityIndicatorView) {
+        indicator.stopAnimating()
+        // prevents user from interacting while loading
+        UIApplication.shared.endIgnoringInteractionEvents()
+    }
 }

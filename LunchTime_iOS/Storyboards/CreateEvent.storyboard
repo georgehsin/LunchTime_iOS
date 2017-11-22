@@ -113,6 +113,13 @@
                                 <rect key="frame" x="0.0" y="104" width="375" height="563"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="nok-SO-3HY">
+                                <rect key="frame" x="167.5" y="313" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="QzM-Wp-gzR"/>
+                                    <constraint firstAttribute="width" constant="40" id="txV-CN-Oxb"/>
+                                </constraints>
+                            </activityIndicatorView>
                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1rO-Fp-sEa">
                                 <rect key="frame" x="335" y="64" width="40" height="40"/>
                                 <constraints>
@@ -146,8 +153,10 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="1rO-Fp-sEa" firstAttribute="top" secondItem="87K-wH-T9Y" secondAttribute="top" id="5Fq-Sv-U4P"/>
+                            <constraint firstItem="nok-SO-3HY" firstAttribute="centerX" secondItem="7IB-ZY-Y7b" secondAttribute="centerX" id="8Bk-Bh-IyW"/>
                             <constraint firstAttribute="trailing" secondItem="EUf-Zz-wJq" secondAttribute="trailing" id="Crn-Ng-uib"/>
                             <constraint firstItem="oW8-Ie-fsC" firstAttribute="top" secondItem="87K-wH-T9Y" secondAttribute="top" id="QTx-MY-hOc"/>
+                            <constraint firstItem="nok-SO-3HY" firstAttribute="centerY" secondItem="7IB-ZY-Y7b" secondAttribute="centerY" id="SRq-xF-qXQ"/>
                             <constraint firstItem="EUf-Zz-wJq" firstAttribute="top" secondItem="1rO-Fp-sEa" secondAttribute="bottom" id="Sx0-TR-PoS"/>
                             <constraint firstAttribute="bottom" secondItem="EUf-Zz-wJq" secondAttribute="bottom" id="aq5-Hh-Qhn"/>
                             <constraint firstItem="oW8-Ie-fsC" firstAttribute="width" secondItem="2Ao-zB-1Bd" secondAttribute="width" id="cpV-AT-CG0"/>
@@ -162,6 +171,7 @@
                     </view>
                     <toolbarItems/>
                     <connections>
+                        <outlet property="activityIndicator" destination="nok-SO-3HY" id="2Bg-dp-D7A"/>
                         <outlet property="foodSearchBar" destination="2Ao-zB-1Bd" id="1Is-IM-gPs"/>
                         <outlet property="locationSearchBar" destination="oW8-Ie-fsC" id="bvr-hH-jhl"/>
                         <outlet property="tableView" destination="EUf-Zz-wJq" id="EqS-Oh-QCc"/>
