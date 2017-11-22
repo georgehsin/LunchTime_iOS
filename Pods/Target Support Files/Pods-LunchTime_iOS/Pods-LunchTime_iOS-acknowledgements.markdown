@@ -323,6 +323,14 @@ Copyright 2017 Google
    limitations under the License.
 
 
+## GoogleMaps
+
+Copyright 2017 Google
+
+## GooglePlaces
+
+Copyright 2017 Google
+
 ## GoogleToolboxForMac
 
 

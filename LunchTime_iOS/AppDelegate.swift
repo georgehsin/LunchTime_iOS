@@ -9,6 +9,7 @@
 import UIKit
 import FBSDKCoreKit
 import Firebase
+import GooglePlaces
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -20,8 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
         FirebaseApp.configure()
-
-//        window?.rootViewController = MainNavigationController()
+        
+        GMSPlacesClient.provideAPIKey("AIzaSyCUxXx9zyS1yRrgDTEKwnMhYwkvxOpPfc8")
         
         // Override point for customization after application launch.
         return true
