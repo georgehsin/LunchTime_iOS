@@ -39,6 +39,7 @@ class LocationSelectorViewController: UIViewController, UITableViewDataSource, U
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.locationSearchBar.delegate = self
+        self.hideKeyboardWhenTappedAround()
     }
     
     func dispatchYelpQuery(term: String, location: String) {
@@ -56,7 +57,15 @@ class LocationSelectorViewController: UIViewController, UITableViewDataSource, U
     }
     
     @IBAction func searchButtonPressed(_ sender: Any) {
-        dispatchYelpQuery(term: self.foodSearchBar.text!, location: self.locationSearchBar.text!)
+        if foodSearchBar.text! != "" && locationSearchBar.text! != "" {
+            dispatchYelpQuery(term: foodSearchBar.text!, location: locationSearchBar.text!)
+        }
+        else {
+            let message = "Food and Location needed"
+            let alertController = ViewController.createAlert(title: "Invalid", message: message)
+            self.present(alertController, animated: true, completion: nil)
+        }
+
     }
     
 //MARK:Delegate and DataSource Methods

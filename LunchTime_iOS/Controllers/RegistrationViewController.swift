@@ -25,9 +25,7 @@ class RegistrationViewController: UIViewController {
         case .Valid:
             viewModel.registerWithFirebase { (errorMsg) in
                 if let errorMsg = errorMsg {
-                    let alertController = UIAlertController(title: "Invalid", message: errorMsg, preferredStyle: UIAlertControllerStyle.alert)
-                    let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-                    alertController.addAction(okAction)
+                    let alertController = ViewController.createAlert(title: "Invalid", message: errorMsg)
                     self.present(alertController, animated: true, completion: nil)
                 }
                 else {
@@ -36,12 +34,7 @@ class RegistrationViewController: UIViewController {
                 }
             }
         case .Invalid(let error):
-            print("\(error)")
-            let alertController = UIAlertController(title: "Invalid", message: error, preferredStyle: UIAlertControllerStyle.alert)
-            let okAction = UIAlertAction(title: "OK", style: .default, handler: { (action) in
-                //
-            })
-            alertController.addAction(okAction)
+            let alertController = ViewController.createAlert(title: "Invalid", message: error)
             self.present(alertController, animated: true, completion: nil)
         }
     }
@@ -120,7 +113,6 @@ extension RegistrationViewController {
 
     func registerForKeyboardNotifications(){
         //Adding notifies on keyboard appearing
-//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow), name: NSNotification.Name.UIKeyboardDidShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillBeHidden), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
@@ -155,7 +147,6 @@ extension RegistrationViewController {
         let contentInsets : UIEdgeInsets = UIEdgeInsetsMake(0.0, 0.0, -keyboardSize!.height, 0.0)
         scrollView.contentInset = contentInsets
         scrollView.scrollIndicatorInsets = contentInsets
-        self.view.endEditing(true)
         scrollView.isScrollEnabled = false
     }
 

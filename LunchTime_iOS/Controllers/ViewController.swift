@@ -17,6 +17,29 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
     var activeField: UITextField?
     private var viewModel = UserViewModel()
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        if UserDefaults.standard.isLoggedIn() {
+            performSegue(withIdentifier: Constants.SegueIdentifiers.Home, sender: self)
+        }
+        
+        let loginButton = FBSDKLoginButton()
+        view.addSubview(loginButton)
+        loginButton.frame = CGRect(x:16, y:view.frame.height - 115, width: view.frame.width - 32, height:50)
+        loginButton.delegate = self
+        loginButton.readPermissions = ["email", "public_profile"]
+        
+        registerForKeyboardNotifications()
+        self.hideKeyboardWhenTappedAround()
+        
+        emailField.placeholder = "email"
+        passwordField.placeholder = "password"
+        passwordField.isSecureTextEntry = true
+        emailField.delegate = self
+        passwordField.delegate = self
+        
+    }
+    
     @IBAction func signUpButtonPressed(_ sender: Any) {
         performSegue(withIdentifier: Constants.SegueIdentifiers.Registration, sender: self)
     }
@@ -26,11 +49,7 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
         case .Valid:
             handleLogin()
         case .Invalid(let error):
-            let alertController = UIAlertController(title: "Invalid", message: error, preferredStyle: UIAlertControllerStyle.alert)
-            let okAction = UIAlertAction(title: "OK", style: .default, handler: { (action) in
-                //
-            })
-            alertController.addAction(okAction)
+            let alertController = ViewController.createAlert(title: "Invalid", message: error)
             self.present(alertController, animated: true, completion: nil)
             self.viewModel.updatePassword(password: "")
             self.passwordField.text = nil
@@ -53,11 +72,7 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
     func handleLogin() {
         viewModel.loginToFirebase { (errorMsg) in
             if let errorMsg = errorMsg {
-                let alertController = UIAlertController(title: "Invalid", message: errorMsg, preferredStyle: UIAlertControllerStyle.alert)
-                let okAction = UIAlertAction(title: "OK", style: .default, handler: { (action) in
-                    //
-                })
-                alertController.addAction(okAction)
+                let alertController = ViewController.createAlert(title: "Invalid", message: errorMsg)
                 self.present(alertController, animated: true, completion: nil)
             }
             else {
@@ -68,32 +83,16 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
             self.viewModel.updatePassword(password: "")
             self.passwordField.text = nil
         }
+    }
+    
+    static func createAlert(title: String, message: String, okTitle: String = "OK") -> UIAlertController{
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        let okAction = UIAlertAction(title: okTitle, style: .default, handler: { (action) in
 
+        })
+        alertController.addAction(okAction)
+        return alertController
     }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        if UserDefaults.standard.isLoggedIn() {
-            performSegue(withIdentifier: Constants.SegueIdentifiers.Home, sender: self)
-        }
-    
-        let loginButton = FBSDKLoginButton()
-        view.addSubview(loginButton)
-        loginButton.frame = CGRect(x:16, y:view.frame.height - 115, width: view.frame.width - 32, height:50)
-        loginButton.delegate = self
-        loginButton.readPermissions = ["email", "public_profile"]
-        
-        registerForKeyboardNotifications()
-        self.hideKeyboardWhenTappedAround()
-        
-        emailField.placeholder = "email"
-        passwordField.placeholder = "password"
-        passwordField.isSecureTextEntry = true
-        emailField.delegate = self
-        passwordField.delegate = self
-        
-    }
-    
     
 //MARK: Unwind Segues
     
@@ -180,7 +179,6 @@ extension ViewController {
         let contentInsets : UIEdgeInsets = UIEdgeInsetsMake(0.0, 0.0, -keyboardSize!.height, 0.0)
         scrollView.contentInset = contentInsets
         scrollView.scrollIndicatorInsets = contentInsets
-        self.view.endEditing(true)
         scrollView.isScrollEnabled = false
     }
     
