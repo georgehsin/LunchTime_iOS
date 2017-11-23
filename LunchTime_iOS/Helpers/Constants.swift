@@ -20,6 +20,6 @@ struct Constants {
         static let eventLocation = "showLocationSelectorVC"
         static let eventDateTime = "showDateTimeSelectorVC"
         static let eventFriends = "showFreindsSelectorVC"
-        
+        static let unwindFromEventLocation = "unwindFromEventLocation"
     }
 }

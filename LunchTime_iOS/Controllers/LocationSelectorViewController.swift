@@ -23,6 +23,7 @@ class LocationSelectorViewController: UIViewController, UITableViewDataSource, U
     @IBOutlet weak var foodSearchBar: UITextField!
     @IBOutlet weak var locationSearchBar: UITextField!
     var yelpBusinesses: [YLPBusiness]?
+    var selectedLocation: YLPBusiness?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,11 +83,16 @@ class LocationSelectorViewController: UIViewController, UITableViewDataSource, U
         let cell = tableView.dequeueReusableCell(withIdentifier: "yelpCell", for: indexPath) as! YelpLocationTableViewCell
         if let business = yelpBusinesses?[indexPath.row] {
             cell.commonInit(business: business)
+            cell.selectButton.tag = indexPath.row
+            cell.selectButton.addTarget(self, action: #selector(selectButtonPressed), for: .touchUpInside)
         }
         return cell
     }
     
-    
+    @objc func selectButtonPressed(sender: UIButton) {
+        selectedLocation = yelpBusinesses![sender.tag]
+        performSegue(withIdentifier: Constants.SegueIdentifiers.unwindFromEventLocation, sender: self)
+    }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 120.0
@@ -100,6 +106,12 @@ class LocationSelectorViewController: UIViewController, UITableViewDataSource, U
         }
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == Constants.SegueIdentifiers.unwindFromEventLocation {
+            let createEventController = segue.destination as! CreateEventViewController
+            createEventController.location = selectedLocation
+        }
+    }
 
 }
 

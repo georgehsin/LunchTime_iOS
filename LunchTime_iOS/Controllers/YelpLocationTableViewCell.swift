@@ -9,34 +9,12 @@
 import UIKit
 import YelpAPI
 
-struct YelpCell {
-    var business: YLPBusiness
-    var image: UIImage
-    var name: String
-    var address: String
-    
-    init(business: YLPBusiness) {
-        let url = business.imageURL
-        self.business = business
-        let data = try? Data(contentsOf: url!)
-        image = UIImage(data: data!)!
-//        DispatchQueue.global().async {
-//            let data = try? Data(contentsOf: url!)
-//            DispatchQueue.main.async {
-//                self.image = UIImage(data: data!)!
-//            }
-//        }
-//
-        name = business.name
-        address = business.location.address[0]
-    }
-}
-
 class YelpLocationTableViewCell: UITableViewCell {
 
     @IBOutlet weak var yelpBusinessImage: UIImageView!
     @IBOutlet weak var yelpBusinessName: UILabel!
     @IBOutlet weak var yelpBusinessAddress: UILabel!
+    @IBOutlet weak var selectButton: UIButton!
     
     var yelpBusiness: YLPBusiness?
     
@@ -59,9 +37,6 @@ class YelpLocationTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         //unwind segue to create event
-    }
-    
-    @IBAction func selectButtonPressed(_ sender: Any) {
     }
     
     @IBAction func viewInYelpButtonPressed(_ sender: Any) {

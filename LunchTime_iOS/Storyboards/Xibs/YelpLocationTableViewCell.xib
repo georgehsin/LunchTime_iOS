@@ -47,9 +47,6 @@
                                 <rect key="frame" x="0.0" y="0.0" width="171" height="30"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <state key="normal" title="Select"/>
-                                <connections>
-                                    <action selector="selectButtonPressed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="ozj-Vl-OdG"/>
-                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jRs-gf-2D9">
                                 <rect key="frame" x="183" y="0.0" width="171" height="30"/>
@@ -78,6 +75,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="selectButton" destination="dM6-j9-Th8" id="oZC-rT-Ggy"/>
                 <outlet property="yelpBusinessAddress" destination="84f-Pp-ZG7" id="91Y-6z-pYV"/>
                 <outlet property="yelpBusinessImage" destination="lJs-oE-OHH" id="dzB-mp-h5Z"/>
                 <outlet property="yelpBusinessName" destination="9FE-WI-6cb" id="pIj-tc-9pO"/>

@@ -7,20 +7,21 @@
 //
 
 import UIKit
+import YelpAPI
 
 class CreateEventViewController: UIViewController {
 
+    var location: YLPBusiness?
+    
+    @IBOutlet weak var locationField: UITextField!
+    
     override func viewWillAppear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = true
     }
     
-    
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == Constants.SegueIdentifiers.eventLocation {
-            let eventLocationController = segue.destination as! LocationSelectorViewController
-//            eventLocationController.yelpBusinesses =
-        }
+    @IBAction func selectedLocationUnwind(unwindSegue: UIStoryboardSegue){
+        print("location selected")
+        locationField.text = location?.name
     }
     
 }
