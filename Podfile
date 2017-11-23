@@ -13,6 +13,7 @@ pod 'FBSDKLoginKit'
 pod 'Firebase/Auth'
 pod 'YelpAPI'
 pod 'GooglePlaces'
+pod 'SDWebImage'
 
 
   target 'LunchTime_iOSTests' do

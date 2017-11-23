@@ -46,8 +46,6 @@ struct Location: Decodable {
     let zipcode: String
 }
 
-
-
 class YelpSearchViewModel {
     
     let appId = "epaxlQQOHCGxzbL65kJr9A"

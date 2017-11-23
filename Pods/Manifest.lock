@@ -49,6 +49,9 @@ PODS:
     - nanopb/encode (= 0.3.8)
   - nanopb/decode (0.3.8)
   - nanopb/encode (0.3.8)
+  - SDWebImage (4.1.2):
+    - SDWebImage/Core (= 4.1.2)
+  - SDWebImage/Core (4.1.2)
   - YelpAPI (2.0.0)
 
 DEPENDENCIES:
@@ -57,6 +60,7 @@ DEPENDENCIES:
   - FBSDKShareKit
   - Firebase/Auth
   - GooglePlaces
+  - SDWebImage
   - YelpAPI
 
 SPEC CHECKSUMS:
@@ -74,8 +78,9 @@ SPEC CHECKSUMS:
   GoogleToolboxForMac: 2501e2ad72a52eb3dfe7bd9aee7dad11b858bd20
   GTMSessionFetcher: ebaa1f79a5366922c1735f1566901f50beba23b7
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
+  SDWebImage: cb6f9f266a9977741efcbc21e618e8be3734c774
   YelpAPI: a0475cf4a7b6f9fe81f1bb7b8a8492770f21e3c7
 
-PODFILE CHECKSUM: 047265b4e8521699ac5f98e850e2f8d03b162682
+PODFILE CHECKSUM: 1ea9df31a50c2bb95b47c4daf3dc42bbf93c75d4
 
 COCOAPODS: 1.2.1

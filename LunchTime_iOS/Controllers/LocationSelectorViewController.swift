@@ -10,12 +10,6 @@ import UIKit
 import YelpAPI
 import GooglePlaces
 
-struct tableViewCellData {
-    let image: UIImage
-    let name: String
-    let address: String
-}
-
 class LocationSelectorViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate {
     
     private var yelp = YelpSearchViewModel()
@@ -87,15 +81,12 @@ class LocationSelectorViewController: UIViewController, UITableViewDataSource, U
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "yelpCell", for: indexPath) as! YelpLocationTableViewCell
         if let business = yelpBusinesses?[indexPath.row] {
-            let url = business.imageURL
-            let data = try? Data(contentsOf: url!)
-            cell.yelpBusinessImage.image = UIImage(data: data!)
-            cell.yelpBusinessName.text = business.name
-            let location = business.location
-            cell.yelpBusinessAddress.text = "\(location.address[0]), \(location.city)"
+            cell.commonInit(business: business)
         }
         return cell
     }
+    
+    
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 120.0
