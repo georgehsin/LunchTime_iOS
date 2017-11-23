@@ -51,7 +51,9 @@ class YelpLocationTableViewCell: UITableViewCell {
         yelpBusinessName.text = business.name
         yelpBusiness = business
         let location = business.location
-        yelpBusinessAddress.text = "\(location.address[0]), \(location.city)"
+        if location.address.count >= 1 {
+            yelpBusinessAddress.text = "\(location.address[0]), \(location.city)"
+        }
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
