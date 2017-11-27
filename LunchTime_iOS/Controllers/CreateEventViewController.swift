@@ -14,6 +14,7 @@ class CreateEventViewController: UIViewController {
     var location: YLPBusiness?
     
     @IBOutlet weak var locationField: UITextField!
+    @IBOutlet weak var dateField: UITextField!
     
     override func viewWillAppear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = true
@@ -24,4 +25,8 @@ class CreateEventViewController: UIViewController {
         locationField.text = location?.name
     }
     
+    @IBAction func selectedDateUnwind(unwindSegue: UIStoryboardSegue) {
+        print("Date Selected")
+//        dateField.text = ""
+    }
 }

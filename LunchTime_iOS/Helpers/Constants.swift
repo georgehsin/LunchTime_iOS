@@ -21,5 +21,6 @@ struct Constants {
         static let eventDateTime = "showDateTimeSelectorVC"
         static let eventFriends = "showFreindsSelectorVC"
         static let unwindFromEventLocation = "unwindFromEventLocation"
+        static let unwindFromEventDate = "unwindFromEventDate"
     }
 }

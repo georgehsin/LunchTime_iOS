@@ -96,6 +96,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="dateField" destination="mz3-K9-Jrf" id="DCz-j0-wlB"/>
                         <outlet property="locationField" destination="YG1-L2-Jba" id="F3g-Wf-kzD"/>
                     </connections>
                 </viewController>
@@ -236,34 +237,52 @@
             </objects>
             <point key="canvasLocation" x="210" y="1053"/>
         </scene>
-        <!--View Controller-->
+        <!--Date Selector View Controller-->
         <scene sceneID="FCD-Bn-blZ">
             <objects>
-                <viewController id="eEm-dl-RQN" sceneMemberID="viewController">
+                <viewController id="eEm-dl-RQN" customClass="DateSelectorViewController" customModule="LunchTime_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Scw-sq-j0c">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date/Time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rxa-2I-oYo">
-                                <rect key="frame" x="142" y="323" width="90" height="21"/>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="94V-Dr-SBK">
+                                <rect key="frame" x="0.0" y="124" width="375" height="250"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="GgJ-bA-bm0"/>
-                                    <constraint firstAttribute="width" constant="90" id="rXH-T7-Xok"/>
+                                    <constraint firstAttribute="height" constant="250" id="aYU-bk-ANQ"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                                <date key="date" timeIntervalSinceReferenceDate="533458465.90430301">
+                                    <!--2017-11-27 06:54:25 +0000-->
+                                </date>
+                            </datePicker>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pll-jK-20I">
+                                <rect key="frame" x="162.5" y="454" width="50" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="gng-yi-Huj"/>
+                                    <constraint firstAttribute="height" constant="30" id="hCj-7x-OzM"/>
+                                </constraints>
+                                <state key="normal" title="Submit"/>
+                                <connections>
+                                    <action selector="submitButtonPressed:" destination="eEm-dl-RQN" eventType="touchUpInside" id="61L-sU-1za"/>
+                                    <segue destination="HA5-aF-Lju" kind="unwind" identifier="unwindFromEventDate" unwindAction="selectedDateUnwindWithUnwindSegue:" id="p39-eL-Nzo"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Rxa-2I-oYo" firstAttribute="centerX" secondItem="Scw-sq-j0c" secondAttribute="centerX" id="2DS-Lh-ZAq"/>
-                            <constraint firstItem="Rxa-2I-oYo" firstAttribute="centerY" secondItem="Scw-sq-j0c" secondAttribute="centerY" id="WYC-A9-Oai"/>
+                            <constraint firstItem="94V-Dr-SBK" firstAttribute="trailing" secondItem="luk-Km-bRc" secondAttribute="trailing" id="NhO-Ge-Ooh"/>
+                            <constraint firstItem="pll-jK-20I" firstAttribute="top" secondItem="94V-Dr-SBK" secondAttribute="bottom" constant="80" id="OdW-3u-pDW"/>
+                            <constraint firstItem="94V-Dr-SBK" firstAttribute="leading" secondItem="luk-Km-bRc" secondAttribute="leading" id="WBl-jc-lcV"/>
+                            <constraint firstItem="pll-jK-20I" firstAttribute="centerX" secondItem="Scw-sq-j0c" secondAttribute="centerX" id="mo1-1j-fvX"/>
+                            <constraint firstItem="94V-Dr-SBK" firstAttribute="top" secondItem="luk-Km-bRc" secondAttribute="top" constant="60" id="sc1-cH-X8g"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="luk-Km-bRc"/>
                     </view>
+                    <connections>
+                        <outlet property="datePicker" destination="94V-Dr-SBK" id="V8m-TK-ax3"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H6J-iZ-2qt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="HA5-aF-Lju" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="-1503" y="1053"/>
         </scene>
