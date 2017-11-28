@@ -176,16 +176,18 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JHC-7j-aNz">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="JHC-7j-aNz">
+                                <rect key="frame" x="0.0" y="20" width="375" height="56"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="JHC-7j-aNz" firstAttribute="top" secondItem="Kqa-XB-AIM" secondAttribute="top" id="7H5-ao-3XO"/>
                             <constraint firstItem="CwL-MF-dNb" firstAttribute="centerX" secondItem="Gab-M1-C6R" secondAttribute="centerX" id="A6Q-Uf-Wkl"/>
+                            <constraint firstItem="JHC-7j-aNz" firstAttribute="leading" secondItem="Kqa-XB-AIM" secondAttribute="leading" id="T0U-2a-Zal"/>
                             <constraint firstItem="CwL-MF-dNb" firstAttribute="centerY" secondItem="Gab-M1-C6R" secondAttribute="centerY" id="jpy-j5-vFr"/>
+                            <constraint firstItem="JHC-7j-aNz" firstAttribute="trailing" secondItem="Kqa-XB-AIM" secondAttribute="trailing" id="shr-Kf-6ZN"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Kqa-XB-AIM"/>
                     </view>

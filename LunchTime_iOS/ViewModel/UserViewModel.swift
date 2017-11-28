@@ -72,7 +72,7 @@ extension UserViewModel {
         var errorMsg: String?
         if let facebookToken = FBSDKAccessToken.current() {
             let credentials = FacebookAuthProvider.credential(withAccessToken: facebookToken.tokenString)
-            Auth.auth().signIn(with: credentials) { (user, error) in
+            Auth.auth().signIn(with: credentials) { (FirebaseUser, error) in
                 if error != nil  {
 //                    print("Error with Firebase login \(error)")
                     if let errCode = AuthErrorCode(rawValue: error!._code) {
@@ -88,7 +88,7 @@ extension UserViewModel {
             }
         }
         else {
-            Auth.auth().signIn(withEmail: user.username, password: user.password, completion: { (user, error) in
+            Auth.auth().signIn(withEmail: user.username, password: user.password, completion: { (FirebaseUser, error) in
                 if error != nil {
                     print("error")
                     if let errCode = AuthErrorCode(rawValue: error!._code) {
@@ -113,7 +113,7 @@ extension UserViewModel {
     
     func registerWithFirebase(onComplete: @escaping (String?) -> ()) {
         var errorMsg: String?
-        Auth.auth().createUser(withEmail: user.username, password: user.password) { (user, error) in
+        Auth.auth().createUser(withEmail: user.username, password: user.password) { (FirebaseUser, error) in
             if error != nil {
                 if let errCode = AuthErrorCode(rawValue: error!._code) {
                     switch errCode {
@@ -126,7 +126,44 @@ extension UserViewModel {
                     }
                 }
             }
+            else if let FirebaseUser = FirebaseUser {
+                self.writeUserToDatabase(uid: FirebaseUser.uid)
+            }
             onComplete(errorMsg)
+        }
+        
+    }
+    
+    func writeUserToDatabase(uid: String) {
+        DispatchQueue.global().async {
+            if FBSDKAccessToken.current() != nil {
+                FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "name, email"]).start(completionHandler: { (connection, result, error) -> Void in
+                    if (error == nil) {
+                        let fbData = result as! [String:String]
+                        Firestore.firestore().collection("users").document(uid).setData([
+                            "email": fbData["email"]!
+                        ], options: SetOptions.merge()) { err in
+                            if let err = err {
+                                print("Error adding document: \(err)")
+                            } else {
+                                print("Document added")
+                            }
+                        }
+                    }
+                })
+            }
+            else {
+                Firestore.firestore().collection("users").document(uid).setData([
+                    "email": self.user.username
+                ], options: SetOptions.merge()) { err in
+                    if let err = err {
+                        print("Error adding document: \(err)")
+                    } else {
+                        print("Document added")
+                    }
+                }
+            }
+            
         }
     }
     
@@ -147,7 +184,5 @@ extension UserViewModel {
             }
             print(result!)
         }
-        
-        print("Successfully logged in with Facebook...")
     }
 }
