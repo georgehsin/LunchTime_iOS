@@ -206,10 +206,10 @@
             </objects>
             <point key="canvasLocation" x="-1502" y="213"/>
         </scene>
-        <!--View Controller-->
+        <!--Friend Selector View Controller-->
         <scene sceneID="LIJ-wu-XPT">
             <objects>
-                <viewController id="JH1-Ej-teG" sceneMemberID="viewController">
+                <viewController id="JH1-Ej-teG" customClass="FriendSelectorViewController" customModule="LunchTime_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0di-Xf-RAc">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
