@@ -46,7 +46,7 @@ extension UserViewModel {
             return .Invalid("Username and password are required.")
         }
         
-        if user.password.characters.count < minPasswordLength {
+        if user.password.count < minPasswordLength {
             return .Invalid("Password needs to be at least \(minPasswordLength) characters long.")
         }
         

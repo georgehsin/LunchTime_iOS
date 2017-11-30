@@ -16,6 +16,8 @@ class FriendsSearchViewController: UIViewController, UITableViewDelegate, UITabl
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var segmentControl: UISegmentedControl!
+    var noResultsView: UIView?
+    var noResultsLabel: UILabel?
     
     var users: [[String:String]]?
     
@@ -74,13 +76,37 @@ class FriendsSearchViewController: UIViewController, UITableViewDelegate, UITabl
             print()
         default:
             let search = searchBar.text!.lowercased()
-            viewModel.getFromFireStore(query: search, onComplete: { (usersList) in
+            viewModel.getFromFireStore(query: search, collection: "users", field: "email", onComplete: { (usersList) in
                 self.users = usersList as? [[String:String]]
                 if self.users!.count >= 1 {
+                    if let noResultsView = self.noResultsView {
+                        noResultsView.isHidden = true
+                    }
                     self.tableView.reloadData()
+                }
+                else {
+                    self.tableView.isHidden = true
+                    if let noResultsView = self.noResultsView {
+                        noResultsView.isHidden = false
+                        self.noResultsLabel!.text = "No users found beginning with \(searchBar.text!)."
+                    }
+                    else {
+                        self.createNoResultsView(query: searchBar.text!)
+                    }
                 }
             })
         }
+    }
+    
+    func createNoResultsView(query: String) {
+        self.noResultsView = UIView()
+        self.noResultsLabel = UILabel()
+        self.noResultsView!.frame = self.tableView.frame
+        self.view.addSubview(self.noResultsView!)
+        self.noResultsLabel!.frame = CGRect(x: 0, y: 0, width: self.noResultsView!.frame.width, height: 200)
+        self.noResultsLabel!.text = "No users found beginning with \(query)."
+        self.noResultsLabel!.textAlignment = NSTextAlignment.center
+        self.noResultsView!.addSubview(self.noResultsLabel!)
     }
 
 
