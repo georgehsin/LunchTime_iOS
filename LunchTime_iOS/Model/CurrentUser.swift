@@ -1,5 +1,5 @@
 //
-//  User.swift
+//  CurrentUser.swift
 //  LunchTime_iOS
 //
 //  Created by George Hsin on 11/12/17.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct User {
+struct CurrentUser {
     var username = ""
     var password = ""
 }

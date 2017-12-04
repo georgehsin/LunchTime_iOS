@@ -70,7 +70,7 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
     }
     
     func handleLogin() {
-        viewModel.loginToFirebase { (errorMsg) in
+        viewModel.loginToFirebase { (user, errorMsg) in
             if let errorMsg = errorMsg {
                 let alertController = ViewController.createAlert(title: "Invalid", message: errorMsg)
                 self.present(alertController, animated: true, completion: nil)
@@ -78,6 +78,7 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
             else {
                 //Handle, if login success... do the following
                 UserDefaults.standard.setIsLoggedIn(value: true)
+                UserDefaults.standard.setKey(key: UserDefaults.UserDefaultKeys.userId.rawValue, value: user!.uid)
                 self.performSegue(withIdentifier: Constants.SegueIdentifiers.Home, sender: self)
             }
             self.viewModel.updatePassword(password: "")

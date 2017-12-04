@@ -17,7 +17,7 @@ enum UserValidationState {
 
 class UserViewModel {
     private let minPasswordLength = 6
-    private var user = User()
+    private var user = CurrentUser()
     
     var username: String {
         return user.username
@@ -66,7 +66,7 @@ extension UserViewModel {
 //MARK: Network login and registration
 extension UserViewModel {
     
-    func loginToFirebase(onComplete: @escaping (String?) -> ()) {
+    func loginToFirebase(onComplete: @escaping (User?, String?) -> ()) {
         print("username = \(user.username) password = \(user.password)")
 //        print("email = \(email) password = \(password)")
         var errorMsg: String?
@@ -84,7 +84,7 @@ extension UserViewModel {
                         }
                     }
                 }
-                onComplete(errorMsg)
+                onComplete(FirebaseUser, errorMsg)
             }
         }
         else {
@@ -106,7 +106,7 @@ extension UserViewModel {
                         }
                     }
                 }
-                onComplete(errorMsg)
+                onComplete(FirebaseUser, errorMsg)
             })
         }
     }
@@ -141,7 +141,10 @@ extension UserViewModel {
                     if (error == nil) {
                         let fbData = result as! [String:String]
                         Firestore.firestore().collection("users").document(uid).setData([
-                            "email": fbData["email"]!
+                            "email": fbData["email"]!,
+                            "friends": [],
+                            "sentRequest": [],
+                            "recievedRequest": []
                         ], options: SetOptions.merge()) { err in
                             if let err = err {
                                 print("Error adding document: \(err)")

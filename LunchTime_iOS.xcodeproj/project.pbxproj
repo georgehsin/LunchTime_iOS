@@ -14,7 +14,7 @@
 		A61BB76D1FCC72A60009823F /* DateSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61BB76C1FCC72A60009823F /* DateSelectorViewController.swift */; };
 		A623216D1FB78F6E00A54814 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A623216C1FB78C7000A54814 /* GoogleService-Info.plist */; };
 		A623217F1FB8FA9400A54814 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A623217E1FB8FA9400A54814 /* UserViewModel.swift */; };
-		A62321811FB8FAD900A54814 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A62321801FB8FAD900A54814 /* User.swift */; };
+		A62321811FB8FAD900A54814 /* CurrentUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A62321801FB8FAD900A54814 /* CurrentUser.swift */; };
 		A644D5631FC2533100E851A8 /* YelpSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A644D5621FC2533100E851A8 /* YelpSearchViewModel.swift */; };
 		A658439E1FCD0BAB00B93FCA /* FriendsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A658439D1FCD0BAB00B93FCA /* FriendsViewModel.swift */; };
 		A65843A01FCD16D100B93FCA /* FriendSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A658439F1FCD16D100B93FCA /* FriendSelectorViewController.swift */; };
@@ -58,7 +58,7 @@
 		A61BB76C1FCC72A60009823F /* DateSelectorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateSelectorViewController.swift; sourceTree = "<group>"; };
 		A623216C1FB78C7000A54814 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A623217E1FB8FA9400A54814 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
-		A62321801FB8FAD900A54814 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		A62321801FB8FAD900A54814 /* CurrentUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUser.swift; sourceTree = "<group>"; };
 		A644D5621FC2533100E851A8 /* YelpSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpSearchViewModel.swift; sourceTree = "<group>"; };
 		A658439D1FCD0BAB00B93FCA /* FriendsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsViewModel.swift; sourceTree = "<group>"; };
 		A658439F1FCD16D100B93FCA /* FriendSelectorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendSelectorViewController.swift; sourceTree = "<group>"; };
@@ -140,7 +140,7 @@
 		A623217D1FB8F85300A54814 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				A62321801FB8FAD900A54814 /* User.swift */,
+				A62321801FB8FAD900A54814 /* CurrentUser.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -452,7 +452,7 @@
 				A698E5BE1FB2284C00D42A29 /* ViewController.swift in Sources */,
 				A65843A21FCD18DC00B93FCA /* FriendsSearchViewController.swift in Sources */,
 				A658439E1FCD0BAB00B93FCA /* FriendsViewModel.swift in Sources */,
-				A62321811FB8FAD900A54814 /* User.swift in Sources */,
+				A62321811FB8FAD900A54814 /* CurrentUser.swift in Sources */,
 				A6C79F5E1FBB5F4400649FBE /* UserDefaults.swift in Sources */,
 				A65843A51FCD1D5700B93FCA /* FriendsSearchTableViewCell.swift in Sources */,
 				A698E5BC1FB2284C00D42A29 /* AppDelegate.swift in Sources */,
