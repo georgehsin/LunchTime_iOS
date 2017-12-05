@@ -19,7 +19,7 @@ class FriendsSearchViewController: UIViewController, UITableViewDelegate, UITabl
     var noResultsView: UIView?
     var noResultsLabel: UILabel?
     
-    var users: [[String:String]]?
+    var users: [Friend]?
     
     @IBAction func segmentedControlSelected(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
@@ -43,12 +43,18 @@ class FriendsSearchViewController: UIViewController, UITableViewDelegate, UITabl
         tableView.dataSource = self
         hideKeyboardWhenTappedAround()
         // Do any additional setup after loading the view.
+        getFriends()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "friendsCell", for: indexPath) as! FriendsSearchTableViewCell
         if let users = users {
-            cell.emailLabel.text = users[indexPath.row]["email"]
+            //cell.reference = *****
+            //use this as the reference and add this as the sent_request array
+            cell.emailLabel.text = users[indexPath.row].username
+            cell.uid = users[indexPath.row].docId
+            cell.addFriendButton.tag = indexPath.row
+            cell.addFriendButton.addTarget(self, action: #selector(addFriendButtonPressed), for: .touchUpInside)
         }
         return cell
     }
@@ -60,6 +66,7 @@ class FriendsSearchViewController: UIViewController, UITableViewDelegate, UITabl
         }
         else {
             return 0
+            
         }
         
     }
@@ -69,33 +76,35 @@ class FriendsSearchViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        var collection: String?
         switch segmentControl.selectedSegmentIndex {
         case 0:
-            print()
+            collection = "users"
         case 1:
-            print()
+            collection = "users"
         default:
-            let search = searchBar.text!.lowercased()
-            viewModel.getFromFireStore(query: search, collection: "users", field: "email", onComplete: { (usersList) in
-                self.users = usersList as? [[String:String]]
-                if self.users!.count >= 1 {
-                    if let noResultsView = self.noResultsView {
-                        noResultsView.isHidden = true
-                    }
-                    self.tableView.reloadData()
+            collection = "users"
+        }
+        let search = searchBar.text!.lowercased()
+        viewModel.queryFireStore(query: search, collection: collection!, field: "email", onComplete: { (usersList) in
+            self.users = usersList
+            if self.users!.count >= 1 {
+                if let noResultsView = self.noResultsView {
+                    noResultsView.isHidden = true
+                }
+                self.tableView.reloadData()
+            }
+            else {
+                self.tableView.isHidden = true
+                if let noResultsView = self.noResultsView {
+                    noResultsView.isHidden = false
+                    self.noResultsLabel!.text = "No users found beginning with \(searchBar.text!)."
                 }
                 else {
-                    self.tableView.isHidden = true
-                    if let noResultsView = self.noResultsView {
-                        noResultsView.isHidden = false
-                        self.noResultsLabel!.text = "No users found beginning with \(searchBar.text!)."
-                    }
-                    else {
-                        self.createNoResultsView(query: searchBar.text!)
-                    }
+                    self.createNoResultsView(query: searchBar.text!)
                 }
-            })
-        }
+            }
+        })
     }
     
     func createNoResultsView(query: String) {
@@ -108,6 +117,25 @@ class FriendsSearchViewController: UIViewController, UITableViewDelegate, UITabl
         self.noResultsLabel!.textAlignment = NSTextAlignment.center
         self.noResultsView!.addSubview(self.noResultsLabel!)
     }
+    
+    func getFriends() {
+        let uid = UserDefaults.standard.string(forKey: UserDefaults.UserDefaultKeys.userId.rawValue)
+        viewModel.getFromFireStore(collection: "users", document: uid!, onComplete: { (user) in
+            print(user)
+//            print(user["email"]! as! String)
+        })
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        getFriends()
+    }
+    
+    @objc func addFriendButtonPressed(sender: UIButton) {
+        print("Sending a friend request to \(users![sender.tag].username)")
+        print("user uid is \(users![sender.tag].docId)")
+        viewModel.sendFriendRequest(recipientId: users![sender.tag].docId)
+    }
+
 
 
 }

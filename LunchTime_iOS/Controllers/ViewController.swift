@@ -79,6 +79,7 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
                 //Handle, if login success... do the following
                 UserDefaults.standard.setIsLoggedIn(value: true)
                 UserDefaults.standard.setKey(key: UserDefaults.UserDefaultKeys.userId.rawValue, value: user!.uid)
+                UserDefaults.standard.setKey(key: UserDefaults.UserDefaultKeys.email.rawValue, value: user!.email!)
                 self.performSegue(withIdentifier: Constants.SegueIdentifiers.Home, sender: self)
             }
             self.viewModel.updatePassword(password: "")

@@ -142,9 +142,9 @@ extension UserViewModel {
                         let fbData = result as! [String:String]
                         Firestore.firestore().collection("users").document(uid).setData([
                             "email": fbData["email"]!,
-                            "friends": [],
-                            "sentRequest": [],
-                            "recievedRequest": []
+                            "friends": [uid, fbData["email"]!],
+                            "sentRequest":{},
+                            "recievedRequest": {}
                         ], options: SetOptions.merge()) { err in
                             if let err = err {
                                 print("Error adding document: \(err)")
@@ -157,7 +157,10 @@ extension UserViewModel {
             }
             else {
                 Firestore.firestore().collection("users").document(uid).setData([
-                    "email": self.user.username
+                    "email": self.user.username,
+                    "friends": [uid, self.user.username],
+                    "sentRequest":{},
+                    "recievedRequest": {}
                 ], options: SetOptions.merge()) { err in
                     if let err = err {
                         print("Error adding document: \(err)")

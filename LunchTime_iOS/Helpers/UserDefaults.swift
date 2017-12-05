@@ -13,6 +13,7 @@ extension UserDefaults {
     enum UserDefaultKeys: String {
         case isLoggedIn
         case userId
+        case email
     }
     
     func setIsLoggedIn(value: Bool) {

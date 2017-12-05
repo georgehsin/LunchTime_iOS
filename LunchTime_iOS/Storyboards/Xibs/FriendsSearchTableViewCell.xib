@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -20,24 +20,21 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zqt-ep-vO2">
-                        <rect key="frame" x="13" y="9" width="50" height="50"/>
+                        <rect key="frame" x="21" y="9" width="50" height="50"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="50" id="cwj-Sf-B6W"/>
                             <constraint firstAttribute="width" constant="50" id="vhj-ep-QB2"/>
                         </constraints>
                     </imageView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gV1-83-Gn4">
-                        <rect key="frame" x="285" y="22.5" width="25" height="25"/>
+                        <rect key="frame" x="277" y="22.5" width="25" height="25"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="25" id="MM6-lh-1GA"/>
                             <constraint firstAttribute="height" constant="25" id="xml-Fa-S1q"/>
                         </constraints>
-                        <connections>
-                            <action selector="addFriendButtonPressed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="m43-4E-hR5"/>
-                        </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="randomemail@gmail.com" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mYv-bl-vKf">
-                        <rect key="frame" x="78" y="23" width="192" height="25"/>
+                        <rect key="frame" x="86" y="23" width="176" height="25"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="25" id="u8H-1S-fEF"/>
                         </constraints>
@@ -58,6 +55,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="addFriendButton" destination="gV1-83-Gn4" id="cXF-0D-gXW"/>
                 <outlet property="emailLabel" destination="mYv-bl-vKf" id="F9t-GO-XUc"/>
                 <outlet property="profileImage" destination="zqt-ep-vO2" id="6UC-37-toV"/>
             </connections>

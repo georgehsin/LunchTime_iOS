@@ -12,7 +12,9 @@ class FriendsSearchTableViewCell: UITableViewCell {
 
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var emailLabel: UILabel!
-    
+    @IBOutlet weak var addFriendButton: UIButton!
+    var uid: String!
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -25,7 +27,9 @@ class FriendsSearchTableViewCell: UITableViewCell {
     }
 
     
-    @IBAction func addFriendButtonPressed(_ sender: Any) {
-        print("Sending a friend request to \(emailLabel.text!)")
-    }
+//    @IBAction func addFriendButtonPressed(_ sender: Any) {
+//        print("Sending a friend request to \(emailLabel.text!)")
+//        print("user uid is \(uid)")
+//        //some ViewModel function here with this uid
+//    }
 }
