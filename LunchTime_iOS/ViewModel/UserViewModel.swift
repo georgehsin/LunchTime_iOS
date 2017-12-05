@@ -140,12 +140,13 @@ extension UserViewModel {
                 FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "name, email"]).start(completionHandler: { (connection, result, error) -> Void in
                     if (error == nil) {
                         let fbData = result as! [String:String]
-                        Firestore.firestore().collection("users").document(uid).setData([
+                        let docData: [String: Any] = [
                             "email": fbData["email"]!,
-                            "friends": [uid, fbData["email"]!],
-                            "sentRequest":{},
-                            "recievedRequest": {}
-                        ], options: SetOptions.merge()) { err in
+                            "friends": [],
+                            "sentRequest": [String: Friend](),
+                            "recievedRequest": [String: Friend]()
+                        ]
+                        Firestore.firestore().collection("users").document(uid).setData(docData) { err in
                             if let err = err {
                                 print("Error adding document: \(err)")
                             } else {
@@ -156,12 +157,13 @@ extension UserViewModel {
                 })
             }
             else {
-                Firestore.firestore().collection("users").document(uid).setData([
+                let docData: [String: Any] = [
                     "email": self.user.username,
-                    "friends": [uid, self.user.username],
-                    "sentRequest":{},
-                    "recievedRequest": {}
-                ], options: SetOptions.merge()) { err in
+                    "friends": [],
+                    "sentRequest": [String: Friend](),
+                    "recievedRequest": [String: Friend]()
+                ]
+                Firestore.firestore().collection("users").document(uid).setData(docData) { err in
                     if let err = err {
                         print("Error adding document: \(err)")
                     } else {
