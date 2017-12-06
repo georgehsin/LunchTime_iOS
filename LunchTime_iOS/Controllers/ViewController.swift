@@ -108,6 +108,9 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
         print("logging out")
         viewModel.logoutOfFirebase()
         UserDefaults.standard.setIsLoggedIn(value: false)
+        UserDefaults.standard.removeObject(forKey: UserDefaults.UserDefaultKeys.userId.rawValue)
+        UserDefaults.standard.removeObject(forKey: UserDefaults.UserDefaultKeys.email.rawValue)
+        UserDefaults.standard.synchronize()
         if FBSDKAccessToken.current() != nil {
             FBSDKLoginManager().logOut()
         }

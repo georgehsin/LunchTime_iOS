@@ -20,6 +20,7 @@ class FriendsSearchViewController: UIViewController, UITableViewDelegate, UITabl
     var noResultsLabel: UILabel?
     
     var users: [Friend]?
+    var currentUserData: UserData?
     
     @IBAction func segmentedControlSelected(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
@@ -119,15 +120,19 @@ class FriendsSearchViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     func getFriends() {
-        let uid = UserDefaults.standard.string(forKey: UserDefaults.UserDefaultKeys.userId.rawValue)
-        viewModel.getFromFireStore(collection: "users", document: uid!, onComplete: { (user) in
-            print(user)
-//            print(user["email"]! as! String)
-        })
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        getFriends()
+//        viewModel.getFromFireStore(collection: "users", document: uid!, onComplete: { (user) in
+//            print(user)
+////            print(user["email"]! as! String)
+//        })
+        DispatchQueue.global(qos: .userInteractive).async {
+            self.viewModel.getCurrentUserData { (userData) in
+                self.users = userData.friends
+            }
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+
     }
     
     @objc func addFriendButtonPressed(sender: UIButton) {

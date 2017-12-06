@@ -26,10 +26,4 @@ class FriendsSearchTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
-    
-//    @IBAction func addFriendButtonPressed(_ sender: Any) {
-//        print("Sending a friend request to \(emailLabel.text!)")
-//        print("user uid is \(uid)")
-//        //some ViewModel function here with this uid
-//    }
 }

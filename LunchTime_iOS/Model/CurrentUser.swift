@@ -9,6 +9,25 @@
 import Foundation
 
 struct CurrentUser {
-    var username = ""
-    var password = ""
+    var username: String = ""
+    var password: String = ""
+    var data: UserData?
 }
+
+struct UserData {
+    var uid = ""
+    var email = ""
+//    var profilePic
+    var friends = [Friend]()
+    var sentRequest = [String: Friend]()
+    var recievedRequest = [String: Friend]()
+
+    init(uid: String, email: String, friends: [Friend], sentRequest: [String: Friend], recievedRequest: [String: Friend]) {
+        self.uid = uid
+        self.email = email
+        self.friends = friends
+        self.sentRequest = sentRequest
+        self.recievedRequest = recievedRequest
+    }
+}
+
