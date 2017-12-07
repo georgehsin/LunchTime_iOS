@@ -19,15 +19,19 @@ struct UserData {
     var email = ""
 //    var profilePic
     var friends = [Friend]()
-    var sentRequest = [String: Friend]()
-    var recievedRequest = [String: Friend]()
+    var sentRequestUsersList = [Friend]()
+    var recievedRequestUsersLists = [Friend]()
+    var sentRequestUsersDict = [String: Friend]()
+    var recievedRequestUsersDict = [String: Friend]()
 
-    init(uid: String, email: String, friends: [Friend], sentRequest: [String: Friend], recievedRequest: [String: Friend]) {
+    init(uid: String, email: String, friends: [Friend], sentRequestList: [Friend], recievedRequestList: [Friend], sentRequestDict: [String: Friend], recievedRequestDict: [String: Friend]) {
         self.uid = uid
         self.email = email
         self.friends = friends
-        self.sentRequest = sentRequest
-        self.recievedRequest = recievedRequest
+        self.sentRequestUsersList = sentRequestList
+        self.recievedRequestUsersLists = recievedRequestList
+        self.sentRequestUsersDict = sentRequestDict
+        self.recievedRequestUsersDict = recievedRequestDict
     }
 }
 

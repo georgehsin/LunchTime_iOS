@@ -10,13 +10,13 @@ import Foundation
 import Firebase
 
 struct Friend {
-    var docId: String
+    var uid: String
     var username: String
 //    var name: String
 //    var profilePicURL: String
     
-    init(docId: String, username: String ) {
-        self.docId = docId
+    init(uid: String, username: String ) {
+        self.uid = uid
         self.username = username
     }
     
@@ -35,7 +35,7 @@ class FriendsViewModel {
             if let err = err {
                 print("Error getting documents: \(err)")
             } else {
-                let usersList = querySnapshot!.documents.filter({$0.documentID != self.uid}).map({return Friend(docId: $0.documentID, username: $0.data()["email"] as! String)})
+                let usersList = querySnapshot!.documents.filter({$0.documentID != self.uid}).map({return Friend(uid: $0.documentID, username: $0.data()["email"] as! String)})
                 print("FriendsViewModel.getFromFireStore() - userList: \(usersList)")
                 onComplete(usersList)
             }
@@ -51,7 +51,7 @@ class FriendsViewModel {
                 if let querySnapshot = querySnapshot {
                     print(querySnapshot.data())
                     print("FriendsViewModel.getFromFireStore() - userList: \(querySnapshot)")
-//                    onComplete(querySnapshot.data()["friends"].map({return Friend(docId: $0.documentId, username: $0.email)}))
+//                    onComplete(querySnapshot.data()["friends"].map({return Friend(uid: $0.documentId, username: $0.email)}))
                 }
             }
         }
@@ -68,20 +68,53 @@ class FriendsViewModel {
                     let uid = querySnapshot.documentID
                     let email = user["email"] as! String
                     let friends = user["friends"] as! [Friend]
-                    let sentRequest = user["sentRequest"] as! [String : Friend]
-                    let recievedRequest = user["recievedRequest"] as! [String : Friend]
-                    self.currentUser.data = UserData.init(uid: uid, email: email, friends: friends, sentRequest: sentRequest, recievedRequest: recievedRequest)
+                    
+                    let sentRequest = user["sentRequest"] as! [String: [String:String]]
+                    let sentRequestList = sentRequest.map { (key, value) -> Friend in
+                        return Friend(uid: value["uid"] as String!, username: value["username"] as String!)
+                    }
+                    let sentRequestDict = sentRequest.mapValues({ (value) -> Friend in
+                        return Friend(uid: value["uid"]!, username: value["username"]!)
+                    })
+                    
+                    let recievedRequest = user["recievedRequest"] as! [String: [String:String]]
+                    //map into array of [Friend] objects with uid and email
+                    let recievedRequestList = recievedRequest.map { (key, value) -> Friend in
+                        return Friend(uid: value["uid"] as String!, username: value["username"] as String!)
+                    }
+                    let recievedRequestDict = recievedRequest.mapValues({ (value) -> Friend in
+                        return Friend(uid: value["uid"]!, username: value["username"]!)
+                    })
+                    
+                    self.currentUser.data = UserData.init(uid: uid, email: email, friends: friends, sentRequestList: sentRequestList, recievedRequestList: recievedRequestList, sentRequestDict: sentRequestDict, recievedRequestDict: recievedRequestDict)
                     onComplete(self.currentUser.data!)
                 }
             }
         }
     }
     
-    func sendFriendRequest(recipientId: String) {
+    func sendFriendRequest(recipientUser: Friend) {
         //get current user add to sentRequest
         //get adding user - add to Request sent
-        Firestore.firestore().collection("users").document(uid!).setData(["sentRequest": [recipientId:true] ], options: SetOptions.merge())
-        Firestore.firestore().collection("users").document(recipientId).setData(["recievedRequest": [uid!:true] ], options: SetOptions.merge())
+        let recipientId = recipientUser.uid
+        let sentRequestData = [
+            "sentRequest": [
+                recipientId: [
+                    "uid": recipientId,
+                    "username": recipientUser.username
+                ]
+            ]
+        ]
+        let recievedRequestData = [
+            "recievedRequest": [
+                uid!: [
+                    "uid": uid!,
+                    "username": currentUser.data?.email
+                ]
+            ]
+        ]
+        Firestore.firestore().collection("users").document(uid!).setData(sentRequestData, options: SetOptions.merge())
+        Firestore.firestore().collection("users").document(recipientId).setData(recievedRequestData, options: SetOptions.merge())
     }
     
     func acceptFriendRequest() {
