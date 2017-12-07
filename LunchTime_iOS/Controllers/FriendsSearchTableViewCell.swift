@@ -26,4 +26,8 @@ class FriendsSearchTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    @IBAction func addFriendButtonPreesed(_ sender: Any) {
+        addFriendButton.isHidden = true
+        
+    }
 }

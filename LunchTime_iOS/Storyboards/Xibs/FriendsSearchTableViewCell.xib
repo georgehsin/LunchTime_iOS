@@ -32,6 +32,9 @@
                             <constraint firstAttribute="width" constant="25" id="MM6-lh-1GA"/>
                             <constraint firstAttribute="height" constant="25" id="xml-Fa-S1q"/>
                         </constraints>
+                        <connections>
+                            <action selector="addFriendButtonPreesed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="nxz-Ck-RK1"/>
+                        </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="randomemail@gmail.com" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mYv-bl-vKf">
                         <rect key="frame" x="86" y="23" width="176" height="25"/>

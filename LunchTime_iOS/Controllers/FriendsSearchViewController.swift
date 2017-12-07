@@ -62,12 +62,25 @@ class FriendsSearchViewController: UIViewController, UITableViewDelegate, UITabl
         
         if segmentControl.selectedSegmentIndex == 2 {
             if let users = users {
+                let uid = users[indexPath.row].uid
                 cell.emailLabel.text = users[indexPath.row].username
-                cell.uid = users[indexPath.row].uid
-                
-                //!!CHECK if in friends, sent, recieved - don't show these in search results
-                cell.addFriendButton.tag = indexPath.row
-                cell.addFriendButton.addTarget(self, action: #selector(addFriendButtonPressed), for: .touchUpInside)
+                cell.uid = uid
+                if currentUserData!.recievedRequestUsersDict.keys.contains(uid) {
+                    //Need to show accept button
+                    cell.addFriendButton.isHidden = true
+                }
+                else if currentUserData!.sentRequestUsersDict.keys.contains(uid) {
+                    //Need to show pending label
+                    cell.addFriendButton.isHidden = true
+                }
+                //else if already friends {
+//                show a friends label
+//                }
+                else {
+                    //!!CHECK if in friends, sent, recieved - don't show these in search results
+                    cell.addFriendButton.tag = indexPath.row
+                    cell.addFriendButton.addTarget(self, action: #selector(addFriendButtonPressed), for: .touchUpInside)
+                }
             }
         }
         else if segmentControl.selectedSegmentIndex == 1 {
