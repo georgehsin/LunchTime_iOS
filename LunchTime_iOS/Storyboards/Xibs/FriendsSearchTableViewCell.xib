@@ -12,22 +12,22 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="friendsCell" rowHeight="70" id="KGk-i7-Jjw" customClass="FriendsSearchTableViewCell" customModule="LunchTime_iOS" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="328" height="70"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="friendsCell" rowHeight="98" id="KGk-i7-Jjw" customClass="FriendsSearchTableViewCell" customModule="LunchTime_iOS" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="445" height="98"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="328" height="69.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="445" height="97.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zqt-ep-vO2">
-                        <rect key="frame" x="21" y="9" width="50" height="50"/>
+                        <rect key="frame" x="25" y="24" width="50" height="50"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="50" id="cwj-Sf-B6W"/>
                             <constraint firstAttribute="width" constant="50" id="vhj-ep-QB2"/>
                         </constraints>
                     </imageView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gV1-83-Gn4">
-                        <rect key="frame" x="277" y="22.5" width="25" height="25"/>
+                        <rect key="frame" x="390" y="36.5" width="25" height="25"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="25" id="MM6-lh-1GA"/>
                             <constraint firstAttribute="height" constant="25" id="xml-Fa-S1q"/>
@@ -37,7 +37,7 @@
                         </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="randomemail@gmail.com" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mYv-bl-vKf">
-                        <rect key="frame" x="86" y="23" width="176" height="25"/>
+                        <rect key="frame" x="90" y="36.5" width="285" height="25"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="25" id="u8H-1S-fEF"/>
                         </constraints>
@@ -62,7 +62,7 @@
                 <outlet property="emailLabel" destination="mYv-bl-vKf" id="F9t-GO-XUc"/>
                 <outlet property="profileImage" destination="zqt-ep-vO2" id="6UC-37-toV"/>
             </connections>
-            <point key="canvasLocation" x="29" y="65"/>
+            <point key="canvasLocation" x="87.5" y="79"/>
         </tableViewCell>
     </objects>
 </document>

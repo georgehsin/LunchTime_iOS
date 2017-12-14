@@ -67,15 +67,20 @@ class FriendsSearchViewController: UIViewController, UITableViewDelegate, UITabl
                 cell.uid = uid
                 if currentUserData!.recievedRequestUsersDict.keys.contains(uid) {
                     //Need to show accept button
-                    cell.addFriendButton.isHidden = true
+                    cell.addFriendButton.setImage(UIImage(named: "friend") , for: .normal)
+                    cell.addFriendButton.isEnabled = false
                 }
                 else if currentUserData!.sentRequestUsersDict.keys.contains(uid) {
                     //Need to show pending label
-                    cell.addFriendButton.isHidden = true
+                    cell.addFriendButton.setImage(UIImage(named: "friend") , for: .normal)
+                    cell.addFriendButton.isEnabled = false
                 }
-                //else if already friends {
-//                show a friends label
-//                }
+                else if currentUserData!.friends.contains(where: {$0.uid == uid}) {
+                    
+                    cell.addFriendButton.setImage(UIImage(named: "friend") , for: .normal)
+                    cell.addFriendButton.isEnabled = false
+                    print("already friends with \(users[indexPath.row].username)")
+                }
                 else {
                     //!!CHECK if in friends, sent, recieved - don't show these in search results
                     cell.addFriendButton.tag = indexPath.row
@@ -93,6 +98,7 @@ class FriendsSearchViewController: UIViewController, UITableViewDelegate, UITabl
             else {
                 cell.emailLabel.text = currentUserData!.sentRequestUsersList[indexPath.row].username
                 cell.uid = currentUserData!.sentRequestUsersList[indexPath.row].uid
+                cell.addFriendButton.isHidden = true
             }
         }
         
@@ -103,10 +109,7 @@ class FriendsSearchViewController: UIViewController, UITableViewDelegate, UITabl
         var numberOfSections = 0
         switch segmentControl.selectedSegmentIndex {
         case 0:
-            if let users = users {
-                tableView.isHidden = false
-                numberOfSections = users.count
-            }
+            numberOfSections = 1
         case 1:
             numberOfSections = 2
         case 2:
@@ -119,13 +122,6 @@ class FriendsSearchViewController: UIViewController, UITableViewDelegate, UITabl
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         tableView.isHidden = false
-//        if let users = users {
-//            return users.count
-//        }
-//        else {
-//            return 0
-//        }
-    
         var numberOfRows = 0
         switch segmentControl.selectedSegmentIndex {
         case 0:
@@ -184,6 +180,17 @@ class FriendsSearchViewController: UIViewController, UITableViewDelegate, UITabl
 //
 //        return view
 //    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        switch segmentControl.selectedSegmentIndex {
+        case 0:
+            return "Friends"
+        case 1:
+            return sections[section]
+        default:
+            return "Search"
+        }
+    }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         var collection: String?
@@ -245,11 +252,15 @@ class FriendsSearchViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     @objc func addFriendButtonPressed(sender: UIButton) {
+        print("Adding Friend")
         viewModel.sendFriendRequest(recipientUser: users![sender.tag])
     }
     
     @objc func acceptFriendRequestButtonPressed(sender: UIButton) {
         print("Accepting Friend Request")
+        print(currentUserData!.recievedRequestUsersLists[sender.tag])
+        let uid = currentUserData!.recievedRequestUsersLists[sender.tag].uid
+        viewModel.acceptFriendRequest(recipientId: uid)
     }
 
 

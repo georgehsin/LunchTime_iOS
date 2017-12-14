@@ -117,10 +117,23 @@ class FriendsViewModel {
         Firestore.firestore().collection("users").document(recipientId).setData(recievedRequestData, options: SetOptions.merge())
     }
     
-    func acceptFriendRequest() {
+    func acceptFriendRequest(recipientId: String) {
         //get current user - append to Friends array
         //get current user - remove key value from requests recieved
         //get sent request user - remove key value from request sent
+        print(uid!, recipientId)
+        Firestore.firestore().collection("users").document(uid!).updateData([
+//            "friends": [],
+            "recievedRequest.\(recipientId)": FieldValue.delete()
+        ])
+        Firestore.firestore().collection("users").document(recipientId).updateData([
+            //PROBLEM - how to remove from recipient users dict
+            //only way for now - get user sentRequest dict, and then set it
+//            "friends": [],
+            "sentRequest.\(uid!)": FieldValue.delete()
+            ])
+        
+        // easiest is to get entire document(friend) and replace with updateed local
     }
     
     func getReference() {
