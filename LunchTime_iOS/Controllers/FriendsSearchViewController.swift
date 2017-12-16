@@ -20,6 +20,7 @@ class FriendsSearchViewController: UIViewController, UITableViewDelegate, UITabl
     var noResultsView: UIView?
     var noResultsLabel: UILabel?
     let activityIndicator = UIActivityIndicatorView()
+    var getUserDataNeeded: Bool = false
     
     var users: [Friend]?
     var currentUserData: UserData?
@@ -32,10 +33,22 @@ class FriendsSearchViewController: UIViewController, UITableViewDelegate, UITabl
         }
         switch sender.selectedSegmentIndex {
         case 0:
-            getUserData()
+            if getUserDataNeeded {
+                getUserData()
+                getUserDataNeeded = false
+            }
+            else {
+                tableView.reloadData()
+            }
             print("my friends")
         case 1:
-            getUserData()
+            if getUserDataNeeded {
+                getUserData()
+                getUserDataNeeded = false
+            }
+            else {
+                tableView.reloadData()
+            }
             print("pending friend requests")
         default:
             print("Search Friends")
@@ -59,8 +72,31 @@ class FriendsSearchViewController: UIViewController, UITableViewDelegate, UITabl
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "friendsCell", for: indexPath) as! FriendsSearchTableViewCell
-        
-        if segmentControl.selectedSegmentIndex == 2 {
+        cell.addFriendButton.isHidden = false
+        cell.addFriendButton.setImage(UIImage(named: "addContact") , for: .normal)
+        cell.addFriendButton.isEnabled = true
+        if segmentControl.selectedSegmentIndex == 0 {
+            cell.emailLabel.text = currentUserData!.friendsList[indexPath.row].username
+            cell.uid = currentUserData!.friendsList[indexPath.row].uid
+            cell.addFriendButton.tag = indexPath.row
+            cell.addFriendButton.setImage(UIImage(named: "friend") , for: .normal)
+            cell.addFriendButton.isEnabled = false
+        }
+        else if segmentControl.selectedSegmentIndex == 1 {
+            if indexPath.section == 0 {
+                cell.emailLabel.text = currentUserData!.recievedRequestUsersLists[indexPath.row].username
+                cell.uid = currentUserData!.recievedRequestUsersLists[indexPath.row].uid
+                cell.addFriendButton.tag = indexPath.row
+                cell.addFriendButton.removeTarget(self, action: #selector(addFriendButtonPressed), for: .touchUpInside)
+                cell.addFriendButton.addTarget(self, action: #selector(acceptFriendRequestButtonPressed), for: .touchUpInside)
+            }
+            else {
+                cell.emailLabel.text = currentUserData!.sentRequestUsersList[indexPath.row].username
+                cell.uid = currentUserData!.sentRequestUsersList[indexPath.row].uid
+                cell.addFriendButton.isHidden = true
+            }
+        }
+        else {
             if let users = users {
                 let uid = users[indexPath.row].uid
                 cell.emailLabel.text = users[indexPath.row].username
@@ -75,7 +111,7 @@ class FriendsSearchViewController: UIViewController, UITableViewDelegate, UITabl
                     cell.addFriendButton.setImage(UIImage(named: "friend") , for: .normal)
                     cell.addFriendButton.isEnabled = false
                 }
-                else if currentUserData!.friends.contains(where: {$0.uid == uid}) {
+                else if currentUserData!.friendsDict.keys.contains(uid) {
                     
                     cell.addFriendButton.setImage(UIImage(named: "friend") , for: .normal)
                     cell.addFriendButton.isEnabled = false
@@ -84,21 +120,9 @@ class FriendsSearchViewController: UIViewController, UITableViewDelegate, UITabl
                 else {
                     //!!CHECK if in friends, sent, recieved - don't show these in search results
                     cell.addFriendButton.tag = indexPath.row
+                    cell.addFriendButton.removeTarget(self, action: #selector(acceptFriendRequestButtonPressed), for: .touchUpInside)
                     cell.addFriendButton.addTarget(self, action: #selector(addFriendButtonPressed), for: .touchUpInside)
                 }
-            }
-        }
-        else if segmentControl.selectedSegmentIndex == 1 {
-            if indexPath.section == 0 {
-                cell.emailLabel.text = currentUserData!.recievedRequestUsersLists[indexPath.row].username
-                cell.uid = currentUserData!.recievedRequestUsersLists[indexPath.row].uid
-                cell.addFriendButton.tag = indexPath.row
-                cell.addFriendButton.addTarget(self, action: #selector(acceptFriendRequestButtonPressed), for: .touchUpInside)
-            }
-            else {
-                cell.emailLabel.text = currentUserData!.sentRequestUsersList[indexPath.row].username
-                cell.uid = currentUserData!.sentRequestUsersList[indexPath.row].uid
-                cell.addFriendButton.isHidden = true
             }
         }
         
@@ -125,9 +149,8 @@ class FriendsSearchViewController: UIViewController, UITableViewDelegate, UITabl
         var numberOfRows = 0
         switch segmentControl.selectedSegmentIndex {
         case 0:
-            if let users = users {
-                tableView.isHidden = false
-                numberOfRows = users.count
+            if let friendsList = currentUserData?.friendsList {
+                numberOfRows = friendsList.count
             }
         case 1:
             switch section {
@@ -203,25 +226,30 @@ class FriendsSearchViewController: UIViewController, UITableViewDelegate, UITabl
         default:
             collection = "users"
             let search = searchBar.text!.lowercased()
-            viewModel.queryFireStore(query: search, collection: collection!, field: "email", onComplete: { (usersList) in
-                self.users = usersList
-                if self.users!.count >= 1 {
-                    if let noResultsView = self.noResultsView {
-                        noResultsView.isHidden = true
+            DispatchQueue.global(qos: .userInteractive).async {
+                self.viewModel.queryFireStore(query: search, collection: collection!, field: "email", onComplete: { (usersList) in
+                    self.users = usersList
+                    DispatchQueue.main.async {
+                        if self.users!.count >= 1 {
+                            if let noResultsView = self.noResultsView {
+                                noResultsView.isHidden = true
+                            }
+                            self.tableView.reloadData()
+                        }
+                        else {
+                            self.tableView.isHidden = true
+                            if let noResultsView = self.noResultsView {
+                                noResultsView.isHidden = false
+                                self.noResultsLabel!.text = "No users found beginning with \(searchBar.text!)."
+                            }
+                            else {
+                                self.createNoResultsView(query: searchBar.text!)
+                            }
+                        }
                     }
-                    self.tableView.reloadData()
-                }
-                else {
-                    self.tableView.isHidden = true
-                    if let noResultsView = self.noResultsView {
-                        noResultsView.isHidden = false
-                        self.noResultsLabel!.text = "No users found beginning with \(searchBar.text!)."
-                    }
-                    else {
-                        self.createNoResultsView(query: searchBar.text!)
-                    }
-                }
-            })
+                })
+            }
+            
         }
 
     }
@@ -242,25 +270,28 @@ class FriendsSearchViewController: UIViewController, UITableViewDelegate, UITabl
         DispatchQueue.global(qos: .userInteractive).async {
             self.viewModel.getCurrentUserData { (userData) in
                 self.currentUserData = userData
-            }
-            DispatchQueue.main.async {
-                self.stopActivityIndicator(indicator: self.activityIndicator)
-                self.tableView.reloadData()
+                DispatchQueue.main.async {
+                    self.stopActivityIndicator(indicator: self.activityIndicator)
+                    self.tableView.reloadData()
+                }
             }
         }
 
     }
     
     @objc func addFriendButtonPressed(sender: UIButton) {
+        getUserDataNeeded = true
         print("Adding Friend")
         viewModel.sendFriendRequest(recipientUser: users![sender.tag])
     }
     
     @objc func acceptFriendRequestButtonPressed(sender: UIButton) {
+        getUserDataNeeded = true
         print("Accepting Friend Request")
+        print(sender.tag)
         print(currentUserData!.recievedRequestUsersLists[sender.tag])
-        let uid = currentUserData!.recievedRequestUsersLists[sender.tag].uid
-        viewModel.acceptFriendRequest(recipientId: uid)
+        let friend = currentUserData!.recievedRequestUsersLists[sender.tag]
+        viewModel.acceptFriendRequest(recipientInfo: friend)
     }
 
 

@@ -67,7 +67,17 @@ class FriendsViewModel {
                     let user = querySnapshot.data()
                     let uid = querySnapshot.documentID
                     let email = user["email"] as! String
-                    let friends = user["friends"] as! [Friend]
+                    
+                    //Will have to map set friends as [String:String] and then map -> [Friend]
+                    //Have to iterate through anyways. questions is, should I change to dict.
+                    let friends = user["friends"] as! [String: [String:String]]
+                    let friendsList = friends.map { (key, value) -> Friend in
+                        return Friend(uid: value["uid"] as String!, username: value["username"] as String!)
+                    }
+                    let friendsDict = friends.mapValues({ (value) -> Friend in
+                        return Friend(uid: value["uid"]!, username: value["username"]!)
+                    })
+                    
                     
                     let sentRequest = user["sentRequest"] as! [String: [String:String]]
                     let sentRequestList = sentRequest.map { (key, value) -> Friend in
@@ -86,7 +96,7 @@ class FriendsViewModel {
                         return Friend(uid: value["uid"]!, username: value["username"]!)
                     })
                     
-                    self.currentUser.data = UserData.init(uid: uid, email: email, friends: friends, sentRequestList: sentRequestList, recievedRequestList: recievedRequestList, sentRequestDict: sentRequestDict, recievedRequestDict: recievedRequestDict)
+                    self.currentUser.data = UserData.init(uid: uid, email: email, friendsList: friendsList, friendsDict: friendsDict, sentRequestList: sentRequestList, recievedRequestList: recievedRequestList, sentRequestDict: sentRequestDict, recievedRequestDict: recievedRequestDict)
                     onComplete(self.currentUser.data!)
                 }
             }
@@ -117,23 +127,68 @@ class FriendsViewModel {
         Firestore.firestore().collection("users").document(recipientId).setData(recievedRequestData, options: SetOptions.merge())
     }
     
-    func acceptFriendRequest(recipientId: String) {
+    func acceptFriendRequest(recipientInfo: Friend) {
         //get current user - append to Friends array
         //get current user - remove key value from requests recieved
         //get sent request user - remove key value from request sent
-        print(uid!, recipientId)
+        print(uid!, recipientInfo)
+        let recipientId = recipientInfo.uid
+        let recipientUsername = recipientInfo.username
         Firestore.firestore().collection("users").document(uid!).updateData([
-//            "friends": [],
             "recievedRequest.\(recipientId)": FieldValue.delete()
         ])
         Firestore.firestore().collection("users").document(recipientId).updateData([
-            //PROBLEM - how to remove from recipient users dict
-            //only way for now - get user sentRequest dict, and then set it
-//            "friends": [],
             "sentRequest.\(uid!)": FieldValue.delete()
-            ])
+        ])
+        
+        
+        
+//        let sentRequestData = [
+//            "sentRequest": [
+//                recipientId: [
+//                    "uid": recipientId,
+//                    "username": recipientInfo.username
+//                ]
+//            ]
+//        ]
+//        let recievedRequestData = [
+//            "recievedRequest": [
+//                uid!: [
+//                    "uid": uid!,
+//                    "username": currentUser.data?.email
+//                ]
+//            ]
+//        ]
+//        Firestore.firestore().collection("users").document(uid!).updateData([
+//            "recievedRequest.\(recipientId)": FieldValue.delete()
+//        ])
+//        Firestore.firestore().collection("users").document(recipientId).updateData([
+//            "sentRequest.\(uid!)": FieldValue.delete()
+//        ])
+        
+        let addFriendToSelf = [
+            "friends": [
+                recipientId : [
+                    "uid": recipientId,
+                    "username": recipientUsername
+                ]
+            ]
+        ]
+        let addSelfToFriend: [String: [String:[String:String]]] = [
+            "friends": [
+                uid!: [
+                    "uid": uid!,
+                    "username": currentUser.data!.email
+                ]
+            ]
+        ]
+        
+        
+        Firestore.firestore().collection("users").document(uid!).setData(addFriendToSelf, options: SetOptions.merge())
+        Firestore.firestore().collection("users").document(recipientId).setData(addSelfToFriend, options: SetOptions.merge())
         
         // easiest is to get entire document(friend) and replace with updateed local
+        // or use setoptions.merge <-- better than above for sure
     }
     
     func getReference() {

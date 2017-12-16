@@ -29,6 +29,5 @@ class FriendsSearchTableViewCell: UITableViewCell {
     @IBAction func addFriendButtonPreesed(_ sender: Any) {
         addFriendButton.setImage(UIImage(named: "friend") , for: .normal)
         addFriendButton.isEnabled = false
-        
     }
 }
