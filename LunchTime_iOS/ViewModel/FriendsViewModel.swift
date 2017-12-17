@@ -103,6 +103,24 @@ class FriendsViewModel {
         }
     }
     
+    func getFriendsList(onComplete: @escaping ([Friend]) -> ()) {
+        Firestore.firestore().collection("users").document(uid!).getDocument() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting user Data: \(err)")
+            }
+            else {
+                if let querySnapshot = querySnapshot {
+                    let user = querySnapshot.data()
+                    let friends = user["friends"] as! [String: [String:String]]
+                    let friendsList = friends.map { (key, value) -> Friend in
+                        return Friend(uid: value["uid"] as String!, username: value["username"] as String!)
+                    }
+                    onComplete(friendsList)
+                }
+            }
+        }
+    }
+    
     func sendFriendRequest(recipientUser: Friend) {
         //get current user add to sentRequest
         //get adding user - add to Request sent

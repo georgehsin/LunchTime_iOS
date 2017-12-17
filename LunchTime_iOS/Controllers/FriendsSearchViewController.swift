@@ -19,7 +19,7 @@ class FriendsSearchViewController: UIViewController, UITableViewDelegate, UITabl
     @IBOutlet weak var segmentControl: UISegmentedControl!
     var noResultsView: UIView?
     var noResultsLabel: UILabel?
-    let activityIndicator = UIActivityIndicatorView()
+    let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
     var getUserDataNeeded: Bool = false
     
     var users: [Friend]?
@@ -276,7 +276,6 @@ class FriendsSearchViewController: UIViewController, UITableViewDelegate, UITabl
                 }
             }
         }
-
     }
     
     @objc func addFriendButtonPressed(sender: UIButton) {
@@ -293,7 +292,4 @@ class FriendsSearchViewController: UIViewController, UITableViewDelegate, UITabl
         let friend = currentUserData!.recievedRequestUsersLists[sender.tag]
         viewModel.acceptFriendRequest(recipientInfo: friend)
     }
-
-
-
 }
