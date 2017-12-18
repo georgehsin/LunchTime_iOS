@@ -16,7 +16,7 @@ class FriendSelectorViewController: UIViewController, UISearchBarDelegate, UITab
     let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
     let addFriendsButton = UIButton()
     var friendsList = [Friend]()
-    var selectedFriends = [Friend]()
+    var selectedFriends = [String:Friend]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -95,6 +95,7 @@ class FriendSelectorViewController: UIViewController, UISearchBarDelegate, UITab
     }
     
     @objc func addFriendButtonPressed(sender: UIButton) {
-        selectedFriends.append(friendsList[sender.tag])
+        let friend = friendsList[sender.tag]
+        selectedFriends[friend.uid] = friendsList[sender.tag]
     }
 }

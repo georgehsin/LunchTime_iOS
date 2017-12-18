@@ -11,8 +11,11 @@ import YelpAPI
 
 class CreateEventViewController: UIViewController {
 
+    let viewModel = EventsViewModel()
+    
     var location: YLPBusiness?
-    var friends: [Friend]?
+    var friends: [String:Friend]?
+    var date: Date?
     
     @IBOutlet weak var locationField: UITextField!
     @IBOutlet weak var dateField: UITextField!
@@ -33,8 +36,16 @@ class CreateEventViewController: UIViewController {
     
     @IBAction func selectedFriendsUnwind(unwindSegue: UIStoryboardSegue) {
         print("Friends Selected")
-        friends?.forEach({ (friend) in
-            print(friend.username)
-        })
     }
+    @IBAction func createEventButtonPressed(_ sender: Any) {
+        if let date = date, let location = location, let friends = friends {
+            DispatchQueue.global(qos: .default).async {
+                self.viewModel.addEvent(date: date, location: location, friends: friends)
+            }
+        } else {
+            let alertController = ViewController.createAlert(title: "Invalid", message: "Date, Locations, and Friends are required to create an event")
+            self.present(alertController, animated: true, completion: nil)
+        }
+    }
+    
 }

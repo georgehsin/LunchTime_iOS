@@ -25,10 +25,12 @@ class DateSelectorViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Constants.SegueIdentifiers.unwindFromEventDate {
             let createEventController = segue.destination as! CreateEventViewController
+            createEventController.date = datePicker.date
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "MMM dd, YYYY"
             let dateString = dateFormatter.string(from: datePicker.date)
             createEventController.dateField.text = dateString
+
         }
     }
 

@@ -152,37 +152,15 @@ class FriendsViewModel {
         print(uid!, recipientInfo)
         let recipientId = recipientInfo.uid
         let recipientUsername = recipientInfo.username
-        Firestore.firestore().collection("users").document(uid!).updateData([
+        let userRef = Firestore.firestore().collection("users").document(uid!)
+        let friendRef = Firestore.firestore().collection("users").document(recipientId)
+         
+        userRef.updateData([
             "recievedRequest.\(recipientId)": FieldValue.delete()
         ])
-        Firestore.firestore().collection("users").document(recipientId).updateData([
+        friendRef.updateData([
             "sentRequest.\(uid!)": FieldValue.delete()
         ])
-        
-        
-        
-//        let sentRequestData = [
-//            "sentRequest": [
-//                recipientId: [
-//                    "uid": recipientId,
-//                    "username": recipientInfo.username
-//                ]
-//            ]
-//        ]
-//        let recievedRequestData = [
-//            "recievedRequest": [
-//                uid!: [
-//                    "uid": uid!,
-//                    "username": currentUser.data?.email
-//                ]
-//            ]
-//        ]
-//        Firestore.firestore().collection("users").document(uid!).updateData([
-//            "recievedRequest.\(recipientId)": FieldValue.delete()
-//        ])
-//        Firestore.firestore().collection("users").document(recipientId).updateData([
-//            "sentRequest.\(uid!)": FieldValue.delete()
-//        ])
         
         let addFriendToSelf = [
             "friends": [
@@ -201,12 +179,8 @@ class FriendsViewModel {
             ]
         ]
         
-        
-        Firestore.firestore().collection("users").document(uid!).setData(addFriendToSelf, options: SetOptions.merge())
-        Firestore.firestore().collection("users").document(recipientId).setData(addSelfToFriend, options: SetOptions.merge())
-        
-        // easiest is to get entire document(friend) and replace with updateed local
-        // or use setoptions.merge <-- better than above for sure
+        userRef.setData(addFriendToSelf, options: SetOptions.merge())
+        friendRef.setData(addSelfToFriend, options: SetOptions.merge())
     }
     
     func getReference() {
