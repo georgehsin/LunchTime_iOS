@@ -14,8 +14,9 @@ class FriendSelectorViewController: UIViewController, UISearchBarDelegate, UITab
     let tableView = UITableView()
     let searchBar = UISearchBar()
     let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
+    let addFriendsButton = UIButton()
     var friendsList = [Friend]()
-    var eventFriendsLists = [Friend]()
+    var selectedFriends = [Friend]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,10 +35,16 @@ class FriendSelectorViewController: UIViewController, UISearchBarDelegate, UITab
         let nib = UINib(nibName: "FriendsSearchTableViewCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "friendsCell")
         let preSearchBarHeight = self.navigationController!.navigationBar.frame.height + UIApplication.shared.statusBarFrame.height
-        searchBar.frame = CGRect(x: 0, y: preSearchBarHeight, width: self.view.bounds.width, height: 56)
-        tableView.frame = CGRect(x: 0, y: preSearchBarHeight + 56, width: self.view.bounds.width, height: self.view.bounds.height - 56)
+        addFriendsButton.frame = CGRect(x: self.view.bounds.width - 40, y: preSearchBarHeight, width: 40, height: 40)
+        addFriendsButton.setImage(UIImage(named: "rightArrow") , for: .normal)
+        addFriendsButton.backgroundColor = UIColor.lightGray
+        addFriendsButton.addTarget(self, action: #selector(setFriendsForEvent), for: .touchUpInside)
+        searchBar.frame = CGRect(x: 0, y: preSearchBarHeight, width: self.view.bounds.width-40, height: 40)
+        searchBar.backgroundColor = UIColor.lightGray
+        tableView.frame = CGRect(x: 0, y: preSearchBarHeight + 40, width: self.view.bounds.width, height: self.view.bounds.height - 40)
         
         self.view.addSubview(searchBar)
+        self.view.addSubview(addFriendsButton)
         self.view.addSubview(tableView)
         self.view.addSubview(activityIndicator)
     }
@@ -76,7 +83,18 @@ class FriendSelectorViewController: UIViewController, UISearchBarDelegate, UITab
         }
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == Constants.SegueIdentifiers.unwindFromEventFriends {
+            let createEventController = segue.destination as! CreateEventViewController
+            createEventController.friends = selectedFriends
+        }
+    }
+    
+    @objc func setFriendsForEvent(sender: UIButton) {
+        performSegue(withIdentifier: Constants.SegueIdentifiers.unwindFromEventFriends, sender: sender)
+    }
+    
     @objc func addFriendButtonPressed(sender: UIButton) {
-        eventFriendsLists.append(friendsList[sender.tag])
+        selectedFriends.append(friendsList[sender.tag])
     }
 }

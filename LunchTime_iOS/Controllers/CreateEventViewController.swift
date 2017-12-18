@@ -12,6 +12,7 @@ import YelpAPI
 class CreateEventViewController: UIViewController {
 
     var location: YLPBusiness?
+    var friends: [Friend]?
     
     @IBOutlet weak var locationField: UITextField!
     @IBOutlet weak var dateField: UITextField!
@@ -28,5 +29,12 @@ class CreateEventViewController: UIViewController {
     @IBAction func selectedDateUnwind(unwindSegue: UIStoryboardSegue) {
         print("Date Selected")
 //        dateField.text = ""
+    }
+    
+    @IBAction func selectedFriendsUnwind(unwindSegue: UIStoryboardSegue) {
+        print("Friends Selected")
+        friends?.forEach({ (friend) in
+            print(friend.username)
+        })
     }
 }
