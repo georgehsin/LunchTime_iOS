@@ -21,7 +21,7 @@ class CreateEventViewController: UIViewController {
     @IBOutlet weak var dateField: UITextField!
     
     override func viewWillAppear(_ animated: Bool) {
-        self.tabBarController?.tabBar.isHidden = true
+//        self.tabBarController?.tabBar.isHidden = true
     }
     
     @IBAction func selectedLocationUnwind(unwindSegue: UIStoryboardSegue){
@@ -37,8 +37,10 @@ class CreateEventViewController: UIViewController {
     @IBAction func selectedFriendsUnwind(unwindSegue: UIStoryboardSegue) {
         print("Friends Selected")
     }
+    
     @IBAction func createEventButtonPressed(_ sender: Any) {
         if let date = date, let location = location, let friends = friends {
+            resetEventData()
             DispatchQueue.global(qos: .default).async {
                 self.viewModel.addEvent(date: date, location: location, friends: friends)
             }
@@ -46,6 +48,14 @@ class CreateEventViewController: UIViewController {
             let alertController = ViewController.createAlert(title: "Invalid", message: "Date, Locations, and Friends are required to create an event")
             self.present(alertController, animated: true, completion: nil)
         }
+    }
+    
+    func resetEventData() {
+        location = nil
+        friends = nil
+        date = nil
+        locationField.text = nil
+        dateField.text = nil
     }
     
 }
