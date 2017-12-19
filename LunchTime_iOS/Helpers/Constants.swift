@@ -24,4 +24,8 @@ struct Constants {
         static let unwindFromEventDate = "unwindFromEventDate"
         static let unwindFromEventFriends = "unwindFromEventFriends"
     }
+    
+    struct Colors {
+        static let appOrange = UIColor(red: 222/255, green: 120/255, blue: 38/255, alpha: 1.0)
+    }
 }

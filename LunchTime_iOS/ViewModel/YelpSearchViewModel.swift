@@ -9,42 +9,42 @@
 import Foundation
 import YelpAPI
 
-struct YelpBusiness: Decodable {
-    let rating: Int
-    let price: String
-    let phone: String
-    let id: String
-    let is_closed: String
-    let categories: Categories
-    let review_count: Int
-    let name: String
-    let url: String
-    let coordinates: Coordinates
-    let image_url: String
-    let location: Location
-    let distance: Double
-    let transaction: [String]
-}
-
-struct Categories: Decodable {
-    let alias: String
-    let title: String
-}
-
-struct Coordinates: Decodable {
-    let latitude: Double
-    let longitude: Double
-}
-
-struct Location: Decodable {
-    let city: String
-    let country: String
-    let address2: String
-    let address3: String
-    let state: String
-    let address1: String
-    let zipcode: String
-}
+//struct YelpBusiness: Decodable {
+//    let rating: Int
+//    let price: String
+//    let phone: String
+//    let id: String
+//    let is_closed: String
+//    let categories: Categories
+//    let review_count: Int
+//    let name: String
+//    let url: String
+//    let coordinates: Coordinates
+//    let image_url: String
+//    let location: Location
+//    let distance: Double
+//    let transaction: [String]
+//}
+//
+//struct Categories: Decodable {
+//    let alias: String
+//    let title: String
+//}
+//
+//struct Coordinates: Decodable {
+//    let latitude: Double
+//    let longitude: Double
+//}
+//
+//struct Location: Decodable {
+//    let city: String
+//    let country: String
+//    let address2: String
+//    let address3: String
+//    let state: String
+//    let address1: String
+//    let zipcode: String
+//}
 
 class YelpSearchViewModel {
     

@@ -42,6 +42,8 @@ class FriendSelectorViewController: UIViewController, UISearchBarDelegate, UITab
         searchBar.frame = CGRect(x: 0, y: preSearchBarHeight, width: self.view.bounds.width-40, height: 40)
         searchBar.backgroundColor = UIColor.lightGray
         tableView.frame = CGRect(x: 0, y: preSearchBarHeight + 40, width: self.view.bounds.width, height: self.view.bounds.height - 40)
+        tableView.allowsSelection = false
+        activityIndicator.frame = CGRect(x: self.view.bounds.width/2 - 20, y: self.view.bounds.height/2 - 20, width: 40, height: 40)
         
         self.view.addSubview(searchBar)
         self.view.addSubview(addFriendsButton)
