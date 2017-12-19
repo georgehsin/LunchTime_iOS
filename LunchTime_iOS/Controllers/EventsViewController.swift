@@ -48,7 +48,12 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         dateFormatter.dateFormat = "E, MMM dd - hh:mm"
         let dateString = dateFormatter.string(from: event.date)
         cell.eventDateLabel.text = dateString
-        cell.locationImage.sd_setImage(with: event.location.locationImageUrl as! URL)
+        cell.locationImage.sd_setImage(with: event.location.locationImageUrl as URL)
+        cell.yesButton.tag = indexPath.row
+        cell.setYesNoButtons(attending: event.attending)
+        cell.yesButton.addTarget(self, action: #selector(yesButtonPressed), for: .touchUpInside)
+        cell.noButton.tag = indexPath.row
+        cell.noButton.addTarget(self, action: #selector(noButtonPressed), for: .touchUpInside)
         return cell
     }
     
@@ -79,5 +84,13 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 }
             })
         }
+    }
+    
+    @objc func yesButtonPressed(sender: UIButton) {
+        viewModel.setAttendingStatus(attending: true, eventId: eventsList![sender.tag].id)
+    }
+    
+    @objc func noButtonPressed(sender: UIButton) {
+        viewModel.setAttendingStatus(attending: false, eventId: eventsList![sender.tag].id)
     }
 }

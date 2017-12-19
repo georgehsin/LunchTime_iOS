@@ -55,9 +55,11 @@ class EventsTableViewCell: UITableViewCell {
     
     func setYesNoButtons(attending: Bool? = nil) {
         if let attending = attending {
-            
-        } else {
-            
+            if attending {
+                yesButtonPressed(self)
+            } else {
+                noButtonPressed(self)
+            }
         }
     }
 }

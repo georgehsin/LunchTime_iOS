@@ -13,8 +13,6 @@ import YelpAPI
 struct Event {
     var id: String
     var date: Date
-//    var locationName: String
-//    var locationImageUrl: NSURL
     var location: Location
     var attending: Bool?
     var creator: Friend?
@@ -23,8 +21,6 @@ struct Event {
     init(id: String, date: Date, locationName: String, locationImageUrl: NSURL, attending: Bool? = nil) {
         self.id = id
         self.date = date
-//        self.locationName = locationName
-//        self.locationImageUrl = locationImageUrl
         self.attending = attending
         self.location = Location(locationName: locationName, locationImageUrl: locationImageUrl)
     }
@@ -32,9 +28,6 @@ struct Event {
     init(id: String, date: Date, locationName: String, locationImageUrl: NSURL, locationYelpId: String, attending: Bool? = nil, creator: Friend, friends: [String:Any]) {
         self.id = id
         self.date = date
-//        self.locationName = locationName
-//        self.locationImageUrl = locationImageUrl
-//        self.locationYelpId = locationYelpId
         self.location = Location(locationName: locationName, locationImageUrl: locationImageUrl, locationYelpId: locationYelpId)
         self.attending = attending
         self.creator = creator
@@ -147,5 +140,16 @@ class EventsViewModel {
                 }
             }
         }
+    }
+    
+    func setAttendingStatus(attending: Bool, eventId: String) {
+        let userRef = Firestore.firestore().collection("users").document(uid!)
+        userRef.updateData([
+            "events.\(eventId).attending": attending
+        ])
+        let eventRef = Firestore.firestore().collection("events").document(eventId)
+        eventRef.updateData([
+            "friends.\(uid!).attending": attending
+        ])
     }
 }
