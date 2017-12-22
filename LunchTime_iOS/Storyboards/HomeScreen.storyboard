@@ -118,45 +118,13 @@
                         <segue destination="HH1-Pq-TQV" kind="relationship" relationship="viewControllers" id="p78-Td-Tfg"/>
                         <segue destination="WuP-aj-lLR" kind="relationship" relationship="viewControllers" id="4hV-tb-rw6"/>
                         <segue destination="zoI-Ve-qDO" kind="relationship" relationship="viewControllers" id="DSK-rd-PJO"/>
-                        <segue destination="e0j-qM-Q1x" kind="relationship" relationship="viewControllers" id="HFv-Ys-Xrl"/>
+                        <segue destination="hdX-VI-fif" kind="relationship" relationship="viewControllers" id="HFv-Ys-Xrl"/>
                         <segue destination="ulf-YC-Z72" kind="relationship" relationship="viewControllers" id="LXy-BK-mh8"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TqQ-Qn-e9k" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1828" y="-62"/>
-        </scene>
-        <!--Events-->
-        <scene sceneID="wV0-ej-wI7">
-            <objects>
-                <viewController id="e0j-qM-Q1x" customClass="EventsViewController" customModule="LunchTime_iOS" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="eAx-Ku-XLb">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Events" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rUQ-QN-ofP">
-                                <rect key="frame" x="157.5" y="323" width="60" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="9NJ-MX-aoK"/>
-                                    <constraint firstAttribute="width" constant="60" id="dV0-bY-Myc"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="rUQ-QN-ofP" firstAttribute="centerY" secondItem="eAx-Ku-XLb" secondAttribute="centerY" id="cfJ-v5-QrL"/>
-                            <constraint firstItem="rUQ-QN-ofP" firstAttribute="centerX" secondItem="eAx-Ku-XLb" secondAttribute="centerX" id="srF-vL-QgI"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="uwa-Bj-0iw"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Events" image="event" id="Fth-y4-l7V"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="WWk-01-lGY" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-815" y="915"/>
         </scene>
         <!--Friends-->
         <scene sceneID="xWk-zK-nZg">
@@ -240,10 +208,19 @@
             </objects>
             <point key="canvasLocation" x="-1828" y="627"/>
         </scene>
+        <!--EventsScreen-->
+        <scene sceneID="r9p-7b-QWS">
+            <objects>
+                <viewControllerPlaceholder storyboardName="EventsScreen" id="hdX-VI-fif" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="Vbr-Zf-nPv"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tTj-h0-8DV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-815" y="915"/>
+        </scene>
     </scenes>
     <resources>
         <image name="LunchTimeLogo" width="300" height="145"/>
-        <image name="event" width="25" height="25"/>
         <image name="friend" width="25" height="25"/>
         <image name="home" width="25" height="25"/>
         <image name="profile" width="25" height="25"/>

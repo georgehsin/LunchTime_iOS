@@ -26,6 +26,11 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
     override func viewWillAppear(_ animated: Bool) {
         getEvents()
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
     }
 
     func createUI() {
@@ -49,6 +54,7 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let dateString = dateFormatter.string(from: event.date)
         cell.eventDateLabel.text = dateString
         cell.locationImage.sd_setImage(with: event.location.locationImageUrl as URL)
+        cell.additionalEventInfoButton.addTarget(self, action: #selector(additionalEventInfoButtonPressed), for: .touchUpInside)
         cell.yesButton.tag = indexPath.row
         cell.setYesNoButtons(attending: event.attending)
         cell.yesButton.addTarget(self, action: #selector(yesButtonPressed), for: .touchUpInside)
@@ -92,5 +98,9 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     @objc func noButtonPressed(sender: UIButton) {
         viewModel.setAttendingStatus(attending: false, eventId: eventsList![sender.tag].id)
+    }
+    
+    @objc func additionalEventInfoButtonPressed(sender: UIButton) {
+        performSegue(withIdentifier: Constants.SegueIdentifiers.eventInfoPage, sender: self)
     }
 }

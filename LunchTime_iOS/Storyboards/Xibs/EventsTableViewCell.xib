@@ -113,6 +113,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="additionalEventInfoButton" destination="0uk-Tt-C2j" id="UwC-C6-wNs"/>
                 <outlet property="eventDateLabel" destination="ul7-kc-JON" id="I6D-cr-kiY"/>
                 <outlet property="locationImage" destination="E4j-gN-OT2" id="y28-Hi-VZn"/>
                 <outlet property="locationNameLabel" destination="WqN-9c-ZvR" id="hjV-JI-lsW"/>

@@ -18,6 +18,8 @@
 		A60EF84D1FE857B300EF2D91 /* EventsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A60EF84B1FE857B300EF2D91 /* EventsTableViewCell.swift */; };
 		A60EF84E1FE857B300EF2D91 /* EventsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A60EF84C1FE857B300EF2D91 /* EventsTableViewCell.xib */; };
 		A61BB76D1FCC72A60009823F /* DateSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61BB76C1FCC72A60009823F /* DateSelectorViewController.swift */; };
+		A61C51D41FECED69009B8F69 /* EventsScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A61C51D31FECED69009B8F69 /* EventsScreen.storyboard */; };
+		A61C51D61FECEE23009B8F69 /* EventInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61C51D51FECEE23009B8F69 /* EventInfoViewController.swift */; };
 		A623216D1FB78F6E00A54814 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A623216C1FB78C7000A54814 /* GoogleService-Info.plist */; };
 		A623217F1FB8FA9400A54814 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A623217E1FB8FA9400A54814 /* UserViewModel.swift */; };
 		A62321811FB8FAD900A54814 /* CurrentUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A62321801FB8FAD900A54814 /* CurrentUser.swift */; };
@@ -67,6 +69,8 @@
 		A60EF84B1FE857B300EF2D91 /* EventsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsTableViewCell.swift; sourceTree = "<group>"; };
 		A60EF84C1FE857B300EF2D91 /* EventsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EventsTableViewCell.xib; sourceTree = "<group>"; };
 		A61BB76C1FCC72A60009823F /* DateSelectorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateSelectorViewController.swift; sourceTree = "<group>"; };
+		A61C51D31FECED69009B8F69 /* EventsScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = EventsScreen.storyboard; sourceTree = "<group>"; };
+		A61C51D51FECEE23009B8F69 /* EventInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventInfoViewController.swift; sourceTree = "<group>"; };
 		A623216C1FB78C7000A54814 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A623217E1FB8FA9400A54814 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		A62321801FB8FAD900A54814 /* CurrentUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUser.swift; sourceTree = "<group>"; };
@@ -182,6 +186,7 @@
 				A65843A11FCD18DC00B93FCA /* FriendsSearchViewController.swift */,
 				A60EF8421FE5A1B400EF2D91 /* FriendSelectorViewController.swift */,
 				A60EF8481FE8418D00EF2D91 /* EventsViewController.swift */,
+				A61C51D51FECEE23009B8F69 /* EventInfoViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -191,6 +196,7 @@
 			children = (
 				A60855901FC396B4009E4BDD /* Xibs */,
 				A6D577671FB97600004D94BE /* HomeScreen.storyboard */,
+				A61C51D31FECED69009B8F69 /* EventsScreen.storyboard */,
 				A6C22FDB1FBEC63500AB472E /* CreateEvent.storyboard */,
 				A698E5BF1FB2284C00D42A29 /* Main.storyboard */,
 				A698E5C41FB2284C00D42A29 /* LaunchScreen.storyboard */,
@@ -356,6 +362,7 @@
 				A6C22FDC1FBEC63500AB472E /* CreateEvent.storyboard in Resources */,
 				A65843A61FCD1D5700B93FCA /* FriendsSearchTableViewCell.xib in Resources */,
 				A698E5C61FB2284C00D42A29 /* LaunchScreen.storyboard in Resources */,
+				A61C51D41FECED69009B8F69 /* EventsScreen.storyboard in Resources */,
 				A60EF84E1FE857B300EF2D91 /* EventsTableViewCell.xib in Resources */,
 				A698E5C31FB2284C00D42A29 /* Assets.xcassets in Resources */,
 				A623216D1FB78F6E00A54814 /* GoogleService-Info.plist in Resources */,
@@ -479,6 +486,7 @@
 				A60EF8471FE7610400EF2D91 /* FirebaseQuery.swift in Sources */,
 				A65843A21FCD18DC00B93FCA /* FriendsSearchViewController.swift in Sources */,
 				A658439E1FCD0BAB00B93FCA /* FriendsViewModel.swift in Sources */,
+				A61C51D61FECEE23009B8F69 /* EventInfoViewController.swift in Sources */,
 				A62321811FB8FAD900A54814 /* CurrentUser.swift in Sources */,
 				A60EF8491FE8418D00EF2D91 /* EventsViewController.swift in Sources */,
 				A6C79F5E1FBB5F4400649FBE /* UserDefaults.swift in Sources */,

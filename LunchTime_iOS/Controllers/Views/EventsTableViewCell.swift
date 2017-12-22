@@ -16,6 +16,7 @@ class EventsTableViewCell: UITableViewCell {
     
     @IBOutlet weak var yesButton: UIButton!
     @IBOutlet weak var noButton: UIButton!
+    @IBOutlet weak var additionalEventInfoButton: UIButton!
     
     
     @IBAction func yesButtonPressed(_ sender: Any) {

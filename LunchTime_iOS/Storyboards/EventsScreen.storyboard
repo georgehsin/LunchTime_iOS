@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="rUj-jA-a8z">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Events View Controller-->
+        <scene sceneID="wV0-ej-wI7">
+            <objects>
+                <viewController id="e0j-qM-Q1x" customClass="EventsViewController" customModule="LunchTime_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="eAx-Ku-XLb">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Events" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rUQ-QN-ofP">
+                                <rect key="frame" x="157.5" y="323" width="60" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="9NJ-MX-aoK"/>
+                                    <constraint firstAttribute="width" constant="60" id="dV0-bY-Myc"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="rUQ-QN-ofP" firstAttribute="centerY" secondItem="eAx-Ku-XLb" secondAttribute="centerY" id="cfJ-v5-QrL"/>
+                            <constraint firstItem="rUQ-QN-ofP" firstAttribute="centerX" secondItem="eAx-Ku-XLb" secondAttribute="centerX" id="srF-vL-QgI"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="uwa-Bj-0iw"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="i8A-1J-uo4"/>
+                    <connections>
+                        <segue destination="RUi-ez-f5c" kind="show" identifier="showEventInfoPage" id="KpJ-p0-9gv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WWk-01-lGY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-476" y="914.392803598201"/>
+        </scene>
+        <!--Event Info View Controller-->
+        <scene sceneID="4O0-oh-tEV">
+            <objects>
+                <viewController id="RUi-ez-f5c" customClass="EventInfoViewController" customModule="LunchTime_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Rfd-j3-Lzj">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <viewLayoutGuide key="safeArea" id="zSl-Zq-KZY"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jDo-SB-NKS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="284" y="913.49325337331345"/>
+        </scene>
+        <!--Events-->
+        <scene sceneID="lOo-Oh-8Mx">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="rUj-jA-a8z" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Events" image="event" id="Fth-y4-l7V"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="qrQ-QB-7Od">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="e0j-qM-Q1x" kind="relationship" relationship="rootViewController" id="LqH-Kx-wzI"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7Zi-99-GoV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1314" y="914"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="event" width="25" height="25"/>
+    </resources>
+</document>
