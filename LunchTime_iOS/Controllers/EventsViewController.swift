@@ -7,14 +7,20 @@
 //
 
 import UIKit
+import YelpAPI
 
 class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     let viewModel = EventsViewModel()
+    let yelpViewModel = YelpSearchViewModel()
     let tableView = UITableView()
     let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
     var eventsList: [Event]?
-    var getEventTest: Event?
+//    var getEventTest: Event?
+//    var requestedEventId: Event?
+    var event: Event?
+    var yelpInfo: YLPBusiness?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,6 +60,7 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let dateString = dateFormatter.string(from: event.date)
         cell.eventDateLabel.text = dateString
         cell.locationImage.sd_setImage(with: event.location.locationImageUrl as URL)
+        cell.additionalEventInfoButton.tag = indexPath.row
         cell.additionalEventInfoButton.addTarget(self, action: #selector(additionalEventInfoButtonPressed), for: .touchUpInside)
         cell.yesButton.tag = indexPath.row
         cell.setYesNoButtons(attending: event.attending)
@@ -101,6 +108,25 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     @objc func additionalEventInfoButtonPressed(sender: UIButton) {
-        performSegue(withIdentifier: Constants.SegueIdentifiers.eventInfoPage, sender: self)
+        let requestedEventId = eventsList![sender.tag].id
+        DispatchQueue.global().async {
+            self.viewModel.getEvent(eventId: requestedEventId) { (event) in
+                self.event = event
+                self.yelpViewModel.findWithYelpId(yelpId: event.location.locationYelpId!) { (result) in
+                    self.yelpInfo = result
+                    DispatchQueue.main.async {
+                        self.performSegue(withIdentifier: Constants.SegueIdentifiers.eventInfoPage, sender: self)
+                    }
+                }
+            }
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == Constants.SegueIdentifiers.eventInfoPage {
+            let eventInfoController = segue.destination as! EventInfoViewController
+            eventInfoController.event = event
+            eventInfoController.yelpInfo = yelpInfo
+        }
     }
 }

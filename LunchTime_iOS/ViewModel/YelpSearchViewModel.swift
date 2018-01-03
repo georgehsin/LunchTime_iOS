@@ -73,6 +73,21 @@ class YelpSearchViewModel {
         }
     }
     
+    func findWithYelpId(yelpId: String, completion: @escaping (YLPBusiness) -> ()) {
+        YLPClient.authorize(withAppId: appId, secret: appSecret) { (YLPClient, Error) in
+            if let yelp = YLPClient {
+                yelp.business(withId: yelpId, completionHandler: { (yelpBusiness, error) in
+                    if error != nil {
+                        print(error!)
+                    }
+                    else {
+                        completion(yelpBusiness!)
+                    }
+                })
+            }
+        }
+    }
+    
     
 }
 

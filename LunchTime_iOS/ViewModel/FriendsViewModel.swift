@@ -9,19 +9,6 @@
 import Foundation
 import Firebase
 
-struct Friend {
-    var uid: String
-    var username: String
-//    var name: String
-//    var profilePicURL: String
-    
-    init(uid: String, username: String ) {
-        self.uid = uid
-        self.username = username
-    }
-    
-}
-
 class FriendsViewModel {
     
     let uid = UserDefaults.standard.string(forKey: UserDefaults.UserDefaultKeys.userId.rawValue)

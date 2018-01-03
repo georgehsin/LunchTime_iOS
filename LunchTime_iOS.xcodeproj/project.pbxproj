@@ -20,6 +20,11 @@
 		A61BB76D1FCC72A60009823F /* DateSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61BB76C1FCC72A60009823F /* DateSelectorViewController.swift */; };
 		A61C51D41FECED69009B8F69 /* EventsScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A61C51D31FECED69009B8F69 /* EventsScreen.storyboard */; };
 		A61C51D61FECEE23009B8F69 /* EventInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61C51D51FECEE23009B8F69 /* EventInfoViewController.swift */; };
+		A61C51D91FF6E007009B8F69 /* FriendAttendanceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61C51D71FF6E007009B8F69 /* FriendAttendanceTableViewCell.swift */; };
+		A61C51DA1FF6E007009B8F69 /* FriendAttendanceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A61C51D81FF6E007009B8F69 /* FriendAttendanceTableViewCell.xib */; };
+		A61C51DC1FFD8B38009B8F69 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61C51DB1FFD8B38009B8F69 /* Event.swift */; };
+		A61C51DE1FFD8B5E009B8F69 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61C51DD1FFD8B5E009B8F69 /* Location.swift */; };
+		A61C51E01FFD8B8C009B8F69 /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61C51DF1FFD8B8C009B8F69 /* Friend.swift */; };
 		A623216D1FB78F6E00A54814 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A623216C1FB78C7000A54814 /* GoogleService-Info.plist */; };
 		A623217F1FB8FA9400A54814 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A623217E1FB8FA9400A54814 /* UserViewModel.swift */; };
 		A62321811FB8FAD900A54814 /* CurrentUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A62321801FB8FAD900A54814 /* CurrentUser.swift */; };
@@ -71,6 +76,11 @@
 		A61BB76C1FCC72A60009823F /* DateSelectorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateSelectorViewController.swift; sourceTree = "<group>"; };
 		A61C51D31FECED69009B8F69 /* EventsScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = EventsScreen.storyboard; sourceTree = "<group>"; };
 		A61C51D51FECEE23009B8F69 /* EventInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventInfoViewController.swift; sourceTree = "<group>"; };
+		A61C51D71FF6E007009B8F69 /* FriendAttendanceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendAttendanceTableViewCell.swift; sourceTree = "<group>"; };
+		A61C51D81FF6E007009B8F69 /* FriendAttendanceTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FriendAttendanceTableViewCell.xib; sourceTree = "<group>"; };
+		A61C51DB1FFD8B38009B8F69 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		A61C51DD1FFD8B5E009B8F69 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		A61C51DF1FFD8B8C009B8F69 /* Friend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
 		A623216C1FB78C7000A54814 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A623217E1FB8FA9400A54814 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		A62321801FB8FAD900A54814 /* CurrentUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUser.swift; sourceTree = "<group>"; };
@@ -138,6 +148,7 @@
 				A608558D1FC395AD009E4BDD /* YelpLocationTableViewCell.xib */,
 				A65843A41FCD1D5700B93FCA /* FriendsSearchTableViewCell.xib */,
 				A60EF84C1FE857B300EF2D91 /* EventsTableViewCell.xib */,
+				A61C51D81FF6E007009B8F69 /* FriendAttendanceTableViewCell.xib */,
 			);
 			path = Xibs;
 			sourceTree = "<group>";
@@ -148,6 +159,7 @@
 				A608558C1FC395AD009E4BDD /* YelpLocationTableViewCell.swift */,
 				A65843A31FCD1D5700B93FCA /* FriendsSearchTableViewCell.swift */,
 				A60EF84B1FE857B300EF2D91 /* EventsTableViewCell.swift */,
+				A61C51D71FF6E007009B8F69 /* FriendAttendanceTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -168,6 +180,9 @@
 			isa = PBXGroup;
 			children = (
 				A62321801FB8FAD900A54814 /* CurrentUser.swift */,
+				A61C51DB1FFD8B38009B8F69 /* Event.swift */,
+				A61C51DD1FFD8B5E009B8F69 /* Location.swift */,
+				A61C51DF1FFD8B8C009B8F69 /* Friend.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -367,6 +382,7 @@
 				A698E5C31FB2284C00D42A29 /* Assets.xcassets in Resources */,
 				A623216D1FB78F6E00A54814 /* GoogleService-Info.plist in Resources */,
 				A698E5C11FB2284C00D42A29 /* Main.storyboard in Resources */,
+				A61C51DA1FF6E007009B8F69 /* FriendAttendanceTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -481,17 +497,21 @@
 				A60EF84D1FE857B300EF2D91 /* EventsTableViewCell.swift in Sources */,
 				A6D307471FB589D6006ACB4B /* RegistrationViewController.swift in Sources */,
 				A60EF8431FE5A1B400EF2D91 /* FriendSelectorViewController.swift in Sources */,
+				A61C51D91FF6E007009B8F69 /* FriendAttendanceTableViewCell.swift in Sources */,
 				A623217F1FB8FA9400A54814 /* UserViewModel.swift in Sources */,
 				A698E5BE1FB2284C00D42A29 /* ViewController.swift in Sources */,
+				A61C51DE1FFD8B5E009B8F69 /* Location.swift in Sources */,
 				A60EF8471FE7610400EF2D91 /* FirebaseQuery.swift in Sources */,
 				A65843A21FCD18DC00B93FCA /* FriendsSearchViewController.swift in Sources */,
 				A658439E1FCD0BAB00B93FCA /* FriendsViewModel.swift in Sources */,
+				A61C51E01FFD8B8C009B8F69 /* Friend.swift in Sources */,
 				A61C51D61FECEE23009B8F69 /* EventInfoViewController.swift in Sources */,
 				A62321811FB8FAD900A54814 /* CurrentUser.swift in Sources */,
 				A60EF8491FE8418D00EF2D91 /* EventsViewController.swift in Sources */,
 				A6C79F5E1FBB5F4400649FBE /* UserDefaults.swift in Sources */,
 				A65843A51FCD1D5700B93FCA /* FriendsSearchTableViewCell.swift in Sources */,
 				A698E5BC1FB2284C00D42A29 /* AppDelegate.swift in Sources */,
+				A61C51DC1FFD8B38009B8F69 /* Event.swift in Sources */,
 				A644D5631FC2533100E851A8 /* YelpSearchViewModel.swift in Sources */,
 				A6D5776A1FB97A66004D94BE /* HomeScreenViewController.swift in Sources */,
 				A608558E1FC395AD009E4BDD /* YelpLocationTableViewCell.swift in Sources */,

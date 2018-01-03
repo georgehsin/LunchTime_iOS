@@ -10,43 +10,6 @@ import Foundation
 import Firebase
 import YelpAPI
 
-struct Event {
-    var id: String
-    var date: Date
-    var location: Location
-    var attending: Bool?
-    var creator: Friend?
-    var friends: [String: Any]?
-    
-    init(id: String, date: Date, locationName: String, locationImageUrl: NSURL, attending: Bool? = nil) {
-        self.id = id
-        self.date = date
-        self.attending = attending
-        self.location = Location(locationName: locationName, locationImageUrl: locationImageUrl)
-    }
-    
-    init(id: String, date: Date, locationName: String, locationImageUrl: NSURL, locationYelpId: String, attending: Bool? = nil, creator: Friend, friends: [String:Any]) {
-        self.id = id
-        self.date = date
-        self.location = Location(locationName: locationName, locationImageUrl: locationImageUrl, locationYelpId: locationYelpId)
-        self.attending = attending
-        self.creator = creator
-        self.friends = friends
-    }
-}
-
-struct Location {
-    var locationName: String
-    var locationImageUrl: NSURL
-    var locationYelpId: String?
-    
-    init(locationName: String, locationImageUrl: NSURL, locationYelpId: String? = nil) {
-        self.locationName = locationName
-        self.locationImageUrl = locationImageUrl
-        self.locationYelpId = locationYelpId
-    }
-}
-
 class EventsViewModel {
     let uid = UserDefaults.standard.string(forKey: UserDefaults.UserDefaultKeys.userId.rawValue)
     let username = UserDefaults.standard.string(forKey: UserDefaults.UserDefaultKeys.email.rawValue)
@@ -123,19 +86,22 @@ class EventsViewModel {
                     
                     let locationInfo = eventInfo["location"] as! [String:Any]
                     let locationName = locationInfo["locationName"] as! String
-                    let locationImageUrl = NSURL(string: locationInfo["name"] as! String)
+                    let locationImageUrl = NSURL(string: locationInfo["locationImageUrl"] as! String)
                     let locationYelpId = locationInfo["yelpId"] as! String
                     
                     let eventCreator = eventInfo["creator"] as! [String:String]
                     let creator = Friend(uid: eventCreator["uid"]!, username: eventCreator["username"]!)
                     let friends = eventInfo["friends"] as! [String: [String:Any]]
+                    let friendsList = friends.map({ (key, value) -> Friend in
+                        return Friend(uid: value["uid"] as! String, username: value["username"] as! String, attending: value["attending"] as! Bool!)
+                    })
 //                    let friendsList = friends.map { (key, value) -> Friend in
 //                        return Friend(uid: value["uid"] as String!, username: value["username"] as String!)
 //                    }
                     let eventFriends = friends.mapValues({ (friend) -> [String:Any] in
                         return ["uid": friend["uid"] as! String, "username": friend["username"] as! String, "attending": friend["attending"] as! Bool]
                     })
-                    let event = Event(id: id, date: date, locationName: locationName, locationImageUrl: locationImageUrl!, locationYelpId: locationYelpId, creator: creator, friends: eventFriends)
+                    let event = Event(id: id, date: date, locationName: locationName, locationImageUrl: locationImageUrl!, locationYelpId: locationYelpId, creator: creator, friends: eventFriends, friendsList: friendsList)
                     onComplete(event)
                 }
             }
