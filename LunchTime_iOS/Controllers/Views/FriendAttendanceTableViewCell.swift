@@ -24,9 +24,12 @@ class FriendAttendanceTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func commonInit(email: String, attending status: Bool) {
+    func commonInit(email: String, attending status: Bool? = nil ) {
         emailLabel.text = email
-        if status {
+        if status == nil {
+            createUI(attending: nil)
+        }
+        else if status! {
             attendanceStatusLabel.setTitle("Yes", for: .normal)
             createUI(attending: true)
         } else {
@@ -35,8 +38,13 @@ class FriendAttendanceTableViewCell: UITableViewCell {
         }
     }
     
-    func createUI(attending: Bool) {
-        if attending {
+    func createUI(attending: Bool? = nil) {
+        if attending == nil {
+            attendanceStatusLabel.setTitle("Pending", for: .normal)
+            attendanceStatusLabel.backgroundColor = UIColor.clear
+            attendanceStatusLabel.setTitleColor(Constants.Colors.appOrange, for: .normal)
+        }
+        else if attending! {
             attendanceStatusLabel.backgroundColor = Constants.Colors.appOrange
             attendanceStatusLabel.setTitleColor(UIColor.white, for: .normal)
         }

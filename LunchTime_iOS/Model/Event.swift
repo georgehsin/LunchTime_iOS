@@ -14,7 +14,7 @@ struct Event {
     var location: Location
     var attending: Bool?
     var creator: Friend?
-    var friends: [String: Any]?
+//    var friends: [String: Any]?
     var friendsList: [Friend]?
     
     init(id: String, date: Date, locationName: String, locationImageUrl: NSURL, attending: Bool? = nil) {
@@ -24,13 +24,13 @@ struct Event {
         self.location = Location(locationName: locationName, locationImageUrl: locationImageUrl)
     }
     
-    init(id: String, date: Date, locationName: String, locationImageUrl: NSURL, locationYelpId: String, attending: Bool? = nil, creator: Friend, friends: [String:Any], friendsList: [Friend]) {
+    init(id: String, date: Date, locationName: String, locationImageUrl: NSURL, locationYelpId: String, attending: Bool? = nil, creator: Friend, friendsList: [Friend]) {
         self.id = id
         self.date = date
         self.location = Location(locationName: locationName, locationImageUrl: locationImageUrl, locationYelpId: locationYelpId)
         self.attending = attending
         self.creator = creator
-        self.friends = friends
+//        self.friends = friends
         self.friendsList = friendsList
     }
 }

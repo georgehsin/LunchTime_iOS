@@ -13,6 +13,7 @@ class DateSelectorViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         datePicker.minimumDate = Date()
+        datePicker.minuteInterval = 5
         // Do any additional setup after loading the view.
     }
 

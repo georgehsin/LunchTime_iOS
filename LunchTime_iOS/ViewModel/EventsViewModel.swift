@@ -17,9 +17,10 @@ class EventsViewModel {
     func addEvent(date: Date, location: YLPBusiness, friends: [String:Friend]) {
 
         let locationInfo: [String:Any] = ["locationName": location.name, "locationImageUrl": location.imageURL!.absoluteString, "yelpId": location.identifier]
-        let eventFriends = friends.mapValues({ (friend) -> [String:Any] in
-            return ["uid": friend.uid, "username": friend.username, "attending": false]
+        var eventFriends = friends.mapValues({ (friend) -> [String:Any?] in
+            return ["uid": friend.uid, "username": friend.username, "attending": nil]
         })
+        eventFriends[uid!] = ["uid": uid, "username": username, "attending": true]
         let eventData: [String: Any] = [
             "creator": ["uid": uid!, "username": username],
             "date": date,
@@ -93,22 +94,24 @@ class EventsViewModel {
                     let creator = Friend(uid: eventCreator["uid"]!, username: eventCreator["username"]!)
                     let friends = eventInfo["friends"] as! [String: [String:Any]]
                     let friendsList = friends.map({ (key, value) -> Friend in
-                        return Friend(uid: value["uid"] as! String, username: value["username"] as! String, attending: value["attending"] as! Bool!)
+                        if !(value["attending"] is NSNull) {
+                            return Friend(uid: value["uid"] as! String, username: value["username"] as! String, attending: value["attending"] as! Bool!)
+                        } else {
+                            return Friend(uid: value["uid"] as! String, username: value["username"] as! String)
+                        }
+
                     })
-//                    let friendsList = friends.map { (key, value) -> Friend in
-//                        return Friend(uid: value["uid"] as String!, username: value["username"] as String!)
-//                    }
-                    let eventFriends = friends.mapValues({ (friend) -> [String:Any] in
-                        return ["uid": friend["uid"] as! String, "username": friend["username"] as! String, "attending": friend["attending"] as! Bool]
-                    })
-                    let event = Event(id: id, date: date, locationName: locationName, locationImageUrl: locationImageUrl!, locationYelpId: locationYelpId, creator: creator, friends: eventFriends, friendsList: friendsList)
+//                    let eventFriends = friends.mapValues({ (friend) -> [String:Any] in
+//                        return ["uid": friend["uid"] as! String, "username": friend["username"] as! String, "attending": friend["attending"] as! Bool]
+//                    })
+                    let event = Event(id: id, date: date, locationName: locationName, locationImageUrl: locationImageUrl!, locationYelpId: locationYelpId, creator: creator, friendsList: friendsList)
                     onComplete(event)
                 }
             }
         }
     }
     
-    func setAttendingStatus(attending: Bool, eventId: String) {
+    func setAttendingStatus(attending: Bool, eventId: String, onComplete: @escaping () -> ()) {
         let userRef = Firestore.firestore().collection("users").document(uid!)
         userRef.updateData([
             "events.\(eventId).attending": attending
@@ -117,5 +120,6 @@ class EventsViewModel {
         eventRef.updateData([
             "friends.\(uid!).attending": attending
         ])
+        onComplete()
     }
 }

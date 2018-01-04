@@ -16,22 +16,22 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     let tableView = UITableView()
     let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
     var eventsList: [Event]?
-//    var getEventTest: Event?
-//    var requestedEventId: Event?
+    
+    var attending: Bool?
     var event: Event?
     var yelpInfo: YLPBusiness?
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-//        getEvents()
         createUI()
         tableView.delegate = self
         tableView.dataSource = self
     }
 
     override func viewWillAppear(_ animated: Bool) {
+        startActivityIndicator(indicator: activityIndicator)
         getEvents()
+        stopActivityIndicator(indicator: activityIndicator)
         self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
@@ -45,7 +45,7 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let preSearchBarHeight = UIApplication.shared.statusBarFrame.height
         tableView.frame = CGRect(x: 0, y: preSearchBarHeight, width: self.view.bounds.width, height: self.view.bounds.height)
         tableView.allowsSelection = false
-        activityIndicator.frame = CGRect(x: self.view.bounds.width/2 - 20, y: self.view.bounds.height/2 - 20, width: 40, height: 40)
+        activityIndicator.frame = CGRect(x: self.view.bounds.width/2 - 20, y: self.view.bounds.height/2 - 20, width: 60, height: 60)
         
         self.view.addSubview(tableView)
         self.view.addSubview(activityIndicator)
@@ -56,7 +56,7 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         guard let event = eventsList?[indexPath.row] else { return cell }
         cell.locationNameLabel.text = event.location.locationName
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "E, MMM dd - hh:mm"
+        dateFormatter.dateFormat = "E, MMM dd, hh:mm"
         let dateString = dateFormatter.string(from: event.date)
         cell.eventDateLabel.text = dateString
         cell.locationImage.sd_setImage(with: event.location.locationImageUrl as URL)
@@ -87,27 +87,43 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         DispatchQueue.global(qos: .userInteractive).async {
             self.viewModel.getAllEvents(onComplete: { (events) in
                 self.eventsList = events
-//                self.getEventTest = events[0]
-                print(events)
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
-//                    self.viewModel.getEvent(eventId: self.getEventTest!.id, onComplete: { (event) in
-//                        print(event)
-//                    })
                 }
             })
         }
     }
     
     @objc func yesButtonPressed(sender: UIButton) {
-        viewModel.setAttendingStatus(attending: true, eventId: eventsList![sender.tag].id)
+        attending = true
+        self.eventsList![sender.tag].attending = true
+        startActivityIndicator(indicator: activityIndicator)
+        DispatchQueue.global(qos: .userInteractive).async {
+            self.viewModel.setAttendingStatus(attending: true, eventId: self.eventsList![sender.tag].id, onComplete: {
+                DispatchQueue.main.async {
+                    self.stopActivityIndicator(indicator: self.activityIndicator)
+                }
+            })
+        }
     }
     
     @objc func noButtonPressed(sender: UIButton) {
-        viewModel.setAttendingStatus(attending: false, eventId: eventsList![sender.tag].id)
+        attending = false
+        self.eventsList![sender.tag].attending = false
+        startActivityIndicator(indicator: activityIndicator)
+        DispatchQueue.global(qos: .userInteractive).async {
+            self.viewModel.setAttendingStatus(attending: false, eventId: self.eventsList![sender.tag].id, onComplete: {
+                DispatchQueue.main.async {
+                    self.stopActivityIndicator(indicator: self.activityIndicator)
+                }
+            })
+        }
     }
     
     @objc func additionalEventInfoButtonPressed(sender: UIButton) {
+        startActivityIndicator(indicator: activityIndicator)
+//        requestedEventIndex = sender.tag
+        attending = eventsList![sender.tag].attending
         let requestedEventId = eventsList![sender.tag].id
         DispatchQueue.global().async {
             self.viewModel.getEvent(eventId: requestedEventId) { (event) in
@@ -115,6 +131,7 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 self.yelpViewModel.findWithYelpId(yelpId: event.location.locationYelpId!) { (result) in
                     self.yelpInfo = result
                     DispatchQueue.main.async {
+                        self.stopActivityIndicator(indicator: self.activityIndicator)
                         self.performSegue(withIdentifier: Constants.SegueIdentifiers.eventInfoPage, sender: self)
                     }
                 }
@@ -127,6 +144,7 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             let eventInfoController = segue.destination as! EventInfoViewController
             eventInfoController.event = event
             eventInfoController.yelpInfo = yelpInfo
+            eventInfoController.attending = attending
         }
     }
 }

@@ -10,11 +10,13 @@ import UIKit
 import YelpAPI
 
 class EventInfoViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-
+    
+    let viewModel = EventsViewModel()
     let tableView = UITableView()
     let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
     var event: Event?
     var yelpInfo: YLPBusiness?
+    var attending: Bool?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,8 +40,10 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
         eventNib.selectButton.setTitle("View in Maps", for: .normal)
         eventNib.frame = CGRect(x: 0, y: leadingTopSpace, width: self.view.bounds.width, height: 120)
         self.view.addSubview(eventNib)
-        let yelpNib = UINib(nibName: "FriendAttendanceTableViewCell", bundle: nil)
-        tableView.register(yelpNib, forCellReuseIdentifier: "attendStatusCell")
+        let friendNib = UINib(nibName: "FriendAttendanceTableViewCell", bundle: nil)
+        tableView.register(friendNib, forCellReuseIdentifier: "attendStatusCell")
+        let dateNib = UINib(nibName: "EventDateAttendanceTableViewCell", bundle: nil)
+        tableView.register(dateNib, forCellReuseIdentifier: "dateCell")
         tableView.frame = CGRect(x: 0, y: leadingTopSpace + 120, width: self.view.bounds.width, height: self.view.bounds.height - leadingTopSpace - 120)
         tableView.allowsSelection = false
         activityIndicator.frame = CGRect(x: self.view.bounds.width/2 - 20, y: self.view.bounds.height/2 - 20, width: 40, height: 40)
@@ -52,14 +56,26 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 1 {
-            let cell = UITableViewCell()
+            let cell = tableView.dequeueReusableCell(withIdentifier: "dateCell", for: indexPath) as! EventDateAttendanceTableViewCell
+            cell.commonInit(date: event!.date, attending: attending)
+            cell.yesButton.addTarget(self, action: #selector(yesButtonPressed), for: .touchUpInside)
+            cell.noButton.addTarget(self, action: #selector(noButtonPressed), for: .touchUpInside)
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "attendStatusCell", for: indexPath) as! FriendAttendanceTableViewCell
             if indexPath.section == 0 {
                 cell.commonInit(email: event!.creator!.username, attending: true)
             } else {
-                cell.commonInit(email: event!.friendsList![indexPath.row].username, attending: event!.friendsList![indexPath.row].attending!)
+                if event!.creator!.uid == event!.friendsList![indexPath.row].uid {
+                    cell.isHidden = true
+                    return cell
+                }
+                if let attending = event!.friendsList![indexPath.row].attending {
+                    cell.commonInit(email: event!.friendsList![indexPath.row].username, attending: attending)
+                } else {
+                    cell.commonInit(email: event!.friendsList![indexPath.row].username)
+                }
+
             }
             return cell
         }
@@ -68,13 +84,16 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 2 {
-            return event!.friends!.count
+            return event!.friendsList!.count
         } else {
             return 1
         }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == 2 && event!.creator!.uid == event!.friendsList![indexPath.row].uid {
+            return 0
+        }
         return 70
     }
     
@@ -84,6 +103,28 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 3
+    }
+    
+    @objc func yesButtonPressed(sender: UIButton) {
+        startActivityIndicator(indicator: activityIndicator)
+        DispatchQueue.global(qos: .userInteractive).async {
+            self.viewModel.setAttendingStatus(attending: true, eventId: self.event!.id, onComplete: {
+                DispatchQueue.main.async {
+                    self.stopActivityIndicator(indicator: self.activityIndicator)
+                }
+            })
+        }
+    }
+    
+    @objc func noButtonPressed(sender: UIButton) {
+        startActivityIndicator(indicator: activityIndicator)
+        DispatchQueue.global(qos: .userInteractive).async {
+            self.viewModel.setAttendingStatus(attending: false, eventId: self.event!.id, onComplete: {
+                DispatchQueue.main.async {
+                    self.stopActivityIndicator(indicator: self.activityIndicator)
+                }
+            })
+        }
     }
 
 }
