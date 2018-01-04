@@ -27,29 +27,29 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Business Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9FE-WI-6cb">
-                        <rect key="frame" x="135" y="16" width="204" height="20.5"/>
+                        <rect key="frame" x="130" y="16" width="235" height="20.5"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="16615 NW Oakridge dr, Portland " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="84f-Pp-ZG7">
-                        <rect key="frame" x="135" y="51.5" width="204" height="17"/>
+                        <rect key="frame" x="130" y="51.5" width="235" height="17"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="jIz-WB-xlG">
-                        <rect key="frame" x="135" y="83.5" width="204" height="30"/>
+                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="jIz-WB-xlG">
+                        <rect key="frame" x="130" y="83.5" width="235" height="30"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dM6-j9-Th8">
-                                <rect key="frame" x="0.0" y="0.0" width="96" height="30"/>
+                                <rect key="frame" x="0.0" y="0.0" width="112.5" height="30"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <state key="normal" title="Select"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jRs-gf-2D9">
-                                <rect key="frame" x="108" y="0.0" width="96" height="30"/>
+                                <rect key="frame" x="122.5" y="0.0" width="112.5" height="30"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <state key="normal" title="View in Yelp"/>
                                 <connections>
@@ -60,22 +60,23 @@
                     </stackView>
                 </subviews>
                 <constraints>
+                    <constraint firstAttribute="trailing" secondItem="9FE-WI-6cb" secondAttribute="trailing" constant="10" id="0px-r3-1df"/>
                     <constraint firstItem="84f-Pp-ZG7" firstAttribute="top" secondItem="9FE-WI-6cb" secondAttribute="bottom" constant="15" id="3eV-jd-9vm"/>
-                    <constraint firstItem="9FE-WI-6cb" firstAttribute="leading" secondItem="lJs-oE-OHH" secondAttribute="trailing" constant="20" id="3k5-Nc-FyA"/>
+                    <constraint firstItem="9FE-WI-6cb" firstAttribute="leading" secondItem="lJs-oE-OHH" secondAttribute="trailing" constant="15" id="3k5-Nc-FyA"/>
                     <constraint firstItem="lJs-oE-OHH" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="C83-v2-Umm"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="jIz-WB-xlG" secondAttribute="trailing" constant="20" id="CUI-Ml-Ugq"/>
-                    <constraint firstItem="84f-Pp-ZG7" firstAttribute="leading" secondItem="lJs-oE-OHH" secondAttribute="trailing" constant="20" id="HAC-cf-O25"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="9FE-WI-6cb" secondAttribute="trailing" constant="20" id="Lku-rb-bzb"/>
+                    <constraint firstItem="84f-Pp-ZG7" firstAttribute="leading" secondItem="lJs-oE-OHH" secondAttribute="trailing" constant="15" id="HAC-cf-O25"/>
                     <constraint firstItem="jIz-WB-xlG" firstAttribute="top" secondItem="84f-Pp-ZG7" secondAttribute="bottom" constant="15" id="NNn-6R-KPy"/>
                     <constraint firstItem="9FE-WI-6cb" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="5" id="OcQ-uO-w0B"/>
-                    <constraint firstItem="jIz-WB-xlG" firstAttribute="leading" secondItem="lJs-oE-OHH" secondAttribute="trailing" constant="20" id="e66-ov-Pia"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="84f-Pp-ZG7" secondAttribute="trailing" constant="20" id="gFM-oS-P3P"/>
+                    <constraint firstItem="jIz-WB-xlG" firstAttribute="leading" secondItem="lJs-oE-OHH" secondAttribute="trailing" constant="15" id="e66-ov-Pia"/>
+                    <constraint firstAttribute="trailing" secondItem="84f-Pp-ZG7" secondAttribute="trailing" constant="10" id="eoM-HB-SbC"/>
+                    <constraint firstAttribute="trailing" secondItem="jIz-WB-xlG" secondAttribute="trailing" constant="10" id="m23-Ra-cAJ"/>
                     <constraint firstItem="lJs-oE-OHH" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="r8H-sf-Tv9"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="selectButton" destination="dM6-j9-Th8" id="oZC-rT-Ggy"/>
+                <outlet property="viewInYelpButton" destination="jRs-gf-2D9" id="vIj-ov-FId"/>
                 <outlet property="yelpBusinessAddress" destination="84f-Pp-ZG7" id="91Y-6z-pYV"/>
                 <outlet property="yelpBusinessImage" destination="lJs-oE-OHH" id="dzB-mp-h5Z"/>
                 <outlet property="yelpBusinessName" destination="9FE-WI-6cb" id="pIj-tc-9pO"/>

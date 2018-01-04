@@ -5,7 +5,6 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -19,15 +18,16 @@
                 <rect key="frame" x="0.0" y="0.0" width="445" height="97.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zqt-ep-vO2">
-                        <rect key="frame" x="25" y="24" width="50" height="50"/>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="avT-NZ-udy">
+                        <rect key="frame" x="10" y="24" width="50" height="50"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="50" id="cwj-Sf-B6W"/>
-                            <constraint firstAttribute="width" constant="50" id="vhj-ep-QB2"/>
+                            <constraint firstAttribute="width" constant="50" id="4zg-xC-wjS"/>
+                            <constraint firstAttribute="height" constant="50" id="btu-eB-hHs"/>
                         </constraints>
-                    </imageView>
+                    </view>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gV1-83-Gn4">
-                        <rect key="frame" x="390" y="36.5" width="25" height="25"/>
+                        <rect key="frame" x="410" y="36.5" width="25" height="25"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="25" id="MM6-lh-1GA"/>
                             <constraint firstAttribute="height" constant="25" id="xml-Fa-S1q"/>
@@ -38,7 +38,7 @@
                         </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="randomemail@gmail.com" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mYv-bl-vKf">
-                        <rect key="frame" x="90" y="36.5" width="285" height="25"/>
+                        <rect key="frame" x="75" y="36.5" width="320" height="25"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="25" id="u8H-1S-fEF"/>
                         </constraints>
@@ -48,20 +48,20 @@
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailingMargin" secondItem="gV1-83-Gn4" secondAttribute="trailing" constant="10" id="Bum-Lg-0ib"/>
                     <constraint firstItem="mYv-bl-vKf" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="CgH-j2-0g5"/>
-                    <constraint firstItem="zqt-ep-vO2" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="5" id="Epp-pk-Jym"/>
-                    <constraint firstItem="mYv-bl-vKf" firstAttribute="leading" secondItem="zqt-ep-vO2" secondAttribute="trailing" constant="15" id="G35-Oh-IhC"/>
-                    <constraint firstItem="zqt-ep-vO2" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="RZi-SF-iLc"/>
+                    <constraint firstAttribute="trailing" secondItem="gV1-83-Gn4" secondAttribute="trailing" constant="10" id="Qan-ZY-eJw"/>
+                    <constraint firstItem="avT-NZ-udy" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Wqt-oR-BYo"/>
                     <constraint firstItem="gV1-83-Gn4" firstAttribute="leading" secondItem="mYv-bl-vKf" secondAttribute="trailing" constant="15" id="ZCh-l7-IiJ"/>
+                    <constraint firstItem="avT-NZ-udy" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="dvc-AX-QrB"/>
                     <constraint firstItem="gV1-83-Gn4" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="nDp-zk-cOx"/>
+                    <constraint firstItem="mYv-bl-vKf" firstAttribute="leading" secondItem="avT-NZ-udy" secondAttribute="trailing" constant="15" id="tHu-7l-Oco"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="addFriendButton" destination="gV1-83-Gn4" id="cXF-0D-gXW"/>
                 <outlet property="emailLabel" destination="mYv-bl-vKf" id="F9t-GO-XUc"/>
-                <outlet property="profileImage" destination="zqt-ep-vO2" id="6UC-37-toV"/>
+                <outlet property="profileImage" destination="avT-NZ-udy" id="ONP-77-etX"/>
             </connections>
             <point key="canvasLocation" x="87.5" y="79"/>
         </tableViewCell>
