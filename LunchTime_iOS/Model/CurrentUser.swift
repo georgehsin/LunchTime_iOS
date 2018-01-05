@@ -34,6 +34,10 @@ struct UserData {
     init(uid: String, email: String, firstName: String? = nil, lastName: String? = nil, phone: String? = nil, city: City? = nil, friendsList: [Friend], friendsDict: [String: Friend], sentRequestList: [Friend], recievedRequestList: [Friend], sentRequestDict: [String: Friend], recievedRequestDict: [String: Friend]) {
         self.uid = uid
         self.email = email
+        self.firstName = firstName
+        self.lastName = lastName
+        self.phone = phone
+        self.city = city
         self.friendsList = friendsList
         self.friendsDict = friendsDict
         self.sentRequestUsersList = sentRequestList
@@ -44,11 +48,11 @@ struct UserData {
 }
 
 struct City {
-    var name: String
-    var latitude: String
-    var longitude: String
+    var name: String?
+    var latitude: String?
+    var longitude: String?
     
-    init(name: String, latitude: String, longitude: String) {
+    init(name: String?, latitude: String?, longitude: String?) {
         self.name = name
         self.latitude = latitude
         self.longitude = longitude

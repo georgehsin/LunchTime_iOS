@@ -218,7 +218,11 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         currentUserInfo?.firstName = firstNameInput.text ?? nil
         currentUserInfo?.lastName =  lastNameInput.text ?? nil
         currentUserInfo?.phone = phoneInput.text ?? nil
-        userViewModel.updateUserInfo(userInfo: currentUserInfo!)
+        DispatchQueue.global(qos: .userInteractive).async {
+            self.userViewModel.updateUserInfo(userInfo: self.currentUserInfo!)
+        }
+        self.userAttributes = [currentUserInfo?.email, currentUserInfo?.firstName, currentUserInfo?.lastName, currentUserInfo?.phone, currentUserInfo?.city?.name]
+        tableView.reloadData()
     }
 }
 

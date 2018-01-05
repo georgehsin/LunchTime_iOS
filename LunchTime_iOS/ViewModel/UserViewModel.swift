@@ -144,6 +144,7 @@ extension UserViewModel {
                         let docData: [String: Any] = [
                             "email": fbData["email"]!,
                             "friends": [String: Friend](),
+                            "events": [String: Event](),
                             "sentRequest": [String: Friend](),
                             "recievedRequest": [String: Friend]()
                         ]
@@ -161,6 +162,7 @@ extension UserViewModel {
                 let docData: [String: Any] = [
                     "email": self.user.username,
                     "friends": [String: Friend](),
+                    "events": [String: Event](),
                     "sentRequest": [String: Friend](),
                     "recievedRequest": [String: Friend]()
                 ]

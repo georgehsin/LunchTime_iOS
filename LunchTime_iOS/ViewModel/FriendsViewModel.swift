@@ -54,6 +54,10 @@ class FriendsViewModel {
                     let user = querySnapshot.data()
                     let uid = querySnapshot.documentID
                     let email = user["email"] as! String
+                    let firstName = user["firstName"] as? String
+                    let lastName = user["lastName"] as? String
+                    let phone = user["phone"] as? String
+                    let city = City(name: user["city"] as? String, latitude: user["latitude"] as? String, longitude: user["longitude"] as? String)
                     
                     //Will have to map set friends as [String:String] and then map -> [Friend]
                     //Have to iterate through anyways. questions is, should I change to dict.
@@ -64,8 +68,6 @@ class FriendsViewModel {
                     let friendsDict = friends.mapValues({ (value) -> Friend in
                         return Friend(uid: value["uid"]!, username: value["username"]!)
                     })
-                    
-                    
                     let sentRequest = user["sentRequest"] as! [String: [String:String]]
                     let sentRequestList = sentRequest.map { (key, value) -> Friend in
                         return Friend(uid: value["uid"] as String!, username: value["username"] as String!)
@@ -83,7 +85,7 @@ class FriendsViewModel {
                         return Friend(uid: value["uid"]!, username: value["username"]!)
                     })
                     
-                    self.currentUser.data = UserData(uid: uid, email: email, friendsList: friendsList, friendsDict: friendsDict, sentRequestList: sentRequestList, recievedRequestList: recievedRequestList, sentRequestDict: sentRequestDict, recievedRequestDict: recievedRequestDict)
+                    self.currentUser.data = UserData(uid: uid, email: email, firstName: firstName, lastName: lastName, phone: phone, city: city, friendsList: friendsList, friendsDict: friendsDict, sentRequestList: sentRequestList, recievedRequestList: recievedRequestList, sentRequestDict: sentRequestDict, recievedRequestDict: recievedRequestDict)
                     onComplete(self.currentUser.data!)
                 }
             }
