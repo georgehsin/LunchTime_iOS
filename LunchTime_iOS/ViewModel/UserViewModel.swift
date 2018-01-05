@@ -16,6 +16,7 @@ enum UserValidationState {
 }
 
 class UserViewModel {
+    let uid = UserDefaults.standard.string(forKey: UserDefaults.UserDefaultKeys.userId.rawValue)
     private let minPasswordLength = 6
     private var user = CurrentUser()
     
@@ -173,6 +174,28 @@ extension UserViewModel {
             }
             
         }
+    }
+    
+    func updateUserInfo(userInfo: UserData) {
+        let userInfo: [String: String?] = [
+            "firstName": userInfo.firstName ?? nil,
+            "lastName": userInfo.lastName,
+            "phone": userInfo.phone,
+            "city": userInfo.city?.name,
+            "latitude": userInfo.city?.latitude,
+            "longitude": userInfo.city?.longitude
+        ]
+        Firestore.firestore().collection("users").document(self.uid!).updateData(
+            userInfo
+        )
+//            .setData(userInfo) { err in
+//            if let err = err {
+//                print("Error adding document: \(err)")
+//            } else {
+//                print("Document added")
+//            }
+//        }
+        
     }
     
     func logoutOfFirebase() {

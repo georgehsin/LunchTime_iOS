@@ -8,15 +8,17 @@
 
 import UIKit
 import FBSDKLoginKit
+import GooglePlaces
 
 class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     let viewModel = FriendsViewModel()
     let userViewModel = UserViewModel()
     let tableView = UITableView()
+    var resultsViewController: GMSAutocompleteResultsViewController?
     let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
     var userAttributes = [String?]()
-    let userAttributesLabel = ["Email:", "First Name:", "Last Name:", "Phone:", "Birthday:"]
+    let userAttributesLabel = ["Email:", "First Name:", "Last Name:", "Phone:", "City:"]
     var currentUserInfo: UserData?
     
     let scrollView = UIScrollView()
@@ -25,7 +27,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     let firstNameInput = UITextField()
     let lastNameInput = UITextField()
     let phoneInput = UITextField()
-    let birthdayInput = UITextField()
+    let cityInput = UITextField()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,14 +47,12 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         tableView.register(nib, forCellReuseIdentifier: "profileCell")
         tableView.frame = CGRect(x: 0, y: statusBarHeight + 44, width: self.view.frame.width, height: self.view.frame.height - 144 - statusBarHeight)
         tableView.allowsSelection = false
+        tableView.isScrollEnabled = false
+        tableView.tableFooterView = UIView(frame: .zero)
         activityIndicator.frame = CGRect(x: self.view.bounds.width/2 - 20, y: self.view.bounds.height/2 - 20, width: 60, height: 60)
         
         let navBar = UINavigationBar(frame: CGRect(x: 0, y: statusBarHeight, width: self.view.frame.width, height: 44))
         navBar.isTranslucent = false
-//
-//        let editProfileBarButtonItem = UIBarButtonItem(title: "edit", style: .plain, target: self, action: #selector(editButtonPressed))
-//        self.navigationItem.rightBarButtonItem = editProfileBarButtonItem
-        
         let editProfileButton = UIButton(frame: CGRect(x: self.view.frame.width - 60, y: 7, width: 50, height: 30))
         editProfileButton.setTitle("edit", for: .normal)
         editProfileButton.setTitleColor(Constants.Colors.appOrange, for: .normal)
@@ -96,7 +96,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         DispatchQueue.global(qos: .userInteractive).async {
             self.viewModel.getCurrentUserData { (userData) in
                 self.currentUserInfo = userData
-                self.userAttributes = [userData.email, userData.firstName, userData.lastName, userData.phone, userData.birthday]
+                self.userAttributes = [userData.email, userData.firstName, userData.lastName, userData.phone, userData.city?.name]
                 DispatchQueue.main.async {
                     self.stopActivityIndicator(indicator: self.activityIndicator)
                     self.tableView.isHidden = false
@@ -133,7 +133,6 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         editInfoView.layer.cornerRadius = 10
         editInfoView.alpha = 0
         scrollView.frame = CGRect(x: 0, y: 0, width: 300, height: 450)
-        scrollView.contentSize = CGSize(width: 300, height: 460)
         layeredView.frame = scrollView.frame
         editInfoView.addSubview(scrollView)
         scrollView.addSubview(layeredView)
@@ -176,11 +175,12 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         phoneInput.frame = CGRect(x: 25, y: 260, width: 250, height: 40)
         phoneInput.text = currentUserInfo!.phone ?? ""
         phoneInput.placeholder = currentUserInfo!.firstName == nil ? "phone number not set" : ""
-        birthdayInput.frame = CGRect(x: 25, y: 330, width: 250, height: 40)
-        birthdayInput.text = currentUserInfo!.birthday ?? ""
-        birthdayInput.placeholder = currentUserInfo!.firstName == nil ? "birthday not set" : ""
+        cityInput.frame = CGRect(x: 25, y: 330, width: 250, height: 40)
+        cityInput.text = currentUserInfo!.city?.name ?? ""
+        cityInput.tag = 1
+        cityInput.placeholder = currentUserInfo!.firstName == nil ? "city not set" : ""
         
-        let inputFields = [firstNameInput, lastNameInput, phoneInput, birthdayInput]
+        let inputFields = [firstNameInput, lastNameInput, phoneInput, cityInput]
         
         for field in inputFields {
             field.textAlignment = .center
@@ -215,6 +215,10 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     @objc func saveButtonPressed() {
         dismissMenu()
+        currentUserInfo?.firstName = firstNameInput.text ?? nil
+        currentUserInfo?.lastName =  lastNameInput.text ?? nil
+        currentUserInfo?.phone = phoneInput.text ?? nil
+        userViewModel.updateUserInfo(userInfo: currentUserInfo!)
     }
 }
 
@@ -222,6 +226,11 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 extension ProfileViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         activeField = textField
+        if textField.tag == 1 {
+            let autocompleteController = GMSAutocompleteViewController()
+            autocompleteController.delegate = self
+            present(autocompleteController, animated: true, completion: nil)
+        }
     }
 
     func textFieldDidEndEditing(_ textField: UITextField) {
@@ -236,7 +245,7 @@ extension ProfileViewController: UITextFieldDelegate {
             phoneInput.becomeFirstResponder()
         }
         else if textField == phoneInput {
-            birthdayInput.becomeFirstResponder()
+            cityInput.becomeFirstResponder()
         }
         else {
             saveButtonPressed()
@@ -260,7 +269,7 @@ extension ProfileViewController {
         let keyboardSize = (info[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.size
         let heightToSubtract = keyboardSize!.height - ((self.view.frame.height - 450)/2)
         let contentInsets : UIEdgeInsets = UIEdgeInsetsMake(0.0, 0.0, heightToSubtract, 0.0)
-        
+        scrollView.contentSize = CGSize(width: 300, height: 460)
         scrollView.contentInset = contentInsets
         scrollView.scrollIndicatorInsets = contentInsets
         
@@ -278,9 +287,44 @@ extension ProfileViewController {
         let keyboardSize = (info[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.size
         let heightToAdd = keyboardSize!.height - ((self.view.frame.height - 450)/2)
         let contentInsets : UIEdgeInsets = UIEdgeInsetsMake(0.0, 0.0, -heightToAdd, 0.0)
+        scrollView.contentSize = CGSize(width: 300, height: 450)
         scrollView.contentInset = contentInsets
         scrollView.scrollIndicatorInsets = contentInsets
         scrollView.isScrollEnabled = false
+    }
+    
+}
+
+//MARK: Google Location Search auto-complete
+extension ProfileViewController: GMSAutocompleteViewControllerDelegate {
+    
+    // Handle the user's selection.
+    func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
+        cityInput.text = place.formattedAddress
+        currentUserInfo?.city?.name = place.formattedAddress ?? ""
+        currentUserInfo?.city?.latitude = place.coordinate.latitude.description
+        currentUserInfo?.city?.longitude = place.coordinate.longitude.description
+        //save coordinates and use that to search in app
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
+        // TODO: handle the error.
+        print("Error: ", error.localizedDescription)
+    }
+    
+    // User canceled the operation.
+    func wasCancelled(_ viewController: GMSAutocompleteViewController) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    // Turn the network activity indicator on and off again.
+    func didRequestAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+    }
+    
+    func didUpdateAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
     }
     
 }
