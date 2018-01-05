@@ -301,10 +301,9 @@ extension ProfileViewController: GMSAutocompleteViewControllerDelegate {
     // Handle the user's selection.
     func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
         cityInput.text = place.formattedAddress
-        currentUserInfo?.city?.name = place.formattedAddress ?? ""
-        currentUserInfo?.city?.latitude = place.coordinate.latitude.description
-        currentUserInfo?.city?.longitude = place.coordinate.longitude.description
+        let city = City(name: place.formattedAddress ?? "", latitude: place.coordinate.latitude.description, longitude: place.coordinate.longitude.description)
         //save coordinates and use that to search in app
+        currentUserInfo?.city = city
         dismiss(animated: true, completion: nil)
     }
     
