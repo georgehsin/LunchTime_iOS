@@ -10,6 +10,9 @@ import UIKit
 
 class ProfileTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var attributeLabel: UILabel!
+    @IBOutlet weak var valueForAttributeLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -19,6 +22,11 @@ class ProfileTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    func commonInit(attribute: String, value: String) {
+        attributeLabel.text = attribute
+        valueForAttributeLabel.text = value
     }
     
 }

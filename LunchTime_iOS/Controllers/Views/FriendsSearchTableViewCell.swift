@@ -10,7 +10,7 @@ import UIKit
 
 class FriendsSearchTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var profileImage: UIImageView!
+    @IBOutlet weak var profileImage: UIView!
     @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var addFriendButton: UIButton!
     var uid: String!

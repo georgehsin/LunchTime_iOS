@@ -72,11 +72,22 @@ class FriendsSearchViewController: UIViewController, UITableViewDelegate, UITabl
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "friendsCell", for: indexPath) as! FriendsSearchTableViewCell
+        
+        let profileImage = UILabel()
+        profileImage.textColor = UIColor.white
+        profileImage.textAlignment = .center
+        profileImage.font.withSize(100)
+        profileImage.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
+        profileImage.layer.cornerRadius = 25
+        profileImage.clipsToBounds = true
+        profileImage.backgroundColor = Constants.Colors.appOrange
+        
         cell.addFriendButton.isHidden = false
         cell.addFriendButton.setImage(UIImage(named: "addContact") , for: .normal)
         cell.addFriendButton.isEnabled = true
         if segmentControl.selectedSegmentIndex == 0 {
             cell.emailLabel.text = currentUserData!.friendsList[indexPath.row].username
+            profileImage.text = currentUserData!.friendsList[indexPath.row].username.first?.description.uppercased()
             cell.uid = currentUserData!.friendsList[indexPath.row].uid
             cell.addFriendButton.tag = indexPath.row
             cell.addFriendButton.setImage(UIImage(named: "friend") , for: .normal)
@@ -85,6 +96,7 @@ class FriendsSearchViewController: UIViewController, UITableViewDelegate, UITabl
         else if segmentControl.selectedSegmentIndex == 1 {
             if indexPath.section == 0 {
                 cell.emailLabel.text = currentUserData!.recievedRequestUsersLists[indexPath.row].username
+                profileImage.text = currentUserData!.recievedRequestUsersLists[indexPath.row].username.first?.description.uppercased()
                 cell.uid = currentUserData!.recievedRequestUsersLists[indexPath.row].uid
                 cell.addFriendButton.tag = indexPath.row
                 cell.addFriendButton.removeTarget(self, action: #selector(addFriendButtonPressed), for: .touchUpInside)
@@ -100,6 +112,7 @@ class FriendsSearchViewController: UIViewController, UITableViewDelegate, UITabl
             if let users = users {
                 let uid = users[indexPath.row].uid
                 cell.emailLabel.text = users[indexPath.row].username
+                profileImage.text = users[indexPath.row].username.first?.description.uppercased()
                 cell.uid = uid
                 if currentUserData!.recievedRequestUsersDict.keys.contains(uid) {
                     //Need to show accept button
@@ -125,7 +138,7 @@ class FriendsSearchViewController: UIViewController, UITableViewDelegate, UITabl
                 }
             }
         }
-        
+        cell.profileImage.addSubview(profileImage)
         return cell
     }
     
@@ -179,31 +192,6 @@ class FriendsSearchViewController: UIViewController, UITableViewDelegate, UITabl
     
     let sections = ["Requests Recieved", "Pending Requests"]
 
-//    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        var title = ""
-//        if segmentControl.selectedSegmentIndex == 1 {
-//            title = sections[section]
-//        }
-//        return title
-//    }
-    
-//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//        let view = UIView()
-//        view.backgroundColor = UIColor.blue
-//
-//        let label = UILabel()
-//        label.frame = CGRect(x: view.bounds.width/2 - 150, y: view.bounds.height/2 - 25, width: 300, height: 50)
-//        label.text = sections[section]
-//        label.textColor = UIColor.white
-//
-//        view.addSubview(label)
-//        if segmentControl.selectedSegmentIndex != 1 {
-//            view.isHidden = true
-//        }
-//
-//        return view
-//    }
-    
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch segmentControl.selectedSegmentIndex {
         case 0:

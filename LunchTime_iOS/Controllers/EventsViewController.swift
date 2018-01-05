@@ -56,7 +56,7 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         guard let event = eventsList?[indexPath.row] else { return cell }
         cell.locationNameLabel.text = event.location.locationName
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "E, MMM dd, hh:mm"
+        dateFormatter.dateFormat = "E, MMM d, h:mm"
         let dateString = dateFormatter.string(from: event.date)
         cell.eventDateLabel.text = dateString
         cell.locationImage.sd_setImage(with: event.location.locationImageUrl as URL)

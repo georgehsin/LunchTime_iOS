@@ -15,12 +15,13 @@ class YelpLocationTableViewCell: UITableViewCell {
     @IBOutlet weak var yelpBusinessName: UILabel!
     @IBOutlet weak var yelpBusinessAddress: UILabel!
     @IBOutlet weak var selectButton: UIButton!
+    @IBOutlet weak var viewInYelpButton: UIButton!
     
     var yelpBusiness: YLPBusiness?
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        createUI()
     }
     
     func commonInit(business: YLPBusiness) {
@@ -32,6 +33,15 @@ class YelpLocationTableViewCell: UITableViewCell {
         if location.address.count >= 1 {
             yelpBusinessAddress.text = "\(location.address[0]), \(location.city)"
         }
+    }
+    
+    func createUI() {
+        selectButton.setTitleColor(UIColor.white, for: .normal)
+        selectButton.backgroundColor = Constants.Colors.appOrange
+        viewInYelpButton.setTitleColor(UIColor.white, for: .normal)
+        viewInYelpButton.backgroundColor = Constants.Colors.appOrange
+        selectButton.roundedButton(corner: [.allCorners], radius: 10, borderColor: Constants.Colors.appOrange)
+        viewInYelpButton.roundedButton(corner: [.allCorners], radius: 10, borderColor: Constants.Colors.appOrange)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

@@ -8,11 +8,11 @@
 
 import UIKit
 
-class FriendSelectorViewController: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource {
+class FriendSelectorViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     let viewModel = FriendsViewModel()
     let tableView = UITableView()
-    let searchBar = UISearchBar()
+//    let searchBar = UISearchBar()
     let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
     let addFriendsButton = UIButton()
     var friendsList = [Friend]()
@@ -21,7 +21,7 @@ class FriendSelectorViewController: UIViewController, UISearchBarDelegate, UITab
     override func viewDidLoad() {
         super.viewDidLoad()
         createUI()
-        searchBar.delegate = self
+//        searchBar.delegate = self
         tableView.delegate = self
         tableView.dataSource = self
         // Do any additional setup after loading the view.
@@ -35,19 +35,21 @@ class FriendSelectorViewController: UIViewController, UISearchBarDelegate, UITab
         let nib = UINib(nibName: "FriendsSearchTableViewCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "friendsCell")
         let preSearchBarHeight = self.navigationController!.navigationBar.frame.height + UIApplication.shared.statusBarFrame.height
-        addFriendsButton.frame = CGRect(x: self.view.bounds.width - 40, y: preSearchBarHeight, width: 40, height: 40)
-        addFriendsButton.setImage(UIImage(named: "rightArrow") , for: .normal)
-        addFriendsButton.backgroundColor = UIColor.lightGray
-        addFriendsButton.addTarget(self, action: #selector(setFriendsForEvent), for: .touchUpInside)
-        searchBar.frame = CGRect(x: 0, y: preSearchBarHeight, width: self.view.bounds.width-40, height: 40)
-        searchBar.backgroundColor = UIColor.lightGray
-        tableView.frame = CGRect(x: 0, y: preSearchBarHeight + 40, width: self.view.bounds.width, height: self.view.bounds.height - 40)
+//        searchBar.frame = CGRect(x: 0, y: preSearchBarHeight, width: self.view.bounds.width-40, height: 40)
+//        searchBar.barTintColor = UIColor.white
+        tableView.frame = CGRect(x: 0, y: preSearchBarHeight, width: self.view.bounds.width, height: self.view.bounds.height - preSearchBarHeight - 95)
         tableView.allowsSelection = false
+        addFriendsButton.frame = CGRect(x: self.view.bounds.width/2 - 58, y: self.view.bounds.height - 90, width: 116, height: 30)
+        addFriendsButton.setTitle("add friends", for: .normal)
+        addFriendsButton.setTitleColor(UIColor.white, for: .normal)
+        addFriendsButton.backgroundColor = Constants.Colors.appOrange
+        addFriendsButton.addTarget(self, action: #selector(setFriendsForEvent), for: .touchUpInside)
+        addFriendsButton.roundedButton(corner: [.allCorners], radius: 10, borderColor: Constants.Colors.appOrange)
         activityIndicator.frame = CGRect(x: self.view.bounds.width/2 - 20, y: self.view.bounds.height/2 - 20, width: 40, height: 40)
         
-        self.view.addSubview(searchBar)
-        self.view.addSubview(addFriendsButton)
+//        self.view.addSubview(searchBar)
         self.view.addSubview(tableView)
+        self.view.addSubview(addFriendsButton)
         self.view.addSubview(activityIndicator)
     }
     
@@ -55,6 +57,18 @@ class FriendSelectorViewController: UIViewController, UISearchBarDelegate, UITab
         let cell = tableView.dequeueReusableCell(withIdentifier: "friendsCell", for: indexPath) as! FriendsSearchTableViewCell
         cell.emailLabel.text = friendsList[indexPath.row].username
         cell.uid = friendsList[indexPath.row].uid
+        
+        let profileImage = UILabel()
+        profileImage.text = friendsList[indexPath.row].username.first?.description.uppercased()
+        profileImage.textColor = UIColor.white
+        profileImage.textAlignment = .center
+        profileImage.font.withSize(100)
+        profileImage.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
+        profileImage.layer.cornerRadius = 25
+        profileImage.clipsToBounds = true
+        profileImage.backgroundColor = Constants.Colors.appOrange
+        cell.profileImage.addSubview(profileImage)
+        
         cell.addFriendButton.tag = indexPath.row
         cell.addFriendButton.addTarget(self, action: #selector(addFriendButtonPressed), for: .touchUpInside)
         return cell
@@ -89,6 +103,7 @@ class FriendSelectorViewController: UIViewController, UISearchBarDelegate, UITab
         if segue.identifier == Constants.SegueIdentifiers.unwindFromEventFriends {
             let createEventController = segue.destination as! CreateEventViewController
             createEventController.friends = selectedFriends
+            createEventController.friendField.text = "\(selectedFriends.count) Friends Selected"
         }
     }
     

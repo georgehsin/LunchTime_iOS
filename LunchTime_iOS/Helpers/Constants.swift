@@ -23,6 +23,7 @@ struct Constants {
         static let unwindFromEventLocation = "unwindFromEventLocation"
         static let unwindFromEventDate = "unwindFromEventDate"
         static let unwindFromEventFriends = "unwindFromEventFriends"
+        static let logout = "logout"
         
         //Segue to additional Event info
         static let eventInfoPage = "showEventInfoPage"

@@ -83,7 +83,7 @@ class FriendsViewModel {
                         return Friend(uid: value["uid"]!, username: value["username"]!)
                     })
                     
-                    self.currentUser.data = UserData.init(uid: uid, email: email, friendsList: friendsList, friendsDict: friendsDict, sentRequestList: sentRequestList, recievedRequestList: recievedRequestList, sentRequestDict: sentRequestDict, recievedRequestDict: recievedRequestDict)
+                    self.currentUser.data = UserData(uid: uid, email: email, friendsList: friendsList, friendsDict: friendsDict, sentRequestList: sentRequestList, recievedRequestList: recievedRequestList, sentRequestDict: sentRequestDict, recievedRequestDict: recievedRequestDict)
                     onComplete(self.currentUser.data!)
                 }
             }

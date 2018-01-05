@@ -12,11 +12,13 @@ class DateSelectorViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        createUI()
         datePicker.minimumDate = Date()
         datePicker.minuteInterval = 5
         // Do any additional setup after loading the view.
     }
 
+    @IBOutlet weak var submitButton: UIButton!
     @IBOutlet weak var datePicker: UIDatePicker!
     
     @IBAction func submitButtonPressed(_ sender: Any) {
@@ -28,11 +30,17 @@ class DateSelectorViewController: UIViewController {
             let createEventController = segue.destination as! CreateEventViewController
             createEventController.date = datePicker.date
             let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "MMM dd, YYYY"
+            dateFormatter.dateFormat = "MMM d, YYYY"
             let dateString = dateFormatter.string(from: datePicker.date)
             createEventController.dateField.text = dateString
 
         }
+    }
+    
+    func createUI(attending: Bool? = nil) {
+        submitButton.backgroundColor = Constants.Colors.appOrange
+        submitButton.setTitleColor(UIColor.white, for: .normal)
+        submitButton.roundedButton(corner: [.allCorners], radius: 10, borderColor: Constants.Colors.appOrange)
     }
 
 }

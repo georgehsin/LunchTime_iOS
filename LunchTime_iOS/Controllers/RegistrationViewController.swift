@@ -113,15 +113,11 @@ extension RegistrationViewController {
 
     func registerForKeyboardNotifications(){
         //Adding notifies on keyboard appearing
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow), name: NSNotification.Name.UIKeyboardDidShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWasShown), name: NSNotification.Name.UIKeyboardDidShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillBeHidden), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
 
-    @objc func UIKeyboardWillShow(notification: NSNotification) {
-        
-    }
-    
-    @objc func keyboardDidShow(notification: NSNotification){
+    @objc func keyboardWasShown(notification: NSNotification){
         //Need to calculate keyboard exact size due to Apple suggestions
         scrollView.isScrollEnabled = true
         var info = notification.userInfo!

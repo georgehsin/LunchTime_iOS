@@ -10,6 +10,7 @@ import UIKit
 
 class FriendAttendanceTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var profileImageView: UIView!
     @IBOutlet weak var emailLabel: UILabel!
     @IBOutlet weak var attendanceStatusLabel: UIButton!
     
@@ -52,9 +53,17 @@ class FriendAttendanceTableViewCell: UITableViewCell {
             attendanceStatusLabel.backgroundColor = UIColor.clear
             attendanceStatusLabel.setTitleColor(Constants.Colors.appOrange, for: .normal)
         }
-        attendanceStatusLabel.layer.cornerRadius = 10
-        attendanceStatusLabel.layer.borderColor = Constants.Colors.appOrange.cgColor
-        attendanceStatusLabel.layer.borderWidth = 2
-
+        attendanceStatusLabel.roundedButton(corner: [.allCorners], radius: 10, borderColor: Constants.Colors.appOrange)
+        
+        let profileImage = UILabel()
+        profileImage.text = emailLabel.text!.first?.description.uppercased()
+        profileImage.textColor = UIColor.white
+        profileImage.textAlignment = .center
+        profileImage.font.withSize(100)
+        profileImage.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
+        profileImage.layer.cornerRadius = 25
+        profileImage.clipsToBounds = true
+        profileImage.backgroundColor = Constants.Colors.appOrange
+        profileImageView.addSubview(profileImage)
     }
 }

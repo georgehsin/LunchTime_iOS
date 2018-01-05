@@ -42,31 +42,40 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6OY-XS-TJB">
-                                <rect key="frame" x="172" y="205" width="30" height="30"/>
-                                <state key="normal" title="Go"/>
+                                <rect key="frame" x="124.5" y="205" width="125" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="125" id="5Iw-BU-esW"/>
+                                </constraints>
+                                <state key="normal" title="Select Date"/>
                                 <connections>
                                     <segue destination="eEm-dl-RQN" kind="show" id="fgs-Wg-e4N"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Af-Ai-OOf">
-                                <rect key="frame" x="172" y="405" width="30" height="30"/>
-                                <state key="normal" title="Go"/>
+                                <rect key="frame" x="124.5" y="405" width="125" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="125" id="1MP-55-4s4"/>
+                                </constraints>
+                                <state key="normal" title="Select Friends"/>
                                 <connections>
                                     <segue destination="JH1-Ej-teG" kind="show" id="Lhv-5D-rXO"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nH9-oM-NaD">
-                                <rect key="frame" x="172" y="305" width="30" height="30"/>
-                                <state key="normal" title="Go"/>
+                                <rect key="frame" x="124.5" y="305" width="125" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="125" id="mfV-bI-DMl"/>
+                                </constraints>
+                                <state key="normal" title="Select Location"/>
                                 <connections>
                                     <segue destination="Xyg-si-BgO" kind="show" id="DH4-7m-rYl"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rV2-pV-Pz9">
-                                <rect key="frame" x="143" y="565" width="88" height="30"/>
+                                <rect key="frame" x="124.5" y="565" width="125" height="30"/>
                                 <constraints>
+                                    <constraint firstAttribute="width" constant="125" id="DUC-9t-OZh"/>
                                     <constraint firstAttribute="height" constant="30" id="E30-XR-Jge"/>
-                                    <constraint firstAttribute="width" constant="88" id="htY-Dg-AAG"/>
                                 </constraints>
                                 <state key="normal" title="Create Event"/>
                                 <connections>
@@ -109,8 +118,13 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="createEventButton" destination="rV2-pV-Pz9" id="1DL-WR-bNf"/>
                         <outlet property="dateField" destination="mz3-K9-Jrf" id="DCz-j0-wlB"/>
+                        <outlet property="friendField" destination="Nse-BV-7OS" id="hcG-5l-uGE"/>
                         <outlet property="locationField" destination="YG1-L2-Jba" id="F3g-Wf-kzD"/>
+                        <outlet property="selectDateButton" destination="6OY-XS-TJB" id="aBX-vD-XBt"/>
+                        <outlet property="selectFriendsButton" destination="4Af-Ai-OOf" id="Rkn-Iw-ghA"/>
+                        <outlet property="selectLocationButton" destination="nH9-oM-NaD" id="DFn-hH-QcL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g3H-EP-duf" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -272,9 +286,9 @@
                                 </date>
                             </datePicker>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pll-jK-20I">
-                                <rect key="frame" x="162.5" y="454" width="50" height="30"/>
+                                <rect key="frame" x="152.5" y="454" width="70" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="50" id="gng-yi-Huj"/>
+                                    <constraint firstAttribute="width" constant="70" id="gng-yi-Huj"/>
                                     <constraint firstAttribute="height" constant="30" id="hCj-7x-OzM"/>
                                 </constraints>
                                 <state key="normal" title="Submit"/>
@@ -296,6 +310,7 @@
                     </view>
                     <connections>
                         <outlet property="datePicker" destination="94V-Dr-SBK" id="V8m-TK-ax3"/>
+                        <outlet property="submitButton" destination="pll-jK-20I" id="ngg-ae-NJE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H6J-iZ-2qt" userLabel="First Responder" sceneMemberID="firstResponder"/>

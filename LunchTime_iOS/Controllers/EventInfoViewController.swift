@@ -8,6 +8,7 @@
 
 import UIKit
 import YelpAPI
+import MapKit
 
 class EventInfoViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -38,6 +39,7 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
         let eventNib = Bundle.main.loadNibNamed("YelpLocationTableViewCell", owner: self, options: nil)?[0] as! YelpLocationTableViewCell
         eventNib.commonInit(business: yelpInfo!)
         eventNib.selectButton.setTitle("View in Maps", for: .normal)
+        eventNib.selectButton.addTarget(self, action: #selector(openInMaps), for: .touchUpInside)
         eventNib.frame = CGRect(x: 0, y: leadingTopSpace, width: self.view.bounds.width, height: 120)
         self.view.addSubview(eventNib)
         let friendNib = UINib(nibName: "FriendAttendanceTableViewCell", bundle: nil)
@@ -125,6 +127,23 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
                 }
             })
         }
+    }
+    
+    @objc func openInMaps(sender: UIButton) {
+        let latitude: CLLocationDegrees = yelpInfo!.location.coordinate!.latitude
+        let longitude: CLLocationDegrees = yelpInfo!.location.coordinate!.longitude
+        
+        let regionDistance:CLLocationDistance = 10000
+        let coordinates = CLLocationCoordinate2DMake(latitude, longitude)
+        let regionSpan = MKCoordinateRegionMakeWithDistance(coordinates, regionDistance, regionDistance)
+        let options = [
+            MKLaunchOptionsMapCenterKey: NSValue(mkCoordinate: regionSpan.center),
+            MKLaunchOptionsMapSpanKey: NSValue(mkCoordinateSpan: regionSpan.span)
+        ]
+        let placemark = MKPlacemark(coordinate: coordinates, addressDictionary: nil)
+        let mapItem = MKMapItem(placemark: placemark)
+        mapItem.name = yelpInfo!.name
+        mapItem.openInMaps(launchOptions: options)
     }
 
 }

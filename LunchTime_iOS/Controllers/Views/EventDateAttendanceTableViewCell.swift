@@ -28,7 +28,7 @@ class EventDateAttendanceTableViewCell: UITableViewCell {
     
     func commonInit(date: Date, attending: Bool?) {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "EEEE, MMM d, hh:mm"
+        dateFormatter.dateFormat = "EEEE, MMM d, h:mm"
         let dateString = dateFormatter.string(from: date)
         dateLabel.text = dateString
         setYesNoButtons(attending: attending)
