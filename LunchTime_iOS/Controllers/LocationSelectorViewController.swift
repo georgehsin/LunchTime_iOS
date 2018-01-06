@@ -30,17 +30,17 @@ class LocationSelectorViewController: UIViewController, UITableViewDataSource, U
         let nib = UINib(nibName: "YelpLocationTableViewCell", bundle: nil)
         self.tableView.register(nib, forCellReuseIdentifier: "yelpCell")
         self.tableView.isHidden = true
-        dispatchYelpQuery(term: "food", location: "San Jose, CA")
+        dispatchYelpQuery(term: "food", location: "San Jose, CA, USA", coordinate: AppDelegate.currentLocation)
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.locationSearchBar.delegate = self
         self.hideKeyboardWhenTappedAround()
     }
     
-    func dispatchYelpQuery(term: String, location: String) {
+    func dispatchYelpQuery(term: String, location: String, coordinate: YLPCoordinate? = nil) {
         self.startActivityIndicator(indicator: self.activityIndicator)
         DispatchQueue.global(qos: .userInteractive).async {
-            self.yelp.queryYelp(term: term, location: location) { (results) in
+            self.yelp.queryYelp(term: term, location: location, coordinate: coordinate) { (results) in
                 self.yelpBusinesses = results
                 DispatchQueue.main.async {
                     self.stopActivityIndicator(indicator: self.activityIndicator)

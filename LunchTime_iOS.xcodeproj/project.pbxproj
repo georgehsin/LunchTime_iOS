@@ -30,6 +30,7 @@
 		A61C51E61FFEDCF6009B8F69 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61C51E51FFEDCF6009B8F69 /* ProfileViewController.swift */; };
 		A61C51E91FFEE123009B8F69 /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A61C51E71FFEE123009B8F69 /* ProfileTableViewCell.swift */; };
 		A61C51EA1FFEE123009B8F69 /* ProfileTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A61C51E81FFEE123009B8F69 /* ProfileTableViewCell.xib */; };
+		A61C51EC20003A34009B8F69 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A61C51EB20003A33009B8F69 /* CoreLocation.framework */; };
 		A623216D1FB78F6E00A54814 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A623216C1FB78C7000A54814 /* GoogleService-Info.plist */; };
 		A623217F1FB8FA9400A54814 /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A623217E1FB8FA9400A54814 /* UserViewModel.swift */; };
 		A62321811FB8FAD900A54814 /* CurrentUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A62321801FB8FAD900A54814 /* CurrentUser.swift */; };
@@ -91,6 +92,7 @@
 		A61C51E51FFEDCF6009B8F69 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		A61C51E71FFEE123009B8F69 /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
 		A61C51E81FFEE123009B8F69 /* ProfileTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileTableViewCell.xib; sourceTree = "<group>"; };
+		A61C51EB20003A33009B8F69 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		A623216C1FB78C7000A54814 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A623217E1FB8FA9400A54814 /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		A62321801FB8FAD900A54814 /* CurrentUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUser.swift; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A61C51EC20003A34009B8F69 /* CoreLocation.framework in Frameworks */,
 				F8A0E76F1C9B524602BE8832 /* Pods_LunchTime_iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -291,6 +294,7 @@
 		E6E13767F8961231E2178055 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A61C51EB20003A33009B8F69 /* CoreLocation.framework */,
 				CD06A4EDF8B3B8461D25BBE4 /* Pods_LunchTime_iOS.framework */,
 				26FC5D1606165C5F50455F91 /* Pods_LunchTime_iOSTests.framework */,
 			);

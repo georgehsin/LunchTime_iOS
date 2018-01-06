@@ -51,9 +51,8 @@ class YelpSearchViewModel {
     let appId = "epaxlQQOHCGxzbL65kJr9A"
     let appSecret = "uOrkUAPJtY5ou7jffTKszKy4W8LfvHyCFKJjBWoZLQvCecmpNKIZfGgMDkqqad0h"
     
-    func queryYelp(term: String = "", location: String, completion: @escaping ([YLPBusiness]) -> ()) {
-        // Search for 3 dinner restaurants
-        let query = YLPQuery(location: location)
+    func queryYelp(term: String = "", location: String, coordinate: YLPCoordinate? = nil, completion: @escaping ([YLPBusiness]) -> ()) {
+        let query = coordinate != nil ? YLPQuery(coordinate: coordinate!) : YLPQuery(location: location)
         query.term = term
         query.limit = 20
         
