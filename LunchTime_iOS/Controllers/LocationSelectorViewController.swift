@@ -33,6 +33,7 @@ class LocationSelectorViewController: UIViewController, UITableViewDataSource, U
         dispatchYelpQuery(term: "food", location: "San Jose, CA, USA", coordinate: AppDelegate.currentLocation)
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        tableView.allowsSelection = false
         self.locationSearchBar.delegate = self
         self.hideKeyboardWhenTappedAround()
     }

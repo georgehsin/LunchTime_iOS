@@ -39,6 +39,7 @@ class FriendSelectorViewController: UIViewController, UITableViewDelegate, UITab
 //        searchBar.barTintColor = UIColor.white
         tableView.frame = CGRect(x: 0, y: preSearchBarHeight, width: self.view.bounds.width, height: self.view.bounds.height - preSearchBarHeight - 95)
         tableView.allowsSelection = false
+        tableView.tableFooterView = UIView(frame: .zero)
         addFriendsButton.frame = CGRect(x: self.view.bounds.width/2 - 58, y: self.view.bounds.height - 90, width: 116, height: 30)
         addFriendsButton.setTitle("add friends", for: .normal)
         addFriendsButton.setTitleColor(UIColor.white, for: .normal)

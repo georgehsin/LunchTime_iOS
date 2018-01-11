@@ -15,6 +15,7 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
     let viewModel = EventsViewModel()
     let tableView = UITableView()
     let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
+    let uid = UserDefaults.standard.string(forKey: UserDefaults.UserDefaultKeys.userId.rawValue)
     var event: Event?
     var yelpInfo: YLPBusiness?
     var attending: Bool?
@@ -67,6 +68,12 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
             let cell = tableView.dequeueReusableCell(withIdentifier: "attendStatusCell", for: indexPath) as! FriendAttendanceTableViewCell
             if indexPath.section == 0 {
                 cell.commonInit(email: event!.creator!.username, attending: true)
+                if event!.creator!.uid == uid {
+                    cell.attendanceStatusLabel.setTitle("delete", for: .normal)
+                    cell.attendanceStatusLabel.setTitleColor(UIColor.white, for: .normal)
+                    cell.attendanceStatusLabel.backgroundColor = UIColor.red
+                    cell.attendanceStatusLabel.roundedButton(corner: [.allCorners], radius: 10, borderColor: UIColor.red)
+                }
             } else {
                 if event!.creator!.uid == event!.friendsList![indexPath.row].uid {
                     cell.isHidden = true

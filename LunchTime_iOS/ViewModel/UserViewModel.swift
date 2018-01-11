@@ -68,8 +68,7 @@ extension UserViewModel {
 extension UserViewModel {
     
     func loginToFirebase(onComplete: @escaping (User?, String?) -> ()) {
-        print("username = \(user.username) password = \(user.password)")
-//        print("email = \(email) password = \(password)")
+//        print("username = \(user.username) password = \(user.password)")
         var errorMsg: String?
         if let facebookToken = FBSDKAccessToken.current() {
             let credentials = FacebookAuthProvider.credential(withAccessToken: facebookToken.tokenString)

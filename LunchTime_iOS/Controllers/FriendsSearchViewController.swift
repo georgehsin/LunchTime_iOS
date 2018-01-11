@@ -64,6 +64,8 @@ class FriendsSearchViewController: UIViewController, UITableViewDelegate, UITabl
         searchBar.delegate = self
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.tableFooterView = UIView(frame: .zero)
+        tableView.allowsSelection = false
         hideKeyboardWhenTappedAround()
         getUserData()
         activityIndicator.frame = CGRect(x: self.view.bounds.width/2 - 20, y: self.view.bounds.height/2 - 20, width: 40, height: 40)

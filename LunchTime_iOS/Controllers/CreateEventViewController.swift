@@ -52,7 +52,11 @@ class CreateEventViewController: UIViewController {
         if let date = date, let location = location, let friends = friends {
             resetEventData()
             DispatchQueue.global(qos: .default).async {
-                self.viewModel.addEvent(date: date, location: location, friends: friends)
+                self.viewModel.addEvent(date: date, location: location, friends: friends, onComplete: {
+                    let alertController = ViewController.createAlert(title: "Event Created!", message: "")
+                    self.present(alertController, animated: true, completion: nil)
+                })
+                
             }
         } else {
             let alertController = ViewController.createAlert(title: "Invalid", message: "Date, Locations, and Friends are required to create an event")
@@ -66,6 +70,7 @@ class CreateEventViewController: UIViewController {
         date = nil
         locationField.text = nil
         dateField.text = nil
+        friendField.text = nil
     }
  
     func createUI() {

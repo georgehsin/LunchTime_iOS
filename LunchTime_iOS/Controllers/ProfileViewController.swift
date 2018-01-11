@@ -184,7 +184,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         for field in inputFields {
             field.textAlignment = .center
-            field.borderStyle = .line
+            field.layer.borderWidth = 1
             field.layer.cornerRadius = 10
             field.layer.masksToBounds = true
             layeredView.addSubview(field)

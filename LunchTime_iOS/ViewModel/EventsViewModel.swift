@@ -14,7 +14,7 @@ class EventsViewModel {
     let uid = UserDefaults.standard.string(forKey: UserDefaults.UserDefaultKeys.userId.rawValue)
     let username = UserDefaults.standard.string(forKey: UserDefaults.UserDefaultKeys.email.rawValue)
     
-    func addEvent(date: Date, location: YLPBusiness, friends: [String:Friend]) {
+    func addEvent(date: Date, location: YLPBusiness, friends: [String:Friend], onComplete: @escaping () -> ()) {
 
         let locationInfo: [String:Any] = ["locationName": location.name, "locationImageUrl": location.imageURL!.absoluteString, "yelpId": location.identifier]
         var eventFriends = friends.mapValues({ (friend) -> [String:Any?] in
@@ -53,6 +53,7 @@ class EventsViewModel {
         friends.forEach { (key, value) in
             Firestore.firestore().collection("users").document(key).setData(event, options: SetOptions.merge())
         }
+        onComplete()
     }
     
     func getAllEvents(onComplete: @escaping ([Event]) -> ()){

@@ -45,6 +45,7 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let preSearchBarHeight = UIApplication.shared.statusBarFrame.height
         tableView.frame = CGRect(x: 0, y: preSearchBarHeight, width: self.view.bounds.width, height: self.view.bounds.height)
         tableView.allowsSelection = false
+        tableView.tableFooterView = UIView(frame: .zero)
         activityIndicator.frame = CGRect(x: self.view.bounds.width/2 - 20, y: self.view.bounds.height/2 - 20, width: 60, height: 60)
         
         self.view.addSubview(tableView)

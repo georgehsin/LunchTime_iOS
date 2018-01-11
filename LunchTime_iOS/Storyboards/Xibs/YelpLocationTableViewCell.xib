@@ -57,6 +57,9 @@
                                 </connections>
                             </button>
                         </subviews>
+                        <constraints>
+                            <constraint firstItem="dM6-j9-Th8" firstAttribute="width" secondItem="jRs-gf-2D9" secondAttribute="width" id="qAg-Kt-hS8"/>
+                        </constraints>
                     </stackView>
                 </subviews>
                 <constraints>
