@@ -10,7 +10,7 @@ import UIKit
 import YelpAPI
 import GooglePlaces
 
-class LocationSelectorViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate {
+class LocationSelectorViewController: UIViewController, UITextFieldDelegate {
     
     private var yelp = YelpSearchViewModel()
     
@@ -22,20 +22,34 @@ class LocationSelectorViewController: UIViewController, UITableViewDataSource, U
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var foodSearchBar: UITextField!
     @IBOutlet weak var locationSearchBar: UITextField!
+    let noLocationLabel = UILabel()
     var yelpBusinesses: [YLPBusiness]?
     var selectedLocation: YLPBusiness?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         let nib = UINib(nibName: "YelpLocationTableViewCell", bundle: nil)
-        self.tableView.register(nib, forCellReuseIdentifier: "yelpCell")
-        self.tableView.isHidden = true
-        dispatchYelpQuery(term: "food", location: "San Jose, CA, USA", coordinate: AppDelegate.currentLocation)
-        self.tableView.delegate = self
-        self.tableView.dataSource = self
+        tableView.register(nib, forCellReuseIdentifier: "yelpCell")
+        tableView.isHidden = true
+        tableView.delegate = self
+        tableView.dataSource = self
         tableView.allowsSelection = false
-        self.locationSearchBar.delegate = self
+        locationSearchBar.delegate = self
+        createUI()
         self.hideKeyboardWhenTappedAround()
+    }
+    
+    override func viewWillLayoutSubviews() {
+        if AppDelegate.currentLocation != nil {
+            dispatchYelpQuery(term: "food", location: "", coordinate: AppDelegate.currentLocation)
+        } else {
+            createUpdateLocationLabel()
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: false)
     }
     
     func dispatchYelpQuery(term: String, location: String, coordinate: YLPCoordinate? = nil) {
@@ -54,6 +68,7 @@ class LocationSelectorViewController: UIViewController, UITableViewDataSource, U
     
     @IBAction func searchButtonPressed(_ sender: Any) {
         if foodSearchBar.text! != "" && locationSearchBar.text! != "" {
+            noLocationLabel.isHidden = true
             dispatchYelpQuery(term: foodSearchBar.text!, location: locationSearchBar.text!)
         }
         else {
@@ -64,7 +79,27 @@ class LocationSelectorViewController: UIViewController, UITableViewDataSource, U
 
     }
     
+    func createUI() {
+        activityIndicator.backgroundColor = Constants.Colors.backgroundGray
+        activityIndicator.layer.cornerRadius = 10
+    }
+    
+    func createUpdateLocationLabel() {
+        activityIndicator.isHidden = true
+        noLocationLabel.frame = CGRect(x: 20, y: self.view.frame.height/2 - 40, width: self.view.frame.width - 40, height: 40)
+        noLocationLabel.text = "Enter food and location to search for results or enable location services"
+        noLocationLabel.textAlignment = .center
+        noLocationLabel.lineBreakMode = .byWordWrapping
+        noLocationLabel.numberOfLines = 2
+        noLocationLabel.sizeToFit()
+        noLocationLabel.preferredMaxLayoutWidth = 300
+        self.view.addSubview(noLocationLabel)
+    }
+    
+}
+
 //MARK:Delegate and DataSource Methods
+extension LocationSelectorViewController: UITableViewDataSource, UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -123,6 +158,9 @@ extension LocationSelectorViewController: GMSAutocompleteViewControllerDelegate 
     func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
         locationSearchBar.text = place.formattedAddress
         dismiss(animated: true, completion: nil)
+        if foodSearchBar.text != "" {
+            searchButtonPressed(self)
+        }
     }
     
     func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {

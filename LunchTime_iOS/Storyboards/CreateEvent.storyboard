@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="DE1-DP-TOL">
-    <device id="retina4_7" orientation="portrait">
+    <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -14,35 +14,29 @@
             <objects>
                 <viewController id="1XY-vs-UVu" customClass="CreateEventViewController" customModule="LunchTime_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ibk-D2-oFf">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New Event" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l0F-lB-rA9">
-                                <rect key="frame" x="146" y="104" width="82" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Date and Time" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mz3-K9-Jrf">
-                                <rect key="frame" x="50" y="155" width="275" height="30"/>
+                                <rect key="frame" x="50" y="114" width="220" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Location" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YG1-L2-Jba">
-                                <rect key="frame" x="50" y="255" width="275" height="30"/>
+                                <rect key="frame" x="50" y="214" width="220" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Friends" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Nse-BV-7OS">
-                                <rect key="frame" x="50" y="355" width="275" height="30"/>
+                                <rect key="frame" x="50" y="314" width="220" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6OY-XS-TJB">
-                                <rect key="frame" x="124.5" y="205" width="125" height="30"/>
+                                <rect key="frame" x="97.5" y="164" width="125" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="125" id="5Iw-BU-esW"/>
                                 </constraints>
@@ -52,7 +46,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Af-Ai-OOf">
-                                <rect key="frame" x="124.5" y="405" width="125" height="30"/>
+                                <rect key="frame" x="97.5" y="364" width="125" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="125" id="1MP-55-4s4"/>
                                 </constraints>
@@ -62,7 +56,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nH9-oM-NaD">
-                                <rect key="frame" x="124.5" y="305" width="125" height="30"/>
+                                <rect key="frame" x="97.5" y="264" width="125" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="125" id="mfV-bI-DMl"/>
                                 </constraints>
@@ -72,7 +66,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rV2-pV-Pz9">
-                                <rect key="frame" x="124.5" y="565" width="125" height="30"/>
+                                <rect key="frame" x="97.5" y="498" width="125" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="125" id="DUC-9t-OZh"/>
                                     <constraint firstAttribute="height" constant="30" id="E30-XR-Jge"/>
@@ -85,9 +79,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="mz3-K9-Jrf" firstAttribute="top" secondItem="gbl-kw-YDV" secondAttribute="top" constant="50" id="3QP-Eq-Hfb"/>
                             <constraint firstItem="nH9-oM-NaD" firstAttribute="centerX" secondItem="Ibk-D2-oFf" secondAttribute="centerX" id="C4S-re-1n2"/>
                             <constraint firstItem="gbl-kw-YDV" firstAttribute="trailing" secondItem="YG1-L2-Jba" secondAttribute="trailing" constant="50" id="Dt6-L8-W7z"/>
-                            <constraint firstItem="gbl-kw-YDV" firstAttribute="bottom" secondItem="rV2-pV-Pz9" secondAttribute="bottom" constant="72" id="JkW-Nl-Hyh"/>
+                            <constraint firstItem="gbl-kw-YDV" firstAttribute="bottom" secondItem="rV2-pV-Pz9" secondAttribute="bottom" constant="40" id="JkW-Nl-Hyh"/>
                             <constraint firstItem="gbl-kw-YDV" firstAttribute="trailing" secondItem="Nse-BV-7OS" secondAttribute="trailing" constant="50" id="JyO-Du-lnc"/>
                             <constraint firstItem="gbl-kw-YDV" firstAttribute="trailing" secondItem="mz3-K9-Jrf" secondAttribute="trailing" constant="50" id="LNA-Dv-UOP"/>
                             <constraint firstItem="rV2-pV-Pz9" firstAttribute="centerX" secondItem="Ibk-D2-oFf" secondAttribute="centerX" id="Myw-Pa-uSj"/>
@@ -95,28 +90,19 @@
                             <constraint firstItem="4Af-Ai-OOf" firstAttribute="centerX" secondItem="Ibk-D2-oFf" secondAttribute="centerX" id="YTM-s3-MoD"/>
                             <constraint firstItem="Nse-BV-7OS" firstAttribute="leading" secondItem="gbl-kw-YDV" secondAttribute="leading" constant="50" id="a3M-nE-Ch1"/>
                             <constraint firstItem="nH9-oM-NaD" firstAttribute="top" secondItem="YG1-L2-Jba" secondAttribute="bottom" constant="20" id="dJl-Xt-wC9"/>
-                            <constraint firstItem="l0F-lB-rA9" firstAttribute="top" secondItem="gbl-kw-YDV" secondAttribute="top" constant="40" id="fzJ-vi-wWq"/>
                             <constraint firstItem="Nse-BV-7OS" firstAttribute="centerX" secondItem="Ibk-D2-oFf" secondAttribute="centerX" id="hgi-lt-WXr"/>
-                            <constraint firstItem="l0F-lB-rA9" firstAttribute="centerX" secondItem="Ibk-D2-oFf" secondAttribute="centerX" id="iFo-Ww-h9j"/>
                             <constraint firstItem="mz3-K9-Jrf" firstAttribute="leading" secondItem="gbl-kw-YDV" secondAttribute="leading" constant="50" id="jWj-dq-fmv"/>
                             <constraint firstItem="mz3-K9-Jrf" firstAttribute="centerX" secondItem="Ibk-D2-oFf" secondAttribute="centerX" id="lvB-Ez-t7Q"/>
                             <constraint firstItem="6OY-XS-TJB" firstAttribute="centerX" secondItem="Ibk-D2-oFf" secondAttribute="centerX" id="nPI-TH-HTP"/>
                             <constraint firstItem="6OY-XS-TJB" firstAttribute="top" secondItem="mz3-K9-Jrf" secondAttribute="bottom" constant="20" id="nx9-VS-uW9"/>
                             <constraint firstItem="Nse-BV-7OS" firstAttribute="top" secondItem="nH9-oM-NaD" secondAttribute="bottom" constant="20" id="qaC-Ui-vEf"/>
                             <constraint firstItem="YG1-L2-Jba" firstAttribute="top" secondItem="6OY-XS-TJB" secondAttribute="bottom" constant="20" id="sgc-ug-uPt"/>
-                            <constraint firstItem="mz3-K9-Jrf" firstAttribute="top" secondItem="l0F-lB-rA9" secondAttribute="bottom" constant="30" id="u6N-8o-Zxf"/>
                             <constraint firstItem="YG1-L2-Jba" firstAttribute="centerX" secondItem="Ibk-D2-oFf" secondAttribute="centerX" id="uOx-gP-2Qg"/>
                             <constraint firstItem="YG1-L2-Jba" firstAttribute="leading" secondItem="gbl-kw-YDV" secondAttribute="leading" constant="50" id="vo4-6x-dk8"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="gbl-kw-YDV"/>
                     </view>
-                    <navigationItem key="navigationItem" id="UGz-3a-91Y">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="AdD-P8-UI5">
-                            <connections>
-                                <segue destination="sfW-NX-2ch" kind="unwind" unwindAction="cancelCreateEventWithUnwindSegue:" id="Yyr-qX-anu"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="UGz-3a-91Y"/>
                     <connections>
                         <outlet property="createEventButton" destination="rV2-pV-Pz9" id="1DL-WR-bNf"/>
                         <outlet property="dateField" destination="mz3-K9-Jrf" id="DCz-j0-wlB"/>
@@ -128,7 +114,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g3H-EP-duf" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="sfW-NX-2ch" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="-665" y="213"/>
         </scene>
@@ -137,22 +122,22 @@
             <objects>
                 <viewController id="Xyg-si-BgO" customClass="LocationSelectorViewController" customModule="LunchTime_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7IB-ZY-Y7b">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="EUf-Zz-wJq">
-                                <rect key="frame" x="0.0" y="104" width="375" height="563"/>
+                                <rect key="frame" x="0.0" y="104" width="320" height="464"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="nok-SO-3HY">
-                                <rect key="frame" x="167.5" y="313" width="40" height="40"/>
+                                <rect key="frame" x="140" y="264" width="40" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="QzM-Wp-gzR"/>
                                     <constraint firstAttribute="width" constant="40" id="txV-CN-Oxb"/>
                                 </constraints>
                             </activityIndicatorView>
                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1rO-Fp-sEa">
-                                <rect key="frame" x="335" y="64" width="40" height="40"/>
+                                <rect key="frame" x="280" y="64" width="40" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="40" id="UFN-iF-iwP"/>
                                     <constraint firstAttribute="height" constant="40" id="xgZ-J8-KfX"/>
@@ -163,7 +148,7 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Food" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2Ao-zB-1Bd">
-                                <rect key="frame" x="0.0" y="64" width="167.5" height="40"/>
+                                <rect key="frame" x="0.0" y="64" width="140" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="2F1-kv-B9J"/>
                                 </constraints>
@@ -172,7 +157,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Location" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oW8-Ie-fsC">
-                                <rect key="frame" x="167.5" y="64" width="167.5" height="40"/>
+                                <rect key="frame" x="140" y="64" width="140" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="UgQ-QU-KKf"/>
                                 </constraints>
@@ -221,7 +206,7 @@
                     <tabBarItem key="tabBarItem" tag="2" title="New" id="aRT-ic-pgS"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="XCo-XI-4gO">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -238,11 +223,11 @@
             <objects>
                 <viewController id="JH1-Ej-teG" customClass="FriendSelectorViewController" customModule="LunchTime_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0di-Xf-RAc">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Friends" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xsy-Le-xFt">
-                                <rect key="frame" x="127" y="323" width="120" height="21"/>
+                                <rect key="frame" x="100" y="273.5" width="120" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="JvB-eU-4Xr"/>
                                     <constraint firstAttribute="width" constant="120" id="dAz-gy-lDd"/>
@@ -273,11 +258,11 @@
             <objects>
                 <viewController id="eEm-dl-RQN" customClass="DateSelectorViewController" customModule="LunchTime_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Scw-sq-j0c">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="94V-Dr-SBK">
-                                <rect key="frame" x="0.0" y="124" width="375" height="250"/>
+                                <rect key="frame" x="0.0" y="124" width="320" height="250"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="250" id="aYU-bk-ANQ"/>
                                 </constraints>
@@ -286,7 +271,7 @@
                                 </date>
                             </datePicker>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pll-jK-20I">
-                                <rect key="frame" x="152.5" y="454" width="70" height="30"/>
+                                <rect key="frame" x="125" y="454" width="70" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="70" id="gng-yi-Huj"/>
                                     <constraint firstAttribute="height" constant="30" id="hCj-7x-OzM"/>

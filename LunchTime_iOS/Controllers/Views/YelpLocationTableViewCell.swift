@@ -36,12 +36,16 @@ class YelpLocationTableViewCell: UITableViewCell {
     }
     
     func createUI() {
+        yelpBusinessName.lineBreakMode = .byWordWrapping
+        yelpBusinessName.numberOfLines = 2
         selectButton.setTitleColor(UIColor.white, for: .normal)
         selectButton.backgroundColor = Constants.Colors.appOrange
         viewInYelpButton.setTitleColor(UIColor.white, for: .normal)
         viewInYelpButton.backgroundColor = Constants.Colors.appOrange
-        selectButton.roundedButton(corner: [.allCorners], radius: 10, borderColor: Constants.Colors.appOrange)
-        viewInYelpButton.roundedButton(corner: [.allCorners], radius: 10, borderColor: Constants.Colors.appOrange)
+//        selectButton.roundedButton(corner: [.allCorners], radius: 10, borderColor: Constants.Colors.appOrange)
+//        viewInYelpButton.roundedButton(corner: [.allCorners], radius: 10, borderColor: Constants.Colors.appOrange)
+        selectButton.layer.cornerRadius = 10
+        viewInYelpButton.layer.cornerRadius = 10
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

@@ -21,6 +21,11 @@ class DateSelectorViewController: UIViewController {
     @IBOutlet weak var submitButton: UIButton!
     @IBOutlet weak var datePicker: UIDatePicker!
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: false)
+    }
+    
     @IBAction func submitButtonPressed(_ sender: Any) {
         performSegue(withIdentifier: Constants.SegueIdentifiers.unwindFromEventDate, sender: self)
     }

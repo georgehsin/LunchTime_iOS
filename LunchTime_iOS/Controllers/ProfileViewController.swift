@@ -49,7 +49,9 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         tableView.allowsSelection = false
         tableView.isScrollEnabled = false
         tableView.tableFooterView = UIView(frame: .zero)
-        activityIndicator.frame = CGRect(x: self.view.bounds.width/2 - 20, y: self.view.bounds.height/2 - 20, width: 60, height: 60)
+        activityIndicator.frame = CGRect(x: self.view.bounds.width/2 - 20, y: self.view.bounds.height/2 - 20, width: 40, height: 40)
+        activityIndicator.backgroundColor = Constants.Colors.backgroundGray
+        activityIndicator.layer.cornerRadius = 10
         
         let navBar = UINavigationBar(frame: CGRect(x: 0, y: statusBarHeight, width: self.view.frame.width, height: 44))
         navBar.isTranslucent = false

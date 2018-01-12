@@ -30,7 +30,8 @@ class CreateEventViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-//        self.tabBarController?.tabBar.isHidden = true
+        super.viewDidAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
     @IBAction func selectedLocationUnwind(unwindSegue: UIStoryboardSegue){

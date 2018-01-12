@@ -29,6 +29,7 @@ class FriendSelectorViewController: UIViewController, UITableViewDelegate, UITab
 
     override func viewWillAppear(_ animated: Bool) {
         getFriends()
+        navigationController?.setNavigationBarHidden(false, animated: false)
     }
 
     func createUI() {
@@ -46,6 +47,8 @@ class FriendSelectorViewController: UIViewController, UITableViewDelegate, UITab
         addFriendsButton.backgroundColor = Constants.Colors.appOrange
         addFriendsButton.addTarget(self, action: #selector(setFriendsForEvent), for: .touchUpInside)
         addFriendsButton.roundedButton(corner: [.allCorners], radius: 10, borderColor: Constants.Colors.appOrange)
+        activityIndicator.backgroundColor = Constants.Colors.backgroundGray
+        activityIndicator.layer.cornerRadius = 10
         activityIndicator.frame = CGRect(x: self.view.bounds.width/2 - 20, y: self.view.bounds.height/2 - 20, width: 40, height: 40)
         
 //        self.view.addSubview(searchBar)

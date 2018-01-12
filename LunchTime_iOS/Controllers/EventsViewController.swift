@@ -29,9 +29,7 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        startActivityIndicator(indicator: activityIndicator)
         getEvents()
-        stopActivityIndicator(indicator: activityIndicator)
         self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
@@ -46,7 +44,9 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         tableView.frame = CGRect(x: 0, y: preSearchBarHeight, width: self.view.bounds.width, height: self.view.bounds.height)
         tableView.allowsSelection = false
         tableView.tableFooterView = UIView(frame: .zero)
-        activityIndicator.frame = CGRect(x: self.view.bounds.width/2 - 20, y: self.view.bounds.height/2 - 20, width: 60, height: 60)
+        activityIndicator.frame = CGRect(x: self.view.bounds.width/2 - 20, y: self.view.bounds.height/2 - 20, width: 40, height: 40)
+        activityIndicator.backgroundColor = Constants.Colors.backgroundGray
+        activityIndicator.layer.cornerRadius = 10
         
         self.view.addSubview(tableView)
         self.view.addSubview(activityIndicator)
@@ -85,11 +85,13 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func getEvents() {
+        startActivityIndicator(indicator: activityIndicator)
         DispatchQueue.global(qos: .userInteractive).async {
             self.viewModel.getAllEvents(onComplete: { (events) in
                 self.eventsList = events
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
+                    self.stopActivityIndicator(indicator: self.activityIndicator)
                 }
             })
         }

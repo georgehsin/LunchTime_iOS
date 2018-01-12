@@ -50,6 +50,8 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
         tableView.frame = CGRect(x: 0, y: leadingTopSpace + 120, width: self.view.bounds.width, height: self.view.bounds.height - leadingTopSpace - 120)
         tableView.allowsSelection = false
         activityIndicator.frame = CGRect(x: self.view.bounds.width/2 - 20, y: self.view.bounds.height/2 - 20, width: 40, height: 40)
+        activityIndicator.backgroundColor = Constants.Colors.backgroundGray
+        activityIndicator.layer.cornerRadius = 10
         
         self.view.addSubview(tableView)
         self.view.addSubview(activityIndicator)

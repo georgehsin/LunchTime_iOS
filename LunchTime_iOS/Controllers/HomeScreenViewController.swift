@@ -29,10 +29,6 @@ class HomeScreenViewController: UIViewController{
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
-    @IBAction func cancelCreateEvent(unwindSegue: UIStoryboardSegue) {
-        //do something
-    }
-    
 }
 
 //MARK: Slide out menu

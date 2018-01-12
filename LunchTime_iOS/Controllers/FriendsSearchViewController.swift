@@ -69,6 +69,8 @@ class FriendsSearchViewController: UIViewController, UITableViewDelegate, UITabl
         hideKeyboardWhenTappedAround()
         getUserData()
         activityIndicator.frame = CGRect(x: self.view.bounds.width/2 - 20, y: self.view.bounds.height/2 - 20, width: 40, height: 40)
+        activityIndicator.backgroundColor = Constants.Colors.backgroundGray
+        activityIndicator.layer.cornerRadius = 10
         self.view.addSubview(activityIndicator)
     }
     
