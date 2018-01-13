@@ -16,6 +16,8 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     let tableView = UITableView()
     let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
     var eventsList: [Event]?
+    var futureEvents: [Event]?
+    var pastEvents: [Event]?
     
     var attending: Bool?
     var event: Event?
@@ -41,7 +43,7 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let nib = UINib(nibName: "EventsTableViewCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "eventsCell")
         let preSearchBarHeight = UIApplication.shared.statusBarFrame.height
-        tableView.frame = CGRect(x: 0, y: preSearchBarHeight, width: self.view.bounds.width, height: self.view.bounds.height)
+        tableView.frame = CGRect(x: 0, y: preSearchBarHeight, width: self.view.bounds.width, height: self.view.bounds.height - preSearchBarHeight)
         tableView.allowsSelection = false
         tableView.tableFooterView = UIView(frame: .zero)
         activityIndicator.frame = CGRect(x: self.view.bounds.width/2 - 20, y: self.view.bounds.height/2 - 20, width: 40, height: 40)
@@ -88,7 +90,8 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         startActivityIndicator(indicator: activityIndicator)
         DispatchQueue.global(qos: .userInteractive).async {
             self.viewModel.getAllEvents(onComplete: { (events) in
-                self.eventsList = events
+                let currentDate = Calendar.current.startOfDay(for: Date())
+                self.eventsList = events.filter { $0.date > currentDate }.sorted { $0.date < $1.date }
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
                     self.stopActivityIndicator(indicator: self.activityIndicator)

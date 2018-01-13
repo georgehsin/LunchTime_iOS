@@ -123,4 +123,8 @@ class EventsViewModel {
         ])
         onComplete()
     }
+    
+    func deleteEvent() {
+        //Handle - this event no longer exists 
+    }
 }
