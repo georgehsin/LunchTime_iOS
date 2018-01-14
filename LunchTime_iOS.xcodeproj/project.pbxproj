@@ -112,6 +112,7 @@
 		A698E5CC1FB2284D00D42A29 /* LunchTime_iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LunchTime_iOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A698E5D01FB2284D00D42A29 /* LunchTime_iOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LunchTime_iOSTests.swift; sourceTree = "<group>"; };
 		A698E5D21FB2284D00D42A29 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A699AFAD200AD2AC00250C04 /* LunchTime_iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LunchTime_iOS.entitlements; sourceTree = "<group>"; };
 		A6B04C311FBEB4EE0021944C /* CreateEventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateEventViewController.swift; sourceTree = "<group>"; };
 		A6C22FDB1FBEC63500AB472E /* CreateEvent.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CreateEvent.storyboard; sourceTree = "<group>"; };
 		A6C79F5B1FBAC4B500649FBE /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -260,6 +261,7 @@
 		A698E5BA1FB2284C00D42A29 /* LunchTime_iOS */ = {
 			isa = PBXGroup;
 			children = (
+				A699AFAD200AD2AC00250C04 /* LunchTime_iOS.entitlements */,
 				A698E5BB1FB2284C00D42A29 /* AppDelegate.swift */,
 				A698E5C21FB2284C00D42A29 /* Assets.xcassets */,
 				A698E5C71FB2284C00D42A29 /* Info.plist */,
@@ -359,6 +361,11 @@
 						CreatedOnToolsVersion = 9.0;
 						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					A698E5CB1FB2284D00D42A29 = {
 						CreatedOnToolsVersion = 9.0;
@@ -697,11 +704,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = LunchTime_iOS/LunchTime_iOS.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = M66LNW846X;
 				INFOPLIST_FILE = LunchTime_iOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "georgehsin.LunchTime-iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = com.georgehsin.LunchTime;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "LunchTime_iOS/Controllers/LunchTime_iOS-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -716,11 +724,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = LunchTime_iOS/LunchTime_iOS.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = M66LNW846X;
 				INFOPLIST_FILE = LunchTime_iOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "georgehsin.LunchTime-iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = com.georgehsin.LunchTime;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "LunchTime_iOS/Controllers/LunchTime_iOS-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;

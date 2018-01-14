@@ -36,15 +36,12 @@ class LocationSelectorViewController: UIViewController, UITextFieldDelegate {
         tableView.allowsSelection = false
         locationSearchBar.delegate = self
         createUI()
-        self.hideKeyboardWhenTappedAround()
-    }
-    
-    override func viewWillLayoutSubviews() {
         if AppDelegate.currentLocation != nil {
             dispatchYelpQuery(term: "food", location: "", coordinate: AppDelegate.currentLocation)
         } else {
             createUpdateLocationLabel()
         }
+        self.hideKeyboardWhenTappedAround()
     }
     
     override func viewWillAppear(_ animated: Bool) {
