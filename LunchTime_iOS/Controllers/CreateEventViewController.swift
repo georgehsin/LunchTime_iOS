@@ -24,6 +24,9 @@ class CreateEventViewController: UIViewController {
     @IBOutlet weak var locationField: UITextField!
     @IBOutlet weak var dateField: UITextField!
     @IBOutlet weak var friendField: UITextField!
+    @IBOutlet weak var dateCheckImage: UIImageView!
+    @IBOutlet weak var locationCheckImage: UIImageView!
+    @IBOutlet weak var friendCheckImage: UIImageView!
     
     override func viewDidLoad() {
         createUI()
@@ -35,18 +38,16 @@ class CreateEventViewController: UIViewController {
     }
     
     @IBAction func selectedLocationUnwind(unwindSegue: UIStoryboardSegue){
-        print("location selected")
+        locationCheckImage.isHidden = false
         locationField.text = location?.name
     }
     
     @IBAction func selectedDateUnwind(unwindSegue: UIStoryboardSegue) {
-        print("Date Selected")
-//        dateField.text = ""
+        dateCheckImage.isHidden = false
     }
     
     @IBAction func selectedFriendsUnwind(unwindSegue: UIStoryboardSegue) {
-        print("Friends Selected")
-        
+        friendCheckImage.isHidden = false
     }
     
     @IBAction func createEventButtonPressed(_ sender: Any) {
@@ -72,6 +73,9 @@ class CreateEventViewController: UIViewController {
         locationField.text = nil
         dateField.text = nil
         friendField.text = nil
+        dateCheckImage.isHidden = true
+        locationCheckImage.isHidden = true
+        friendCheckImage.isHidden = true
     }
  
     func createUI() {
@@ -81,6 +85,10 @@ class CreateEventViewController: UIViewController {
         selectFriendsButton.setTitle("Select Friends", for: .normal)
         selectLocationButton.setTitle("Select Location", for: .normal)
         createEventButton.setTitle("Create Event", for: .normal)
+        
+        dateCheckImage.isHidden = true
+        locationCheckImage.isHidden = true
+        friendCheckImage.isHidden = true
         
         for button in buttons {
             button.setTitleColor(UIColor.white, for: .normal)

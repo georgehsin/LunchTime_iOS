@@ -42,7 +42,6 @@ extension UserViewModel {
     }
     
     func validate(register: Bool = false, confirmationPassword: String? = nil) -> UserValidationState {
-        print("username = \(user.username) password = \(user.password)")
         if user.username.isEmpty || user.password.isEmpty {
             return .Invalid("Username and password are required.")
         }
