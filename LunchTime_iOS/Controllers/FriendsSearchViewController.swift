@@ -108,7 +108,7 @@ class FriendsSearchViewController: UIViewController, UITableViewDelegate, UITabl
             }
             else {
                 cell.emailLabel.text = currentUserData!.sentRequestUsersList[indexPath.row].username
-                profileImage.text = currentUserData!.recievedRequestUsersLists[indexPath.row].username.first?.description.uppercased()
+                profileImage.text = currentUserData!.sentRequestUsersList[indexPath.row].username.first?.description.uppercased()
                 cell.uid = currentUserData!.sentRequestUsersList[indexPath.row].uid
                 cell.addFriendButton.isHidden = true
             }
