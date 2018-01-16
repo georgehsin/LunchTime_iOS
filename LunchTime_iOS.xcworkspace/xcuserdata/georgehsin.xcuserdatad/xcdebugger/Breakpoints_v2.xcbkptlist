@@ -9,22 +9,6 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "LunchTime_iOS/Controllers/CreateEventViewController.swift"
-            timestampString = "533505962.885691"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "28"
-            endingLineNumber = "28"
-            landmarkName = "selectedDateUnwind(unwindSegue:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "LunchTime_iOS/ViewModel/UserViewModel.swift"
             timestampString = "533551925.887162"
             startingColumnNumber = "9223372036854775807"
@@ -33,6 +17,38 @@
             endingLineNumber = "137"
             landmarkName = "writeUserToDatabase(uid:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "LunchTime_iOS.UserViewModel.writeUserToDatabase(uid: Swift.String) -&gt; ()"
+                  moduleName = "LunchTime_iOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/georgehsin/Documents/projects_post_bootcamp/LunchTime_iOS/LunchTime_iOS/ViewModel/UserViewModel.swift"
+                  timestampString = "537766579.563597"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "137"
+                  endingLineNumber = "137"
+                  offsetFromSymbolStart = "29">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in LunchTime_iOS.UserViewModel.writeUserToDatabase(uid: Swift.String) -&gt; ()"
+                  moduleName = "LunchTime_iOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/georgehsin/Documents/projects_post_bootcamp/LunchTime_iOS/LunchTime_iOS/ViewModel/UserViewModel.swift"
+                  timestampString = "537766579.566913"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "138"
+                  endingLineNumber = "138"
+                  offsetFromSymbolStart = "29">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -49,6 +65,38 @@
             endingLineNumber = "139"
             landmarkName = "writeUserToDatabase(uid:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in LunchTime_iOS.UserViewModel.writeUserToDatabase(uid: Swift.String) -&gt; ()"
+                  moduleName = "LunchTime_iOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/georgehsin/Documents/projects_post_bootcamp/LunchTime_iOS/LunchTime_iOS/ViewModel/UserViewModel.swift"
+                  timestampString = "537766579.57469"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "139"
+                  endingLineNumber = "139"
+                  offsetFromSymbolStart = "189">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;__ObjC.FBSDKGraphRequestConnection&gt;, Swift.Optional&lt;Any&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in closure #1 () -&gt; () in LunchTime_iOS.UserViewModel.writeUserToDatabase(uid: Swift.String) -&gt; ()"
+                  moduleName = "LunchTime_iOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/georgehsin/Documents/projects_post_bootcamp/LunchTime_iOS/LunchTime_iOS/ViewModel/UserViewModel.swift"
+                  timestampString = "537766579.57754"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "140"
+                  endingLineNumber = "140"
+                  offsetFromSymbolStart = "35">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -65,6 +113,38 @@
             endingLineNumber = "155"
             landmarkName = "writeUserToDatabase(uid:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;__ObjC.FBSDKGraphRequestConnection&gt;, Swift.Optional&lt;Any&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in closure #1 () -&gt; () in LunchTime_iOS.UserViewModel.writeUserToDatabase(uid: Swift.String) -&gt; ()"
+                  moduleName = "LunchTime_iOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/georgehsin/Documents/projects_post_bootcamp/LunchTime_iOS/LunchTime_iOS/ViewModel/UserViewModel.swift"
+                  timestampString = "537766579.58476"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "155"
+                  endingLineNumber = "155"
+                  offsetFromSymbolStart = "2055">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;Swift.Error&gt;) -&gt; () in closure #1 (Swift.Optional&lt;__ObjC.FBSDKGraphRequestConnection&gt;, Swift.Optional&lt;Any&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in closure #1 () -&gt; () in LunchTime_iOS.UserViewModel.writeUserToDatabase(uid: Swift.String) -&gt; ()"
+                  moduleName = "LunchTime_iOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/georgehsin/Documents/projects_post_bootcamp/LunchTime_iOS/LunchTime_iOS/ViewModel/UserViewModel.swift"
+                  timestampString = "537766579.5874341"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "155"
+                  endingLineNumber = "155"
+                  offsetFromSymbolStart = "755">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

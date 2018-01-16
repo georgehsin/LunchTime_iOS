@@ -118,6 +118,10 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
     
     @objc func yesButtonPressed(sender: UIButton) {
         startActivityIndicator(indicator: activityIndicator)
+        if !isInternetAvailable() {
+            handleNoNetwork()
+            return
+        }
         DispatchQueue.global(qos: .userInteractive).async {
             self.viewModel.setAttendingStatus(attending: true, eventId: self.event!.id, onComplete: {
                 DispatchQueue.main.async {
@@ -129,6 +133,10 @@ class EventInfoViewController: UIViewController, UITableViewDelegate, UITableVie
     
     @objc func noButtonPressed(sender: UIButton) {
         startActivityIndicator(indicator: activityIndicator)
+        if !isInternetAvailable() {
+            handleNoNetwork()
+            return
+        }
         DispatchQueue.global(qos: .userInteractive).async {
             self.viewModel.setAttendingStatus(attending: false, eventId: self.event!.id, onComplete: {
                 DispatchQueue.main.async {

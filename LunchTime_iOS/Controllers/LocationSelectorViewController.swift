@@ -51,6 +51,10 @@ class LocationSelectorViewController: UIViewController, UITextFieldDelegate {
     
     func dispatchYelpQuery(term: String, location: String, coordinate: YLPCoordinate? = nil) {
         self.startActivityIndicator(indicator: self.activityIndicator)
+        if !isInternetAvailable() {
+            handleNoNetwork()
+            return
+        }
         DispatchQueue.global(qos: .userInteractive).async {
             self.yelp.queryYelp(term: term, location: location, coordinate: coordinate) { (results) in
                 self.yelpBusinesses = results

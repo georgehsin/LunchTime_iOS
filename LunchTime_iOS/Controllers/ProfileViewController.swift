@@ -95,6 +95,10 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func getUserData() {
         startActivityIndicator(indicator: self.activityIndicator)
+        if !isInternetAvailable() {
+            handleNoNetwork()
+            return
+        }
         DispatchQueue.global(qos: .userInteractive).async {
             self.viewModel.getCurrentUserData { (userData) in
                 self.currentUserInfo = userData

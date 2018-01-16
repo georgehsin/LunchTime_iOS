@@ -92,6 +92,10 @@ class FriendSelectorViewController: UIViewController, UITableViewDelegate, UITab
     
     func getFriends() {
         startActivityIndicator(indicator: self.activityIndicator)
+        if !isInternetAvailable() {
+            handleNoNetwork()
+            return
+        }
         DispatchQueue.global(qos: .userInteractive).async {
             self.viewModel.getFriendsList { (friends) in
                 self.friendsList = friends

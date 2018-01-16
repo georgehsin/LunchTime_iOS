@@ -88,6 +88,10 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func getEvents() {
         startActivityIndicator(indicator: activityIndicator)
+        if !isInternetAvailable() {
+            handleNoNetwork()
+            return
+        }
         DispatchQueue.global(qos: .userInteractive).async {
             self.viewModel.getAllEvents(onComplete: { (events) in
                 let currentDate = Calendar.current.startOfDay(for: Date())
@@ -104,6 +108,10 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         attending = true
         self.eventsList![sender.tag].attending = true
         startActivityIndicator(indicator: activityIndicator)
+        if !isInternetAvailable() {
+            handleNoNetwork()
+            return
+        }
         DispatchQueue.global(qos: .userInteractive).async {
             self.viewModel.setAttendingStatus(attending: true, eventId: self.eventsList![sender.tag].id, onComplete: {
                 DispatchQueue.main.async {
@@ -117,6 +125,10 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         attending = false
         self.eventsList![sender.tag].attending = false
         startActivityIndicator(indicator: activityIndicator)
+        if !isInternetAvailable() {
+            handleNoNetwork()
+            return
+        }
         DispatchQueue.global(qos: .userInteractive).async {
             self.viewModel.setAttendingStatus(attending: false, eventId: self.eventsList![sender.tag].id, onComplete: {
                 DispatchQueue.main.async {
@@ -128,6 +140,10 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     @objc func additionalEventInfoButtonPressed(sender: UIButton) {
         startActivityIndicator(indicator: activityIndicator)
+        if !isInternetAvailable() {
+            handleNoNetwork()
+            return
+        }
 //        requestedEventIndex = sender.tag
         attending = eventsList![sender.tag].attending
         let requestedEventId = eventsList![sender.tag].id

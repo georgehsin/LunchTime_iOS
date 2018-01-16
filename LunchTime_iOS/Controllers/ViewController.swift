@@ -8,6 +8,7 @@
 
 import UIKit
 import FBSDKLoginKit
+import SystemConfiguration
 
 class ViewController: UIViewController, FBSDKLoginButtonDelegate {
 
@@ -20,7 +21,12 @@ class ViewController: UIViewController, FBSDKLoginButtonDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         if UserDefaults.standard.isLoggedIn() {
-            performSegue(withIdentifier: Constants.SegueIdentifiers.Home, sender: self)
+            if isInternetAvailable() {
+                performSegue(withIdentifier: Constants.SegueIdentifiers.Home, sender: self)
+            } else {
+                handleNoNetwork()
+                self.view.isUserInteractionEnabled = false
+            }
         }
         
         let loginButton = FBSDKLoginButton()
@@ -201,5 +207,31 @@ extension UIViewController {
     
     @objc func dismissKeyboard() {
         view.endEditing(true)
+    }
+    
+    func isInternetAvailable() -> Bool {
+        var zeroAddress = sockaddr_in()
+        zeroAddress.sin_len = UInt8(MemoryLayout.size(ofValue: zeroAddress))
+        zeroAddress.sin_family = sa_family_t(AF_INET)
+        
+        let defaultRouteReachability = withUnsafePointer(to: &zeroAddress) {
+            $0.withMemoryRebound(to: sockaddr.self, capacity: 1) {zeroSockAddress in
+                SCNetworkReachabilityCreateWithAddress(nil, zeroSockAddress)
+            }
+        }
+        
+        var flags = SCNetworkReachabilityFlags()
+        if !SCNetworkReachabilityGetFlags(defaultRouteReachability!, &flags) {
+            return false
+        }
+        let isReachable = flags.contains(.reachable)
+        let needsConnection = flags.contains(.connectionRequired)
+        return (isReachable && !needsConnection)
+    }
+    
+    func handleNoNetwork() {
+        print("No Network Connection")
+        let alertController = UIAlertController(title: "No Internet Connection", message: "Please connect to the internet and relaunch the application", preferredStyle: UIAlertControllerStyle.alert)
+        self.present(alertController, animated: true, completion: nil)
     }
 }
