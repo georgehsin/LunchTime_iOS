@@ -83,7 +83,10 @@ extension UserViewModel {
                         }
                     }
                 }
-                onComplete(FirebaseUser, errorMsg)
+                self.updateUsername(username: FirebaseUser!.email!)
+                self.writeUserToDatabase(uid: FirebaseUser!.uid, onComplete: {
+                    onComplete(FirebaseUser, errorMsg)
+                })
             }
         }
         else {
@@ -126,21 +129,26 @@ extension UserViewModel {
                 }
             }
             else if let FirebaseUser = FirebaseUser {
-                self.writeUserToDatabase(uid: FirebaseUser.uid)
+                self.writeUserToDatabase(uid: FirebaseUser.uid, onComplete: {
+                    print("Wrote User to Database")
+                })
             }
             onComplete(errorMsg)
         }
         
     }
     
-    func writeUserToDatabase(uid: String) {
+    func writeUserToDatabase(uid: String, onComplete: @escaping () -> ()) {
         DispatchQueue.global().async {
             if FBSDKAccessToken.current() != nil {
-                FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "name, email"]).start(completionHandler: { (connection, result, error) -> Void in
-                    if (error == nil) {
-                        let fbData = result as! [String:String]
+                Firestore.firestore().collection("users").document(uid).getDocument(completion: { (user, error) in
+                    print(user!.exists)
+                    if error != nil {
+                        print(error!)
+                        return
+                    } else if !(user!.exists) {
                         let docData: [String: Any] = [
-                            "email": fbData["email"]!,
+                            "email": self.user.username,
                             "friends": [String: Friend](),
                             "events": [String: Event](),
                             "sentRequest": [String: Friend](),
@@ -152,6 +160,7 @@ extension UserViewModel {
                             } else {
                                 print("Document added")
                             }
+                            onComplete()
                         }
                     }
                 })
@@ -170,6 +179,7 @@ extension UserViewModel {
                     } else {
                         print("Document added")
                     }
+                    onComplete()
                 }
             }
             
